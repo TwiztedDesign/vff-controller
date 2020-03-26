@@ -1,0 +1,12 @@
+:host {
+  display: flex;
+  flex-direction: row;
+  flex: 0 0 auto;
+  background-color: var(--tabs-bg-color);
+  border-bottom: 1px solid var(--tabs-border-color);
+  height: var(--tabs-height);
+}
+
+:host(*) {
+  box-sizing: border-box;
+}

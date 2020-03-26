@@ -1,0 +1,44 @@
+{
+  "timestamp": "2020-03-25T23:46:50",
+  "compiler": {
+    "name": "@stencil/core",
+    "version": "1.8.8",
+    "typescriptVersion": "3.7.5"
+  },
+  "components": [
+    {
+      "filePath": "src/components/checkbox/checkbox.tsx",
+      "encapsulation": "shadow",
+      "tag": "vff-checkbox",
+      "readme": "# vff-checkbox\n\n\n",
+      "docs": "",
+      "docsTags": [],
+      "usage": {},
+      "props": [
+        {
+          "name": "text",
+          "type": "any",
+          "mutable": false,
+          "attr": "text",
+          "reflectToAttr": false,
+          "docs": "",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "any"
+            }
+          ],
+          "optional": false,
+          "required": false
+        }
+      ],
+      "methods": [],
+      "events": [],
+      "styles": [],
+      "slots": [],
+      "dependents": [],
+      "dependencies": [],
+      "dependencyGraph": {}
+    }
+  ]
+}

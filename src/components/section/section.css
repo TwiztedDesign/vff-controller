@@ -1,0 +1,11 @@
+:host {
+  display: none;
+}
+
+:host(*) {
+  box-sizing: border-box;
+}
+
+:host(.active) {
+  display: block;
+}

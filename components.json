@@ -1,0 +1,122 @@
+{
+  "timestamp": "2020-03-26T16:40:48",
+  "compiler": {
+    "name": "@stencil/core",
+    "version": "1.8.8",
+    "typescriptVersion": "3.7.5"
+  },
+  "components": [
+    {
+      "filePath": "src/components/container/container.tsx",
+      "encapsulation": "shadow",
+      "tag": "vff-container",
+      "readme": "# vff-container\n\n\n",
+      "docs": "",
+      "docsTags": [],
+      "usage": {},
+      "props": [],
+      "methods": [],
+      "events": [],
+      "styles": [],
+      "slots": [],
+      "dependents": [],
+      "dependencies": [],
+      "dependencyGraph": {}
+    },
+    {
+      "filePath": "src/components/section/section.tsx",
+      "encapsulation": "shadow",
+      "tag": "vff-section",
+      "readme": "# vff-section\n\n\n",
+      "docs": "",
+      "docsTags": [],
+      "usage": {},
+      "props": [],
+      "methods": [],
+      "events": [],
+      "styles": [],
+      "slots": [],
+      "dependents": [],
+      "dependencies": [],
+      "dependencyGraph": {}
+    },
+    {
+      "filePath": "src/components/tab/tab.tsx",
+      "encapsulation": "shadow",
+      "tag": "vff-tab",
+      "readme": "# vff-tab\n\n\n",
+      "docs": "",
+      "docsTags": [],
+      "usage": {},
+      "props": [
+        {
+          "name": "for",
+          "type": "any",
+          "mutable": false,
+          "attr": "for",
+          "reflectToAttr": false,
+          "docs": "Refers to the id of the element this tab is associated with.",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "any"
+            }
+          ],
+          "optional": false,
+          "required": false
+        }
+      ],
+      "methods": [],
+      "events": [],
+      "styles": [],
+      "slots": [],
+      "dependents": [],
+      "dependencies": [],
+      "dependencyGraph": {}
+    },
+    {
+      "filePath": "src/components/tabs/tabs.tsx",
+      "encapsulation": "shadow",
+      "tag": "vff-tabs",
+      "readme": "# vff-tabs\n\n\n",
+      "docs": "",
+      "docsTags": [],
+      "usage": {},
+      "props": [
+        {
+          "name": "default",
+          "type": "any",
+          "mutable": false,
+          "attr": "default",
+          "reflectToAttr": false,
+          "docs": "default tab to be selected on tabs load when not selected first will be selected",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "any"
+            }
+          ],
+          "optional": false,
+          "required": false
+        }
+      ],
+      "methods": [],
+      "events": [
+        {
+          "event": "tab:active",
+          "detail": "any",
+          "bubbles": true,
+          "cancelable": true,
+          "composed": true,
+          "docs": "",
+          "docsTags": []
+        }
+      ],
+      "styles": [],
+      "slots": [],
+      "dependents": [],
+      "dependencies": [],
+      "dependencyGraph": {}
+    }
+  ]
+}

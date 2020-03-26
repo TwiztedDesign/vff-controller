@@ -1,0 +1,37 @@
+:host {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: var(--tabs-tab-color);
+  padding: 0 15px;
+  font-size: 14px;
+  cursor: pointer;
+  user-select: none;
+}
+
+:host(*) {
+  box-sizing: border-box;
+}
+
+:host(:hover) {
+  color: var(--tabs-tab-hover);
+}
+
+:host(.active) {
+  color: var(--tabs-tab-hover);
+}
+
+:host(.active):before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  background-color: var(--tabs-tab-hover);
+  left: 0;
+  bottom: 0;
+  pointer-events: none;
+}
