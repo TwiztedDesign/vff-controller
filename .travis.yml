@@ -4,15 +4,25 @@ node_js:
 cache:
   directories:
     - node_modules
-script:
-  - echo 'Installing Deps!'
-  - npm install
-  - echo 'Testing!'
-  - npm run test
-build:
-  - echo 'Building Project'
-  - npm run build
-install:
-  - npm install -g firebase-tools
-after_success:
-  - firebase deploy --token "$FIREBASE_TOKEN"
+jobs:
+  include:
+    - stage: test
+      script:
+        - echo 'Installing Deps!'
+        - npm install
+        - npm run build
+        - echo 'Testing!'
+        - npm run test
+    -stage: deploy
+      script:
+        - npm install -g firebase-tools
+        - firebase deploy --token "$FIREBASE_TOKEN"
+stages:
+  - name: test
+    # require the type to be a PR
+    if: type = pull_request
+  - name: deploy
+    # require the type to be push to master
+    if: type = push AND branch = master
+
+
