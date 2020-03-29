@@ -16,7 +16,7 @@ export namespace Components {
     /**
     * Refers to the id of the element this tab is associated with.
     */
-    'for': any;
+    'for': string;
   }
   interface VffTabs {
     /**
@@ -67,7 +67,7 @@ declare namespace LocalJSX {
     /**
     * Refers to the id of the element this tab is associated with.
     */
-    'for'?: any;
+    'for'?: string;
   }
   interface VffTabs {
     /**

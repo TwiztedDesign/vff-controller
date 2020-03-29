@@ -9,3 +9,20 @@
 :host(.active) {
   display: block;
 }
+
+.ctrl-container {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  overflow: auto;
+}
+
+::slotted(input),
+::slotted(select),
+::slotted(label),
+::slotted(table),
+::slotted(button),
+::slotted(.ctrl-container-row),
+::slotted(.element-image) {
+  margin: 0 0 var(--element-spacing) 0;
+}

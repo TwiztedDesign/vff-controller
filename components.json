@@ -1,5 +1,5 @@
 {
-  "timestamp": "2020-03-26T16:40:48",
+  "timestamp": "2020-03-29T11:23:56",
   "compiler": {
     "name": "@stencil/core",
     "version": "1.8.8",
@@ -51,15 +51,16 @@
       "props": [
         {
           "name": "for",
-          "type": "any",
+          "type": "string",
           "mutable": false,
           "attr": "for",
           "reflectToAttr": false,
           "docs": "Refers to the id of the element this tab is associated with.",
           "docsTags": [],
+          "default": "''",
           "values": [
             {
-              "type": "any"
+              "type": "string"
             }
           ],
           "optional": false,

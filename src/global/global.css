@@ -380,13 +380,13 @@ button > h5 {
 }*/
 
 /* LAYOUT */
-.ctrl-container {
+/*.ctrl-container {
   display: flex;
   flex-direction: column;
   padding: 5px;
   overflow: auto;
-}
-
+}*/
+/*
 .ctrl-container > input,
 .ctrl-container > select,
 .ctrl-container > label,
@@ -395,7 +395,7 @@ button > h5 {
 .ctrl-container > .ctrl-container-row,
 .ctrl-container > .element-image {
   margin: 0 0 var(--element-spacing) 0;
-}
+}*/
 
 .ctrl-container-row {
   display: flex;

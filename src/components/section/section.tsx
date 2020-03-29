@@ -1,4 +1,4 @@
-import { Component, Host, h } from '@stencil/core';
+import {Component, Host, h} from '@stencil/core';
 
 @Component({
   tag: 'vff-section',
@@ -10,7 +10,9 @@ export class Section {
   render() {
     return (
       <Host>
-        <slot></slot>
+        <div class='ctrl-container'>
+          <slot></slot>
+        </div>
       </Host>
     );
   }
