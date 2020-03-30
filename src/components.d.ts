@@ -10,8 +10,6 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 
 export namespace Components {
-  interface VffContainer {}
-  interface VffSection {}
   interface VffTab {
     /**
     * Refers to the id of the element this tab is associated with.
@@ -20,7 +18,7 @@ export namespace Components {
   }
   interface VffTabs {
     /**
-    * default tab to be selected on tabs load when not selected first will be selected
+    * Default tab to be selected when tabs component loads. When property is not provided, default will be the most first tab
     */
     'default': any;
   }
@@ -28,18 +26,6 @@ export namespace Components {
 
 declare global {
 
-
-  interface HTMLVffContainerElement extends Components.VffContainer, HTMLStencilElement {}
-  var HTMLVffContainerElement: {
-    prototype: HTMLVffContainerElement;
-    new (): HTMLVffContainerElement;
-  };
-
-  interface HTMLVffSectionElement extends Components.VffSection, HTMLStencilElement {}
-  var HTMLVffSectionElement: {
-    prototype: HTMLVffSectionElement;
-    new (): HTMLVffSectionElement;
-  };
 
   interface HTMLVffTabElement extends Components.VffTab, HTMLStencilElement {}
   var HTMLVffTabElement: {
@@ -53,16 +39,12 @@ declare global {
     new (): HTMLVffTabsElement;
   };
   interface HTMLElementTagNameMap {
-    'vff-container': HTMLVffContainerElement;
-    'vff-section': HTMLVffSectionElement;
     'vff-tab': HTMLVffTabElement;
     'vff-tabs': HTMLVffTabsElement;
   }
 }
 
 declare namespace LocalJSX {
-  interface VffContainer {}
-  interface VffSection {}
   interface VffTab {
     /**
     * Refers to the id of the element this tab is associated with.
@@ -71,15 +53,13 @@ declare namespace LocalJSX {
   }
   interface VffTabs {
     /**
-    * default tab to be selected on tabs load when not selected first will be selected
+    * Default tab to be selected when tabs component loads. When property is not provided, default will be the most first tab
     */
     'default'?: any;
     'onTab:active'?: (event: CustomEvent<any>) => void;
   }
 
   interface IntrinsicElements {
-    'vff-container': VffContainer;
-    'vff-section': VffSection;
     'vff-tab': VffTab;
     'vff-tabs': VffTabs;
   }
@@ -91,8 +71,6 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
-      'vff-container': LocalJSX.VffContainer & JSXBase.HTMLAttributes<HTMLVffContainerElement>;
-      'vff-section': LocalJSX.VffSection & JSXBase.HTMLAttributes<HTMLVffSectionElement>;
       'vff-tab': LocalJSX.VffTab & JSXBase.HTMLAttributes<HTMLVffTabElement>;
       'vff-tabs': LocalJSX.VffTabs & JSXBase.HTMLAttributes<HTMLVffTabsElement>;
     }

@@ -6,7 +6,8 @@ import {Component, Host, h, Listen, Element, Prop, Event, EventEmitter} from '@s
   shadow: true
 })
 export class Tabs {
-  /** default tab to be selected on tabs load when not selected first will be selected */
+  private activeSection: Element = null;
+  /** Default tab to be selected when tabs component loads. When property is not provided, default will be the most first tab */
   @Prop() default;
   @Element() el: HTMLElement;
   @Event({
@@ -44,7 +45,14 @@ export class Tabs {
 
   activate(tab: Element) {
     tab.classList.add('active');
-    this.tabActive.emit(tab.getAttribute('for'));
+    const section = document.body.querySelector(`#${tab.getAttribute('for')}`);
+    if (this.activeSection) {
+      this.activeSection.classList.remove('active');
+    }
+    if (section) {
+      section.classList.add('active');
+      this.activeSection = section;
+    }
   }
 
   render() {

@@ -9,208 +9,224 @@
   <script nomodule src="/build/vff-octopus.js"></script>
 </head>
 <body>
-<vff-container>
-  <vff-tabs default="section1">
-    <vff-tab for="section1">First</vff-tab>
-    <vff-tab for="section2">Second</vff-tab>
-    <vff-tab for="section3">Third</vff-tab>
-  </vff-tabs>
+<vff-tabs default="section1">
+  <vff-tab for="section1">First</vff-tab>
+  <vff-tab for="section2">Second</vff-tab>
+  <vff-tab for="section3">Third</vff-tab>
+</vff-tabs>
 
-  <vff-section id="section1">
-      <h1>Main Title</h1>
-      <div class="ctrl-container-row">
-        <label>Main Header</label>
-        <input type="text" placeholder="test"/>
-      </div>
-      <div class="ctrl-container-row">
-        <label>Main Header</label>
-        <input type="text" placeholder="test"/>
-        <label>Main Header</label>
-        <input type="text" placeholder="test"/>
-      </div>
-      <input type="range" min="0" max="100" step="5"/>
-      <div class="ctrl-container-row">
-        <label>This is another slider</label>
-        <input type="range" min="0" max="100"/>
-      </div>
-      <input type="text" placeholder="test"/>
-      <select>
-        <option>Option 1</option>
-        <option>Option 3</option>
-        <option>Option 3</option>
-      </select>
-      <input type="color" value="#ff0036"/>
-      <div class="ctrl-container-row">
-        <input type="text" placeholder="test"/>
-        <input type="text" placeholder="test"/>
-        <select>
-          <option>Option 1</option>
-          <option>Option 3</option>
-          <option>Option 3</option>
-        </select>
-        <label for="cb1" class="element-checkbox">
-          <input type="checkbox" id="cb1"/>
+<section id="section1" class="section ctrl-container">
+  <div class="ctrl-container-row">
+    <h1>Main Title</h1>
+  </div>
+
+  <div class="ctrl-container-row"><label>Main Header</label> <input type="text" placeholder="test"></div>
+
+  <div class="ctrl-container-row">
+    <label>Main Header</label>
+    <input type="text" placeholder="test">
+    <label>Main Header</label>
+    <input type="text" placeholder="test">
+  </div>
+
+  <div class="ctrl-container-row">
+    <input type="range" min="0" max="100" step="5">
+  </div>
+
+
+  <div class="ctrl-container-row">
+    <label>This is another slider</label>
+    <input type="range" min="0" max="100">
+  </div>
+
+  <div class="ctrl-container-row">
+    <input type="text" placeholder="test">
+  </div>
+
+  <div class="ctrl-container-row">
+    <select>
+      <option>Option 1</option>
+      <option>Option 3</option>
+      <option>Option 3</option>
+    </select>
+  </div>
+
+  <div class="ctrl-container-row">
+    <input type="color" value="#ff0036">
+  </div>
+
+  <div class="ctrl-container-row">
+    <input type="text" placeholder="test">
+    <input type="text" placeholder="test">
+    <select>
+      <option>Option 1</option>
+      <option>Option 3</option>
+      <option>Option 3</option>
+    </select> <label for="cb1" class="element-checkbox">
+    <input type="checkbox" id="cb1">
+    <div class="element-checkbox-indicator"></div>
+    <div class="element-checkbox-text">Check this box!</div>
+  </label></div>
+
+  <div class="ctrl-container-row">
+    <select>
+      <option>Option 1</option>
+      <option>Option 3</option>
+      <option>Option 3</option>
+    </select> <label for="cb3" class="element-checkbox"> <input type="checkbox" id="cb3">
+    <div class="element-checkbox-indicator"></div>
+    <div class="element-checkbox-text">Check this box!</div>
+  </label></div>
+
+  <div class="ctrl-container-row">
+    <h2>Medium Title - Check box</h2>
+  </div>
+
+  <div class="ctrl-container-row">
+    <label for="cb2" class="element-checkbox">
+      <input type="checkbox" id="cb2">
+      <div class="element-checkbox-indicator"></div>
+      <div class="element-checkbox-text">Check this box!</div>
+    </label>
+  </div>
+
+  <div class="ctrl-container-row">
+    <h3>Small Title - Numbers</h3>
+  </div>
+
+  <div class="ctrl-container-row">
+    <input type="number">
+  </div>
+
+  <div class="ctrl-container-row">
+    <h4>Tiny Title</h4>
+  </div>
+  <div class="ctrl-container-row">
+    <h5>Footnote</h5>
+  </div>
+
+  <div class="ctrl-container-row">
+    <label for="cb4" class="element-checkbox">
+      <input type="checkbox" id="cb4">
+      <div class="element-checkbox-indicator"></div>
+      <div class="element-checkbox-text">Check this box!</div>
+    </label> <label for="cb5" class="element-checkbox">
+    <input type="checkbox" id="cb5">
+    <div class="element-checkbox-indicator"></div>
+    <div class="element-checkbox-text">Check this box!</div>
+  </label>
+  </div>
+
+  <div class="ctrl-container-row">
+    <label for="radio1" class="element-checkbox">
+      <input type="radio" id="radio1"
+             name="radio-group">
+      <div class="element-checkbox-indicator"></div>
+      <div class="element-checkbox-text">Radio 1</div>
+    </label> <label for="radio2" class="element-checkbox"> <input type="radio" id="radio2" name="radio-group">
+    <div class="element-checkbox-indicator"></div>
+    <div class="element-checkbox-text">Radio 2</div>
+  </label> <label for="radio3" class="element-checkbox"> <input type="radio" id="radio3" name="radio-group">
+    <div class="element-checkbox-indicator"></div>
+    <div class="element-checkbox-text">Radio 3</div>
+  </label>
+  </div>
+
+  <div class="ctrl-container-row">
+    <h3>Table</h3>
+  </div>
+  <div class="ctrl-container-row">
+    <table>
+      <thead>
+      <tr>
+        <th style="width: 25px;"></th>
+        <th><input type="text" value="Column name"></th>
+        <th><input type="text"></th>
+        <th>Static Header</th>
+        <th style="width: 25px;"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><label for="cb7" class="element-checkbox"> <input type="checkbox" id="cb7">
           <div class="element-checkbox-indicator"></div>
-          <div class="element-checkbox-text">Check this box!</div>
-        </label>
-      </div>
-      <div class="ctrl-container-row">
-        <select>
-          <option>Option 1</option>
-          <option>Option 3</option>
-          <option>Option 3</option>
-        </select>
-        <label for="cb3" class="element-checkbox">
-          <input type="checkbox" id="cb3"/>
-          <div class="element-checkbox-indicator"></div>
-          <div class="element-checkbox-text">Check this box!</div>
-        </label>
-      </div>
-      <h2>Medium Title - Check box</h2>
-      <label for="cb2" class="element-checkbox">
-        <input type="checkbox" id="cb2"/>
-        <div class="element-checkbox-indicator"></div>
-        <div class="element-checkbox-text">Check this box!</div>
-      </label>
-      <h3>Small Title - Numbers</h3>
-      <input type="number"/>
-      <h4>Tiny Title</h4>
-      <h5>Footnote</h5>
-      <div class="ctrl-container-row">
-        <label for="cb4" class="element-checkbox">
-          <input type="checkbox" id="cb4"/>
-          <div class="element-checkbox-indicator"></div>
-          <div class="element-checkbox-text">Check this box!</div>
-        </label>
-        <label for="cb5" class="element-checkbox">
-          <input type="checkbox" id="cb5"/>
-          <div class="element-checkbox-indicator"></div>
-          <div class="element-checkbox-text">Check this box!</div>
-        </label>
-      </div>
-      <div class="ctrl-container-row">
-        <label for="radio1" class="element-checkbox">
-          <input type="radio" id="radio1" name="radio-group"/>
-          <div class="element-checkbox-indicator"></div>
-          <div class="element-checkbox-text">Radio 1</div>
-        </label>
-        <label for="radio2" class="element-checkbox">
-          <input type="radio" id="radio2" name="radio-group"/>
-          <div class="element-checkbox-indicator"></div>
-          <div class="element-checkbox-text">Radio 2</div>
-        </label>
-        <label for="radio3" class="element-checkbox">
-          <input type="radio" id="radio3" name="radio-group"/>
-          <div class="element-checkbox-indicator"></div>
-          <div class="element-checkbox-text">Radio 3</div>
-        </label>
-      </div>
-      <h3>Table</h3>
-      <table>
-        <thead>
-        <tr>
-          <th style="width:25px;"></th>
-          <th><input type="text" value="Column name"/></th>
-          <th><input type="text"/></th>
-          <th>Static Header</th>
-          <th style="width:25px;"></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <td>
-            <label for="cb7" class="element-checkbox">
-              <input type="checkbox" id="cb7"/>
-              <div class="element-checkbox-indicator"></div>
-              <div class="element-checkbox-text"></div>
-            </label>
-          </td>
-          <td>
-            <input type="color" value="#00ff00"/>
-          </td>
-          <td>
-            <div class="element-image">
-              <div class="ctrl-container-row">
-                <input type="text"/>
-                <button>Browse...</button>
-              </div>
-              <img src="img/quid.svg" class="element-image-preview"/>
-              <button class="element-image-hover">Browse...</button>
+          <div class="element-checkbox-text"></div>
+        </label></td>
+        <td><input type="color" value="#00ff00"></td>
+        <td>
+          <div class="element-image">
+            <div class="ctrl-container-row"><input type="text">
+              <button>Browse...</button>
             </div>
-          </td>
-          <td>
-            <input type="text"/>
-          </td>
-          <td>
-            <button>X</button>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <label for="cb8" class="element-checkbox">
-              <input type="checkbox" id="cb8"/>
-              <div class="element-checkbox-indicator"></div>
-              <div class="element-checkbox-text"></div>
-            </label>
-          </td>
-          <td>
-            <input type="text"/>
-          </td>
-          <td>
-            <input type="range" min="0" max="100"/>
-          </td>
-          <td>
-            <input type="text"/>
-          </td>
-          <td>
-            <button>X</button>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <label for="cb9" class="element-checkbox">
-              <input type="checkbox" id="cb9"/>
-              <div class="element-checkbox-indicator"></div>
-              <div class="element-checkbox-text"></div>
-            </label>
-          </td>
-          <td>
-            <select>
-              <option>Option 1</option>
-              <option>Option 3</option>
-              <option>Option 3</option>
-            </select>
-          </td>
-          <td>
-            <label for="cb6" class="element-checkbox">
-              <input type="checkbox" id="cb6"/>
-              <div class="element-checkbox-indicator"></div>
-              <div class="element-checkbox-text">Check this box!</div>
-            </label>
-          </td>
-          <td>
-            <input type="text" placeholder="test"/>
-          </td>
-          <td>
-            <button>X</button>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-      <button><h1>+</h1></button>
-      <h5>Click this button to add more rows</h5>
-      <h3>Image Browser</h3>
-      <div class="element-image">
-        <div class="ctrl-container-row">
-          <input type="text"/>
-          <button>Browse...</button>
-        </div>
-        <img src="img/quid.svg" class="element-image-preview"/>
-        <button class="element-image-hover">Browse...</button>
+            <img src="img/quid.svg" class="element-image-preview">
+            <button class="element-image-hover">Browse...</button>
+          </div>
+        </td>
+        <td><input type="text"></td>
+        <td>
+          <button>X</button>
+        </td>
+      </tr>
+      <tr>
+        <td><label for="cb8" class="element-checkbox"> <input type="checkbox" id="cb8">
+          <div class="element-checkbox-indicator"></div>
+          <div class="element-checkbox-text"></div>
+        </label></td>
+        <td><input type="text"></td>
+        <td><input type="range" min="0" max="100"></td>
+        <td><input type="text"></td>
+        <td>
+          <button>X</button>
+        </td>
+      </tr>
+      <tr>
+        <td><label for="cb9" class="element-checkbox"> <input type="checkbox" id="cb9">
+          <div class="element-checkbox-indicator"></div>
+          <div class="element-checkbox-text"></div>
+        </label></td>
+        <td><select>
+          <option>Option 1</option>
+          <option>Option 3</option>
+          <option>Option 3</option>
+        </select></td>
+        <td><label for="cb6" class="element-checkbox"> <input type="checkbox" id="cb6">
+          <div class="element-checkbox-indicator"></div>
+          <div class="element-checkbox-text">Check this box!</div>
+        </label></td>
+        <td><input type="text" placeholder="test"></td>
+        <td>
+          <button>X</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ctrl-container-row">
+    <button><h1>+</h1></button>
+  </div>
+
+  <div class="ctrl-container-row">
+    <h5>Click this button to add more rows</h5>
+  </div>
+
+  <div class="ctrl-container-row">
+    <h3>Image Browser</h3>
+  </div>
+
+  <div class="ctrl-container-row">
+    <div class="element-image">
+      <div class="flex">
+        <input type="text">
+        <button>Browse...</button>
       </div>
-  </vff-section>
-  <vff-section id="section2">CONTENT-2</vff-section>
-  <vff-section id="section3">CONTENT-3</vff-section>
-</vff-container>
+      <img src="img/quid.svg" class="element-image-preview">
+      <button class="element-image-hover">Browse...</button>
+    </div>
+  </div>
+
+</section>
+<section id="section2" class="section ctrl-container"></section>
+<section id="section3" class="section ctrl-container"></section>
 </body>
 </html>

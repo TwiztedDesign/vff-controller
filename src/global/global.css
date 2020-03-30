@@ -68,6 +68,9 @@ body {
 }
 
 * {
+  outline: none;
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
@@ -76,9 +79,9 @@ h1, h2, h3, h4, h5 {
   user-select: none;
 }
 
-h1, h2, h3 {
+/*h1, h2, h3 {
   margin: var(--header-spacing) 0 var(--element-spacing) 0;
-}
+}*/
 
 h4 {
   font-size: 12px;
@@ -89,15 +92,15 @@ h5 {
 }
 
 h4, h5 {
-  margin: 0 0 var(--element-spacing) 0;
   opacity: 0.65;
 }
 
-h1:first-child,
+/* Specific */
+/*h1:first-child,
 h2:first-child,
 h3:first-child {
   margin: 0 0 var(--element-spacing) 0;
-}
+}*/
 
 h4, h5 {
   font-weight: normal;
@@ -108,11 +111,12 @@ input, select, label {
   display: flex;
 }
 
-input[type=text], input[type=number], select {
+input[type=text],
+input[type=number],
+select {
   background-color: var(--input-bg-color);
   border: 0.5px solid var(--input-border-color);
   color: var(--input-color);
-  outline: none;
   font-size: var(--element-font-size);
   padding: 0 5px;
   min-width: 50px;
@@ -124,7 +128,6 @@ input[type=color] {
   border: 0.5px solid var(--input-border-color);
   width: 100%;
   background: transparent;
-  outline: none;
   padding: 0.5px;
 }
 
@@ -141,7 +144,6 @@ input[type=range] {
   background-color: transparent;
   min-height: var(--elememt-min-height);
   border: 0.5px solid var(--input-border-color);
-  margin: 0;
   width: 100%;
 }
 
@@ -150,7 +152,7 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 input[type=range]:focus {
-  outline: none;
+
 }
 
 input[type=range]::-webkit-slider-thumb {
@@ -340,66 +342,18 @@ button > h5 {
   display: none;
 }
 
-/*.element-tabs {
-  display: flex;
-  background-color: var(--tabs-bg-color);
-  border-bottom: 1px solid var(--tabs-border-color);
-  height: var(--tabs-height);
-  flex: 0 0 auto;
-}*/
-
-/*.element-tabs .element-tab {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--tabs-tab-color);
-  padding: 0 15px;
-  font-size: 14px;
-  cursor: pointer;
-  position: relative;
-  user-select: none;
-}*/
-
-/*.element-tabs .element-tab:hover {
-  color: var(--tabs-tab-hover);
-}*/
-
-/*.element-tabs .element-tab.active {
-  color: var(--tabs-tab-hover);
-}*/
-
-/*.element-tabs .element-tab.active::before {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 3px;
-  background-color: var(--tabs-tab-hover);
-  left: 0;
-  bottom: 0;
-  pointer-events: none;
-}*/
-
 /* LAYOUT */
-/*.ctrl-container {
+.ctrl-container {
   display: flex;
   flex-direction: column;
   padding: 5px;
   overflow: auto;
-}*/
-/*
-.ctrl-container > input,
-.ctrl-container > select,
-.ctrl-container > label,
-.ctrl-container > table,
-.ctrl-container > button,
-.ctrl-container > .ctrl-container-row,
-.ctrl-container > .element-image {
-  margin: 0 0 var(--element-spacing) 0;
-}*/
+}
 
 .ctrl-container-row {
   display: flex;
   align-items: center;
+  margin-bottom: var(--element-spacing);
 }
 
 .ctrl-container-row > label:first-child,
@@ -422,4 +376,16 @@ button > h5 {
 .ctrl-container-row > select:last-child,
 .ctrl-container-row > label:last-child {
   margin: 0;
+}
+
+.flex {
+  display: flex;
+}
+
+section {
+  display: none !important;
+}
+
+section.active {
+  display: initial !important;
 }
