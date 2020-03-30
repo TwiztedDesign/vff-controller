@@ -37,21 +37,21 @@ Videflow controllers allow you to manage your visual engagement data in most int
   <script nomodule="" src="https://unpkg.com/vff-controllers/dist/vff-controller/vff-controller.js"></script>
 </head>
 <body>
-<vff-tabs default="section1">
-  <vff-tab for="section1">First</vff-tab>
-  <vff-tab for="section2">Second</vff-tab>
-  <vff-tab for="section3">Third</vff-tab>
-</vff-tabs>
-
-<div id="section1" class="ctrl-container">
-    <div class="ctrl-container-row">[YOUR HTML HERE]</div>
-</div>
-<div id="section2" class="ctrl-container">
-    <div class="ctrl-container-row">[YOUR HTML HERE]</div>
-</div>
-<div id="section3" class="ctrl-container">
-    <div class="ctrl-container-row">[YOUR HTML HERE]</div>
-</div>
+    <vff-tabs default="section1">
+      <vff-tab for="section1">First</vff-tab>
+      <vff-tab for="section2">Second</vff-tab>
+      <vff-tab for="section3">Third</vff-tab>
+    </vff-tabs>
+    
+    <div id="section1" class="ctrl-container">
+        <div class="ctrl-container-row">[YOUR HTML HERE]</div>
+    </div>
+    <div id="section2" class="ctrl-container">
+        <div class="ctrl-container-row">[YOUR HTML HERE]</div>
+    </div>
+    <div id="section3" class="ctrl-container">
+        <div class="ctrl-container-row">[YOUR HTML HERE]</div>
+    </div>
 </body>
 </html>
 ```

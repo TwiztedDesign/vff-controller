@@ -24,16 +24,21 @@
   --tabs-tab-hover: #ff0036;
 }
 
-body {
+/**********************/
+/* RESET */
+/**********************/
+
+* {
+  outline: none;
+  user-select: none;
   margin: 0;
   padding: 0;
-  color: #fff;
-  background-color: #12161B;
-  font-family: var(--element-font-family);
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
+  box-sizing: border-box;
 }
+
+/**********************/
+/* SCROLLBAR */
+/**********************/
 
 *::-webkit-scrollbar-button {
   display: none;
@@ -67,17 +72,20 @@ body {
   cursor: pointer;
 }
 
-* {
-  outline: none;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/**********************/
+/* BODY */
+/**********************/
+
+body {
+  color: #fff;
+  background-color: #12161B;
+  font-family: var(--element-font-family);
+  height: 100vh;
 }
 
+/**********************/
 /* ELEMENTS */
-h1, h2, h3, h4, h5 {
-  user-select: none;
-}
+/**********************/
 
 /*h1, h2, h3 {
   margin: var(--header-spacing) 0 var(--element-spacing) 0;
@@ -194,7 +202,6 @@ select option {
 label {
   font-size: var(--element-font-size);
   align-items: center;
-  user-select: none;
 }
 
 table {
@@ -255,10 +262,6 @@ button {
   align-items: center;
 }
 
-button * {
-  user-select: none;
-}
-
 button:hover {
   background-color: var(--button-hover-color);
 }
@@ -280,7 +283,6 @@ button > h5 {
 .element-checkbox .element-checkbox-text {
   font-size: var(--element-font-size);
   margin: 0 0 0 5px;
-  user-select: none;
 }
 
 .element-checkbox input {
@@ -327,10 +329,9 @@ button > h5 {
   linear-gradient(45deg, var(--checker-color-b) 75%, var(--checker-color-a) 75%),
   linear-gradient(-45deg, var(--checker-color-b) 75%, var(--checker-color-a) 75%);
   background-size: 20px 20px;
-  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0;
   border: 0.5px solid var(--input-border-color);
   min-height: 100px;
-  user-select: none;
 }
 
 .element-image .element-image-hover {
@@ -342,12 +343,21 @@ button > h5 {
   display: none;
 }
 
+/**********************/
 /* LAYOUT */
+/**********************/
+
 .ctrl-container {
-  display: flex;
-  flex-direction: column;
   padding: 5px;
   overflow: auto;
+}
+
+.ctrl-container {
+  display: none !important;
+}
+
+.ctrl-container.active {
+  display: block !important;
 }
 
 .ctrl-container-row {
@@ -378,14 +388,10 @@ button > h5 {
   margin: 0;
 }
 
+/**********************/
+/* HELPER CLASSES */
+/**********************/
+
 .flex {
   display: flex;
-}
-
-section {
-  display: none !important;
-}
-
-section.active {
-  display: initial !important;
 }
