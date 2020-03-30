@@ -9,7 +9,7 @@
   "types": "dist/types/components.d.ts",
   "collection": "dist/collection/collection-manifest.json",
   "collection:main": "dist/collection/index.js",
-  "unpkg": "dist/vff-octopus/vff-octopus.js",
+  "unpkg": "dist/vff-controller/vff-controller.js",
   "files": [
     "dist/",
     "loader/"
