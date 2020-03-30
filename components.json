@@ -1,45 +1,11 @@
 {
-  "timestamp": "2020-03-29T11:23:56",
+  "timestamp": "2020-03-30T11:08:39",
   "compiler": {
     "name": "@stencil/core",
     "version": "1.8.8",
     "typescriptVersion": "3.7.5"
   },
   "components": [
-    {
-      "filePath": "src/components/container/container.tsx",
-      "encapsulation": "shadow",
-      "tag": "vff-container",
-      "readme": "# vff-container\n\n\n",
-      "docs": "",
-      "docsTags": [],
-      "usage": {},
-      "props": [],
-      "methods": [],
-      "events": [],
-      "styles": [],
-      "slots": [],
-      "dependents": [],
-      "dependencies": [],
-      "dependencyGraph": {}
-    },
-    {
-      "filePath": "src/components/section/section.tsx",
-      "encapsulation": "shadow",
-      "tag": "vff-section",
-      "readme": "# vff-section\n\n\n",
-      "docs": "",
-      "docsTags": [],
-      "usage": {},
-      "props": [],
-      "methods": [],
-      "events": [],
-      "styles": [],
-      "slots": [],
-      "dependents": [],
-      "dependencies": [],
-      "dependencyGraph": {}
-    },
     {
       "filePath": "src/components/tab/tab.tsx",
       "encapsulation": "shadow",
@@ -90,7 +56,7 @@
           "mutable": false,
           "attr": "default",
           "reflectToAttr": false,
-          "docs": "default tab to be selected on tabs load when not selected first will be selected",
+          "docs": "Default tab to be selected when tabs component loads. When property is not provided, default will be the most first tab",
           "docsTags": [],
           "values": [
             {

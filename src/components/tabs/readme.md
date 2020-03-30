@@ -7,9 +7,9 @@
 
 ## Properties
 
-| Property  | Attribute | Description                                                                      | Type  | Default     |
-| --------- | --------- | -------------------------------------------------------------------------------- | ----- | ----------- |
-| `default` | `default` | default tab to be selected on tabs load when not selected first will be selected | `any` | `undefined` |
+| Property  | Attribute | Description                                                                                                             | Type  | Default     |
+| --------- | --------- | ----------------------------------------------------------------------------------------------------------------------- | ----- | ----------- |
+| `default` | `default` | Default tab to be selected when tabs component loads. When property is not provided, default will be the most first tab | `any` | `undefined` |
 
 
 ## Events
