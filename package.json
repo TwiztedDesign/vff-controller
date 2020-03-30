@@ -1,5 +1,5 @@
 {
-  "name": "@vff/controllers",
+  "name": "vff-controllers",
   "version": "1.0.0",
   "description": "Videoflow controller components",
   "main": "dist/index.js",
