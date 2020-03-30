@@ -1,6 +1,6 @@
 {
   "name": "vff-controllers",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Videoflow controller components",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -9,7 +9,7 @@
   "types": "dist/types/components.d.ts",
   "collection": "dist/collection/collection-manifest.json",
   "collection:main": "dist/collection/index.js",
-  "unpkg": "dist/vff-controller.js",
+  "unpkg": "dist/vff-controller/vff-controller.js",
   "files": [
     "dist/"
   ],
