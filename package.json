@@ -1,6 +1,6 @@
 {
   "name": "vff-controllers",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Videoflow controller components",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -11,8 +11,7 @@
   "collection:main": "dist/collection/index.js",
   "unpkg": "dist/vff-controller/vff-controller.js",
   "files": [
-    "dist/",
-    "loader/"
+    "dist/"
   ],
   "scripts": {
     "build": "stencil build --docs",
@@ -30,6 +29,10 @@
     "jest-cli": "24.9.0",
     "puppeteer": "1.20.0"
   },
-  "keywords": ["vff", "videoflow", "controllers"],
+  "keywords": [
+    "vff",
+    "videoflow",
+    "controllers"
+  ],
   "license": "MIT"
 }
