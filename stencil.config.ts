@@ -1,7 +1,7 @@
 import {Config} from '@stencil/core';
 
 export const config: Config = {
-  namespace: 'vff-octopus',
+  namespace: 'vff-controller',
   globalStyle: 'src/global/global.css',
   outputTargets: [
     {
