@@ -1,6 +1,6 @@
 {
   "name": "vff-controller",
-  "version": "0.0.1",
+  "version": "1.0.0.",
   "description": "Videoflow controller components",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
