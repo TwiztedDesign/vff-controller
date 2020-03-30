@@ -1,5 +1,5 @@
 {
-  "name": "vff-controller",
+  "name": "@vff/controllers",
   "version": "1.0.0",
   "description": "Videoflow controller components",
   "main": "dist/index.js",
@@ -19,7 +19,8 @@
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll",
-    "generate": "stencil generate"
+    "generate": "stencil generate",
+    "prepublish": "npm run build"
   },
   "devDependencies": {
     "@stencil/core": "^1.8.8",
@@ -29,5 +30,6 @@
     "jest-cli": "24.9.0",
     "puppeteer": "1.20.0"
   },
+  "keywords": ["vff", "videoflow", "controllers"],
   "license": "MIT"
 }
