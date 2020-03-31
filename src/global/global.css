@@ -80,6 +80,8 @@ body {
   color: #fff;
   background-color: #12161B;
   font-family: var(--element-font-family);
+  display: flex;
+  flex-direction: column;
   height: 100vh;
 }
 
