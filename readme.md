@@ -1,13 +1,21 @@
-# Videoflow Controllers Library
+## Table of contents
+* [Videoflow Controllers Library](#Videoflow_Controllers_Library)
+* [Videoflow Controllers](#Videoflow_Controllers)
+* [Loading dependencies](#Loading_dependencies)
+* [How to use this library](#How_to_use_this_library)
+* [Available Controllers](#Available_Controllers)
+
+## <a name="Videoflow_Controllers_Library"></a> Videoflow Controllers Library
 
 This library provides HTML components and Layout helper classes that will allow you to create your
 Videoflow controllers out of the box.
 
-## Videoflow Controllers
+## <a name="Videoflow_Controllers"></a> Videoflow Controllers
 
-Videflow controllers allow you to manage your visual engagement data in most intuitive way. 
+Videflow controllers allow you to manage your visual engagement data in most intuitive way.<br/>
+Controllers are HTML elements and can be simply used inside you're HTML.  
 
-## Loading dependencies
+## <a name="Loading_dependencies"></a> Loading dependencies
 
 ##### Javascript
 ```html
@@ -56,7 +64,7 @@ Videflow controllers allow you to manage your visual engagement data in most int
 </html>
 ```
 
-## How to use this library
+## <a name="How_to_use_this_library"></a> How to use this library
 
 ##### Basic Layout
 A section must have a ```ctrl-container``` class ```html<div id="section1" class="ctrl-container">```
@@ -84,4 +92,12 @@ Sections used to visually divide controllers, each section holds controllers nee
 In order to allow a section to be bound to a tab it must have the same ```id=section_id``` as the tab.
 ```html
 <div id="section1" class="ctrl-container"></div>
+```
+
+## <a name="Available_Controllers"></a> Available Controllers
+
+###### vff-checkbox:
+
+```html 
+    <vff-checkbox>You can have you're text here!</vff-checkbox>
 ```
