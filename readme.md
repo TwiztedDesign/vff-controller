@@ -71,8 +71,8 @@ Each direct descendant of a ```ctrl-container``` must be wrapped in  ```ctrl-con
 
 ##### Tabs
 Tabs used to control section visibility.
-Each tab have a ```for``` attribute : ```html<vff-tab for="section_id">```.<br/>
-This attribute specifies which content section a tab is bound.
+Each tab has a ```for``` attribute : ```html<vff-tab for="section_id">```.<br/>
+This attribute specifies which content section a tab is bound to.
 ```html
 <vff-tabs>
     <vff-tab for="section1">First</vff-tab>
