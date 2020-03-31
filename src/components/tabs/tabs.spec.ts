@@ -1,7 +1,13 @@
-import { Tabs } from './tabs';
+import {Tabs} from './tabs';
 
 describe('vff-tabs', () => {
+  let tabs = new Tabs();
+
   it('builds', () => {
-    expect(new Tabs()).toBeTruthy();
+    expect(tabs).toBeTruthy();
+  });
+
+  it('class should have a default property', () => {
+    expect(typeof tabs.default).toBe('string');
   });
 });

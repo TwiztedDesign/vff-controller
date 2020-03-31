@@ -20,7 +20,7 @@ export namespace Components {
     /**
     * Default tab to be selected when tabs component loads. When property is not provided, default will be the most first tab
     */
-    'default': any;
+    'default': string;
   }
 }
 
@@ -55,8 +55,7 @@ declare namespace LocalJSX {
     /**
     * Default tab to be selected when tabs component loads. When property is not provided, default will be the most first tab
     */
-    'default'?: any;
-    'onTab:active'?: (event: CustomEvent<any>) => void;
+    'default'?: string;
   }
 
   interface IntrinsicElements {

@@ -10,4 +10,8 @@ describe('vff-tab', () => {
   it('builds', () => {
     expect(tab).toBeTruthy();
   });
+
+  it('should have "for" property', () => {
+    expect(typeof tab.for).toBe('string');
+  });
 });
