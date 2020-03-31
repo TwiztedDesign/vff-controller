@@ -7,7 +7,7 @@ import {Component, h, Host, Prop} from '@stencil/core';
 })
 export class Tab {
   /** Refers to the id of the element this tab is associated with. */
-  @Prop() for: string = '';
+  @Prop() for!: string;
 
   render() {
     return (
