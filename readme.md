@@ -1,4 +1,4 @@
-# Videoflow Components Library
+# Videoflow Controllers Library
 
 This library provides HTML components and Layout helper classes that will allow you to create your
 Videoflow controllers out of the box.
