@@ -56,7 +56,7 @@ Videflow controllers allow you to manage your visual engagement data in most int
 </html>
 ```
 
-## How to use of this library
+## How to use this library
 
 ##### Basic Layout
 A section must have a ```ctrl-container``` class ```html<div id="section1" class="ctrl-container">```
