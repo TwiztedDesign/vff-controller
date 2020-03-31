@@ -10,6 +10,7 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 
 export namespace Components {
+  interface VffCheckbox {}
   interface VffTab {
     /**
     * Refers to the id of the element this tab is associated with.
@@ -27,6 +28,12 @@ export namespace Components {
 declare global {
 
 
+  interface HTMLVffCheckboxElement extends Components.VffCheckbox, HTMLStencilElement {}
+  var HTMLVffCheckboxElement: {
+    prototype: HTMLVffCheckboxElement;
+    new (): HTMLVffCheckboxElement;
+  };
+
   interface HTMLVffTabElement extends Components.VffTab, HTMLStencilElement {}
   var HTMLVffTabElement: {
     prototype: HTMLVffTabElement;
@@ -39,12 +46,14 @@ declare global {
     new (): HTMLVffTabsElement;
   };
   interface HTMLElementTagNameMap {
+    'vff-checkbox': HTMLVffCheckboxElement;
     'vff-tab': HTMLVffTabElement;
     'vff-tabs': HTMLVffTabsElement;
   }
 }
 
 declare namespace LocalJSX {
+  interface VffCheckbox {}
   interface VffTab {
     /**
     * Refers to the id of the element this tab is associated with.
@@ -59,6 +68,7 @@ declare namespace LocalJSX {
   }
 
   interface IntrinsicElements {
+    'vff-checkbox': VffCheckbox;
     'vff-tab': VffTab;
     'vff-tabs': VffTabs;
   }
@@ -70,6 +80,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
+      'vff-checkbox': LocalJSX.VffCheckbox & JSXBase.HTMLAttributes<HTMLVffCheckboxElement>;
       'vff-tab': LocalJSX.VffTab & JSXBase.HTMLAttributes<HTMLVffTabElement>;
       'vff-tabs': LocalJSX.VffTabs & JSXBase.HTMLAttributes<HTMLVffTabsElement>;
     }
