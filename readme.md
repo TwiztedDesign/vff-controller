@@ -58,15 +58,6 @@ Videflow controllers allow you to manage your visual engagement data in most int
 
 ## How to use of this library
 
-##### Tabs
-Tabs used to control section visibility.
-Each tab have a ```for``` attribute : ```html<vff-tab for="section_id">```.<br/>
-This attribute specifies which content section a tab is bound.
-
-##### Sections
-Sections used to visually divide controllers, each section holds controllers needed for a specific engagement screen.<br/>
-In order to allow a section to be bound to a tab it must have the same ```id=section_id``` as the tab.
-
 ##### Basic Layout
 A section must have a ```ctrl-container``` class ```html<div id="section1" class="ctrl-container">```
 This is needed in order to control section visibility and give a section the initial CSS it needs.
@@ -76,4 +67,21 @@ Each direct descendant of a ```ctrl-container``` must be wrapped in  ```ctrl-con
 <div id="section1" class="ctrl-container">
     <div class="ctrl-container-row">[YOUR HTML HERE]</div>
 </div>
+```
+
+##### Tabs
+Tabs used to control section visibility.
+Each tab have a ```for``` attribute : ```html<vff-tab for="section_id">```.<br/>
+This attribute specifies which content section a tab is bound.
+```html
+<vff-tabs>
+    <vff-tab for="section1">First</vff-tab>
+</vff-tabs>
+```
+
+##### Sections
+Sections used to visually divide controllers, each section holds controllers needed for a specific engagement screen.<br/>
+In order to allow a section to be bound to a tab it must have the same ```id=section_id``` as the tab.
+```html
+<div id="section1" class="ctrl-container"></div>
 ```
