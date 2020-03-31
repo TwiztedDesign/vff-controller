@@ -16,23 +16,10 @@ export class Tabs {
 
   connectedCallback() {
     const tabs = this.el.children;
-    let tab;
-    if (!this.default) {
-      this.activate(tabs[0]);
-    } else {
-      for (let i = 0, j = tabs.length; i < j; i++) {
-        const child = this.el.children[i];
-        if (child.getAttribute('for') === this.default) {
-          tab = child;
-          break;
-        }
-      }
-      if (tab) {
-        this.activate(tab);
-      } else {
-        this.activate(tabs[0]); // in case of misspelling
-      }
-    }
+    this.activate(!this.default ?
+      tabs[0] :
+      Array.from(tabs)
+        .find((tab) => tab.getAttribute('for') === this.default) || tabs[0]);
   }
 
   @Listen('click')
