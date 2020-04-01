@@ -101,3 +101,11 @@ In order to allow a section to be bound to a tab it must have the same ```id=sec
 ```html 
     <vff-checkbox>You can have you're text here!</vff-checkbox>
 ```
+
+###### vff-radio-button:
+
+```html 
+    <vff-radio-button name="radio-group" value="optional">Radio1</vff-radio-button>
+    <vff-radio-button name="radio-group" value="optional">Radio2</vff-radio-button>
+    <vff-radio-button name="radio-group" value="optional">Radio3</vff-radio-button>
+```
