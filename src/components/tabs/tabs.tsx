@@ -36,6 +36,7 @@ export class Tabs {
     if (section) {
       this.activeSection && this.activeSection.classList.remove('active');
       section.classList.add('active');
+      section.scrollTop = 0;
       this.activeSection = section;
     }
   }
