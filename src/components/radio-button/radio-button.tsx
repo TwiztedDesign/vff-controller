@@ -10,9 +10,9 @@ export class RadioButton {
 
   @Element() el: HTMLElement;
 
-  @Prop() name = '';
+  @Prop() name = 'radio';
   @Prop() value = 'on';
-  @Prop({mutable: true}) checked = false;
+  @Prop({reflect: true, mutable: true}) checked = false;
 
   @Watch('checked')
   validateChecked(newValue: boolean) {
@@ -46,10 +46,12 @@ export class RadioButton {
   constructor() {
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.validateChecked = this.validateChecked.bind(this);
   }
 
   componentDidLoad() {
     this.radioButton = this.el.shadowRoot.querySelector('input');
+    this.radioButton.checked = this.checked;
   }
 
   handleClick() {
