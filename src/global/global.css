@@ -83,6 +83,7 @@ body {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  overflow: hidden;
 }
 
 /**********************/
@@ -226,7 +227,8 @@ table td {
   background-color: var(--input-bg-color);
 }
 
-table td > .element-checkbox {
+table td > vff-checkbox,
+table td > vff-radio-button {
   margin: 0 5px;
 }
 
@@ -306,6 +308,11 @@ button > h5 {
   display: none;
 }
 
+vff-radio-button,
+vff-checkbox {
+  min-width: 120px;
+}
+
 /**********************/
 /* LAYOUT */
 /**********************/
@@ -329,12 +336,6 @@ button > h5 {
   margin-bottom: var(--element-spacing);
 }
 
-.ctrl-container-row > label:first-child,
-.element-checkbox ~ .element-checkbox,
-vff-checkbox {
-  min-width: 120px;
-}
-
 .ctrl-container-row > input,
 .ctrl-container-row > select {
   margin: 0 var(--element-spacing) 0 0;
@@ -342,7 +343,7 @@ vff-checkbox {
 }
 
 .ctrl-container-row > vff-checkbox,
-.ctrl-container-row > label {
+.ctrl-container-row > vff-radio-button {
   margin: 0 var(--element-spacing) 0 0;
   flex: 0 1 auto;
 }

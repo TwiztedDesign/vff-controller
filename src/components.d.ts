@@ -11,6 +11,11 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 export namespace Components {
   interface VffCheckbox {}
+  interface VffRadioButton {
+    'checked': boolean;
+    'name': string;
+    'value': string;
+  }
   interface VffTab {
     /**
     * Refers to the id of the element this tab is associated with.
@@ -34,6 +39,12 @@ declare global {
     new (): HTMLVffCheckboxElement;
   };
 
+  interface HTMLVffRadioButtonElement extends Components.VffRadioButton, HTMLStencilElement {}
+  var HTMLVffRadioButtonElement: {
+    prototype: HTMLVffRadioButtonElement;
+    new (): HTMLVffRadioButtonElement;
+  };
+
   interface HTMLVffTabElement extends Components.VffTab, HTMLStencilElement {}
   var HTMLVffTabElement: {
     prototype: HTMLVffTabElement;
@@ -47,6 +58,7 @@ declare global {
   };
   interface HTMLElementTagNameMap {
     'vff-checkbox': HTMLVffCheckboxElement;
+    'vff-radio-button': HTMLVffRadioButtonElement;
     'vff-tab': HTMLVffTabElement;
     'vff-tabs': HTMLVffTabsElement;
   }
@@ -54,6 +66,12 @@ declare global {
 
 declare namespace LocalJSX {
   interface VffCheckbox {}
+  interface VffRadioButton {
+    'checked'?: boolean;
+    'name'?: string;
+    'onRadioButton:click'?: (event: CustomEvent<any>) => void;
+    'value'?: string;
+  }
   interface VffTab {
     /**
     * Refers to the id of the element this tab is associated with.
@@ -69,6 +87,7 @@ declare namespace LocalJSX {
 
   interface IntrinsicElements {
     'vff-checkbox': VffCheckbox;
+    'vff-radio-button': VffRadioButton;
     'vff-tab': VffTab;
     'vff-tabs': VffTabs;
   }
@@ -81,6 +100,7 @@ declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
       'vff-checkbox': LocalJSX.VffCheckbox & JSXBase.HTMLAttributes<HTMLVffCheckboxElement>;
+      'vff-radio-button': LocalJSX.VffRadioButton & JSXBase.HTMLAttributes<HTMLVffRadioButtonElement>;
       'vff-tab': LocalJSX.VffTab & JSXBase.HTMLAttributes<HTMLVffTabElement>;
       'vff-tabs': LocalJSX.VffTabs & JSXBase.HTMLAttributes<HTMLVffTabsElement>;
     }

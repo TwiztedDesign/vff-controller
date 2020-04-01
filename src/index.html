@@ -104,18 +104,9 @@
   </div>
 
   <div class="ctrl-container-row">
-    <label for="radio1" class="element-checkbox">
-      <input type="radio" id="radio1"
-             name="radio-group">
-      <div class="element-checkbox-indicator"></div>
-      <div class="element-checkbox-text">Radio 1</div>
-    </label> <label for="radio2" class="element-checkbox"> <input type="radio" id="radio2" name="radio-group">
-    <div class="element-checkbox-indicator"></div>
-    <div class="element-checkbox-text">Radio 2</div>
-  </label> <label for="radio3" class="element-checkbox"> <input type="radio" id="radio3" name="radio-group">
-    <div class="element-checkbox-indicator"></div>
-    <div class="element-checkbox-text">Radio 3</div>
-  </label>
+    <vff-radio-button name="radio-group">Radio1</vff-radio-button>
+    <vff-radio-button name="radio-group">Radio2</vff-radio-button>
+    <vff-radio-button name="radio-group">Radio3</vff-radio-button>
   </div>
 
   <div class="ctrl-container-row">
@@ -134,10 +125,9 @@
       </thead>
       <tbody>
       <tr>
-        <td><label for="cb7" class="element-checkbox"> <input type="checkbox" id="cb7">
-          <div class="element-checkbox-indicator"></div>
-          <div class="element-checkbox-text"></div>
-        </label></td>
+        <td>
+          <vff-checkbox></vff-checkbox>
+        </td>
         <td><input type="color" value="#00ff00"></td>
         <td>
           <div class="element-image">
@@ -154,10 +144,9 @@
         </td>
       </tr>
       <tr>
-        <td><label for="cb8" class="element-checkbox"> <input type="checkbox" id="cb8">
-          <div class="element-checkbox-indicator"></div>
-          <div class="element-checkbox-text"></div>
-        </label></td>
+        <td>
+          <vff-checkbox></vff-checkbox>
+        </td>
         <td><input type="text"></td>
         <td><input type="range" min="0" max="100"></td>
         <td><input type="text"></td>
@@ -166,19 +155,15 @@
         </td>
       </tr>
       <tr>
-        <td><label for="cb9" class="element-checkbox"> <input type="checkbox" id="cb9">
-          <div class="element-checkbox-indicator"></div>
-          <div class="element-checkbox-text"></div>
-        </label></td>
+        <td>
+          <vff-checkbox></vff-checkbox>
+        </td>
         <td><select>
           <option>Option 1</option>
           <option>Option 3</option>
           <option>Option 3</option>
         </select></td>
-        <td><label for="cb6" class="element-checkbox"> <input type="checkbox" id="cb6">
-          <div class="element-checkbox-indicator"></div>
-          <div class="element-checkbox-text">Check this box!</div>
-        </label></td>
+        <td><vff-checkbox>Check this box!</vff-checkbox></td>
         <td><input type="text" placeholder="test"></td>
         <td>
           <button>X</button>
