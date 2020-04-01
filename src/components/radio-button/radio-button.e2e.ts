@@ -14,6 +14,14 @@ describe('vff-radio-button', () => {
       const c = await input.getProperty('checked');
       expect(c).toEqual(true);
     });
+
+    it('single radio button should not be unclicked', async () => {
+      const radioButton = await page.find('vff-radio-button');
+      await radioButton.click();
+      await page.waitForChanges();
+      const c = await radioButton.getProperty('checked');
+      expect(c).toEqual(true);
+    });
   });
 
   describe('test vff-radio-button for group functionality', () => {
@@ -24,7 +32,8 @@ describe('vff-radio-button', () => {
       await page.setContent('' +
         '<vff-radio-button name="radio-gaga">Radio1</vff-radio-button>' +
         '<vff-radio-button name="radio-gaga">Radio2</vff-radio-button>' +
-        '<vff-radio-button name="radio-gaga">Radio3</vff-radio-button>'
+        '<vff-radio-button name="radio-gaga">Radio3</vff-radio-button>' +
+        '<vff-radio-button checked name="stranger">Another Radio</vff-radio-button>'
       );
       components = await page.findAll('vff-radio-button');
     });
@@ -74,5 +83,15 @@ describe('vff-radio-button', () => {
       expect(c1).toEqual(true);
       expect(c2).toEqual(false);
     });
+
+    it('should not deselect a check box from another radio group', async () => {
+      const c3 = await components[3].getProperty('checked');
+      expect(c3).toEqual(true);
+      components[0].click();
+      await page.waitForChanges();
+      const c0 = await components[3].getProperty('checked');
+      expect(c0).toEqual(true);
+      expect(c3).toEqual(true);
+    })
   })
 });

@@ -18,35 +18,32 @@ export class RadioButton {
   validateChecked(newValue: boolean) {
     this.radioButton.checked = newValue;
     if (newValue) {
-      this.radioButtonClick.emit({
+      this.radioButtonStateChange.emit({
         origin: this.radioButton,
         name: this.name,
-        checked: this.radioButton.checked
+        checked: this.checked
       });
     }
   }
 
   @Event({
-    eventName: 'radioButton:click',
+    eventName: 'radioButtonStateChange',
     composed: true,
     cancelable: true,
     bubbles: true,
-  }) radioButtonClick: EventEmitter;
+  }) radioButtonStateChange: EventEmitter;
 
-  @Listen('radioButton:click', {target: 'document'})
+  @Listen('radioButtonStateChange', {target: 'document'})
   handleRadioButtonClicked(event: CustomEvent) {
     const {origin, name} = event.detail;
     if (origin === this.radioButton) return;
     if (name === this.name) {
-      this.radioButton.checked = false;
       this.checked = false;
     }
   }
 
   constructor() {
     this.handleClick = this.handleClick.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.validateChecked = this.validateChecked.bind(this);
   }
 
   componentDidLoad() {
@@ -55,22 +52,14 @@ export class RadioButton {
   }
 
   handleClick() {
-    this.radioButtonClick.emit({
-      origin: this.radioButton,
-      name: this.name,
-      checked: this.radioButton.checked
-    });
-  }
-
-  handleChange() {
-    this.checked = this.radioButton.checked;
+    !this.checked && (this.checked = true); // radio button can't disable it'self
   }
 
   render() {
     return (
-      <Host>
+      <Host onClick={this.handleClick}>
         <label class="element-checkbox">
-          <input onChange={this.handleChange} onClick={this.handleClick} type="radio"/>
+          <input disabled type="radio"/>
           <div class="element-checkbox-indicator"/>
           <div class="element-checkbox-text">
             <slot></slot>

@@ -69,7 +69,7 @@ declare namespace LocalJSX {
   interface VffRadioButton {
     'checked'?: boolean;
     'name'?: string;
-    'onRadioButton:click'?: (event: CustomEvent<any>) => void;
+    'onRadioButtonStateChange'?: (event: CustomEvent<any>) => void;
     'value'?: string;
   }
   interface VffTab {
