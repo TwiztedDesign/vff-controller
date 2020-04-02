@@ -2,6 +2,7 @@
 * [Videoflow Controllers Library](#Videoflow_Controllers_Library)
 * [Videoflow Controllers](#Videoflow_Controllers)
 * [Loading dependencies](#Loading_dependencies)
+* [Starter Template](#Starter_Template)
 * [How to use this library](#How_to_use_this_library)
 * [Available Controllers](#Available_Controllers)
 
@@ -28,7 +29,7 @@ Controllers are HTML elements and can be simply used inside you're HTML.
 <link rel="stylesheet" href="https://unpkg.com/vff-controllers/dist/vff-controller/vff-controller.css"/>
 ```
 
-##### Starter Template
+## <a name="Starter_Template"></a> Starter Template
 ```html
 <!DOCTYPE html>
 <html dir="ltr" lang="en">

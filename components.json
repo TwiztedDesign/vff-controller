@@ -1,11 +1,142 @@
 {
-  "timestamp": "2020-03-31T11:03:07",
+  "timestamp": "2020-04-02T09:11:45",
   "compiler": {
     "name": "@stencil/core",
     "version": "1.8.8",
     "typescriptVersion": "3.7.5"
   },
   "components": [
+    {
+      "filePath": "src/components/checkbox/checkbox.tsx",
+      "encapsulation": "shadow",
+      "tag": "vff-checkbox",
+      "readme": "# vff-checkbox\n\n\n",
+      "docs": "",
+      "docsTags": [],
+      "usage": {},
+      "props": [
+        {
+          "name": "checked",
+          "type": "boolean",
+          "mutable": true,
+          "attr": "checked",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [],
+          "default": "false",
+          "values": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "optional": false,
+          "required": false
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "mutable": false,
+          "attr": "value",
+          "reflectToAttr": false,
+          "docs": "",
+          "docsTags": [],
+          "default": "'check-box'",
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false
+        }
+      ],
+      "methods": [],
+      "events": [],
+      "styles": [],
+      "slots": [],
+      "dependents": [],
+      "dependencies": [],
+      "dependencyGraph": {}
+    },
+    {
+      "filePath": "src/components/radio-button/radio-button.tsx",
+      "encapsulation": "shadow",
+      "tag": "vff-radio-button",
+      "readme": "# vff-radio-button\n\n\n",
+      "docs": "",
+      "docsTags": [],
+      "usage": {},
+      "props": [
+        {
+          "name": "checked",
+          "type": "boolean",
+          "mutable": true,
+          "attr": "checked",
+          "reflectToAttr": true,
+          "docs": "",
+          "docsTags": [],
+          "default": "false",
+          "values": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "optional": false,
+          "required": false
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "mutable": false,
+          "attr": "name",
+          "reflectToAttr": false,
+          "docs": "",
+          "docsTags": [],
+          "default": "'radio'",
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "mutable": false,
+          "attr": "value",
+          "reflectToAttr": false,
+          "docs": "",
+          "docsTags": [],
+          "default": "'on'",
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false
+        }
+      ],
+      "methods": [],
+      "events": [
+        {
+          "event": "radioButtonStateChange",
+          "detail": "any",
+          "bubbles": true,
+          "cancelable": true,
+          "composed": true,
+          "docs": "",
+          "docsTags": []
+        }
+      ],
+      "styles": [],
+      "slots": [],
+      "dependents": [],
+      "dependencies": [],
+      "dependencyGraph": {}
+    },
     {
       "filePath": "src/components/tab/tab.tsx",
       "encapsulation": "shadow",
@@ -52,15 +183,16 @@
       "props": [
         {
           "name": "default",
-          "type": "any",
+          "type": "string",
           "mutable": false,
           "attr": "default",
           "reflectToAttr": false,
-          "docs": "Default tab to be selected when tabs component loads. When property is not provided, default will be the most first tab",
+          "docs": "Default tab to be selected when tabs component loads.\nWhen property is not provided, default will be the most first tab",
           "docsTags": [],
+          "default": "''",
           "values": [
             {
-              "type": "any"
+              "type": "string"
             }
           ],
           "optional": false,
@@ -68,17 +200,7 @@
         }
       ],
       "methods": [],
-      "events": [
-        {
-          "event": "tab:active",
-          "detail": "any",
-          "bubbles": true,
-          "cancelable": true,
-          "composed": true,
-          "docs": "",
-          "docsTags": []
-        }
-      ],
+      "events": [],
       "styles": [],
       "slots": [],
       "dependents": [],
