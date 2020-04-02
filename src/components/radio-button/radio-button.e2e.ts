@@ -9,6 +9,17 @@ describe('vff-radio-button', () => {
       await page.setContent('<vff-radio-button checked name="radio-gaga">Radio1</vff-radio-button>');
     });
 
+    it('should have the following HTML structure', async () => {
+      const component = await page.find('vff-radio-button');
+      expect(component.shadowRoot).toEqualHtml(`
+        <label class="element-checkbox">
+          <input disabled type="radio"/>
+          <div class="element-checkbox-indicator"></div>
+          <div class="element-checkbox-text"><slot></slot></div>
+        </label>
+    `);
+    });
+
     it('should test status update of input radio button from "checked" property on componentDidLoad', async () => {
       const input = await page.find('vff-radio-button >>> input');
       const c = await input.getProperty('checked');
