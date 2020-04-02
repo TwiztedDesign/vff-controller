@@ -102,10 +102,41 @@ In order to allow a section to be bound to a tab it must have the same ```id=sec
     <vff-checkbox>You can have you're text here!</vff-checkbox>
 ```
 
+Checkbox properties<br/>
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>value</td><td>Sets or returns the value of the value attribute of the checkbox</td></tr>
+    <tr><td>checked</td><td>Sets or returns the checked state of a checkbox</td></tr>
+  </tbody>
+</table>
+<br/>
+
 ###### vff-radio-button:
 
 ```html 
-    <vff-radio-button name="radio-group" value="optional">Radio1</vff-radio-button>
-    <vff-radio-button name="radio-group" value="optional">Radio2</vff-radio-button>
-    <vff-radio-button name="radio-group" value="optional">Radio3</vff-radio-button>
+    <vff-radio-button name="radio-group">Radio1</vff-radio-button>
+    <vff-radio-button name="radio-group">Radio2</vff-radio-button>
+    <vff-radio-button name="radio-group">Radio3</vff-radio-button>
 ```
+
+Checkbox properties<br/>
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>name</td><td>Sets or returns the value of the name attribute of the radio button</td></tr>
+    <tr><td>value</td><td>Sets or returns the value of the value attribute of the radio button</td></tr>
+    <tr><td>checked</td><td>Sets or returns the checked state of a radio button</td></tr>
+  </tbody>
+</table>
+<br/>
