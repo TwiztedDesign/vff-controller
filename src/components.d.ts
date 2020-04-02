@@ -10,7 +10,10 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 
 export namespace Components {
-  interface VffCheckbox {}
+  interface VffCheckbox {
+    'checked': boolean;
+    'value': string;
+  }
   interface VffRadioButton {
     'checked': boolean;
     'name': string;
@@ -65,7 +68,10 @@ declare global {
 }
 
 declare namespace LocalJSX {
-  interface VffCheckbox {}
+  interface VffCheckbox {
+    'checked'?: boolean;
+    'value'?: string;
+  }
   interface VffRadioButton {
     'checked'?: boolean;
     'name'?: string;

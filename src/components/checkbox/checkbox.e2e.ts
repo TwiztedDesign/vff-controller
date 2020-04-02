@@ -16,7 +16,7 @@ describe('vff-checkbox', () => {
   it('should have the following HTML structure', async () => {
     expect(component.shadowRoot).toEqualHtml(`
         <label class="element-checkbox">
-          <input type="checkbox"/>
+          <input disabled type="checkbox"/>
           <div class="element-checkbox-indicator"></div>
           <div class="element-checkbox-text"><slot></slot></div>
         </label>
