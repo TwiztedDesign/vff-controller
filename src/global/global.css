@@ -1,5 +1,10 @@
 :root {
-  --input-color: #fff;
+  --theme-color-1: #ff0036;
+  --theme-color-2: #474747;
+  --theme-color-3: #FFF;
+  --theme-color-4: #000;
+
+  --input-color: var(--theme-color-3);
   --input-bg-color: rgba(0, 0, 0, .4);
   --input-border-color: rgba(255, 255, 255, .25);
   --input-border-color-highlight: rgba(255, 255, 255, .5);
@@ -11,17 +16,17 @@
   --element-font-size: 12px;
   --element-font-family: sans-serif;
 
-  --button-color: #474747;
-  --button-hover-color: #ff0036;
+  --button-color: var(--theme-color-2);
+  --button-hover-color: var(--theme-color-1);
 
   --checker-color-a: rgba(255, 255, 255, 0.1);
   --checker-color-b: transparent;
 
   --tabs-height: 40px;
   --tabs-bg-color: rgba(0, 0, 0, 0.6);
-  --tabs-border-color: #000;
-  --tabs-tab-color: #fff;
-  --tabs-tab-hover: #ff0036;
+  --tabs-border-color: var(--theme-color-4);
+  --tabs-tab-color: var(--theme-color-3);
+  --tabs-tab-hover: var(--theme-color-1);
 }
 
 /**********************/
@@ -199,7 +204,7 @@ select {
 }
 
 select option {
-  background-color: #000;
+  background-color: var(--theme-color-4);
 }
 
 label {
@@ -215,7 +220,6 @@ table th {
   background-color: rgba(255, 255, 255, 0.1);
   font-size: 14px;
   text-align: left;
-
 }
 
 table th > input {
@@ -278,39 +282,9 @@ button > h5 {
   margin: 0 !important;
 }
 
-.element-image {
-  display: flex;
-  flex-direction: column;
+vff-image-browser {
   width: 100%;
-  position: relative;
-}
-
-.element-image .element-image-preview {
-  max-height: 500px;
-  object-fit: contain;
-  margin: var(--element-spacing) 0 0 0;
-  background-image: linear-gradient(45deg, var(--checker-color-a) 25%, var(--checker-color-b) 25%),
-  linear-gradient(-45deg, var(--checker-color-a) 25%, var(--checker-color-b) 25%),
-  linear-gradient(45deg, var(--checker-color-b) 75%, var(--checker-color-a) 75%),
-  linear-gradient(-45deg, var(--checker-color-b) 75%, var(--checker-color-a) 75%);
-  background-size: 20px 20px;
-  background-position: 0 0, 0 10px, 10px -10px, -10px 0;
-  border: 0.5px solid var(--input-border-color);
-  min-height: 100px;
-}
-
-.element-image .element-image-hover {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  height: auto;
-  display: none;
-}
-
-vff-radio-button,
-vff-checkbox {
-  min-width: 120px;
+  height: 200px;
 }
 
 /**********************/

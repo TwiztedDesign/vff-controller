@@ -1,0 +1,111 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 130px;
+  width: 130px;
+}
+
+:host(*) {
+  box-sizing: border-box;
+  outline: none;
+}
+
+:host > * {
+  margin-bottom: 5px;
+}
+
+#search-bar {
+  display: flex;
+  align-items: center;
+}
+
+#search-bar input {
+  background-color: var(--input-bg-color);
+  border: 0.5px solid var(--input-border-color);
+  color: var(--input-color);
+  font-size: var(--element-font-size);
+  min-height: var(--elememt-min-height);
+  width: 100%;
+  padding: 0 5px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+#search-bar button {
+  white-space: nowrap;
+  height: 100%;
+  background: var(--button-color);
+  border: 0;
+  outline: 0;
+  color: #fff;
+  min-height: 25px;
+  border-radius: 0 2px 2px 0;
+  font-size: var(--element-font-size);
+  padding: 0 10px;
+  cursor: pointer;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+#search-bar button:hover {
+  background: var(--button-hover-color);
+}
+
+#preview {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0;
+  background-image: linear-gradient(45deg, var(--checker-color-a) 25%, var(--checker-color-b) 25%),
+  linear-gradient(-45deg, var(--checker-color-a) 25%, var(--checker-color-b) 25%),
+  linear-gradient(45deg, var(--checker-color-b) 75%, var(--checker-color-a) 75%),
+  linear-gradient(-45deg, var(--checker-color-b) 75%, var(--checker-color-a) 75%);
+  border: 0.5px solid var(--input-border-color);
+  overflow: hidden;
+}
+
+#preview.highlight {
+  border-color: var(--button-hover-color);
+}
+
+img {
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
+  height: auto;
+}
+
+.img-container {
+  position: relative;
+  height: 100%;
+}
+
+.img-container:hover .img-ctrl {
+  transition: opacity 300ms;
+  opacity: 1;
+}
+
+.img-ctrl {
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  text-align: right;
+}
+
+.img-ctrl__cancel {
+  cursor: pointer;
+  margin: 0 5px;
+  color: var(--button-hover-color);
+}
+
+#preview__instructions {
+  display: none;
+}
+
+#preview #preview__instructions:only-child {
+  align-self: center;
+  display: initial;
+}

@@ -14,6 +14,7 @@ export namespace Components {
     'checked': boolean;
     'value': string;
   }
+  interface VffImageBrowser {}
   interface VffRadioButton {
     'checked': boolean;
     'name': string;
@@ -42,6 +43,12 @@ declare global {
     new (): HTMLVffCheckboxElement;
   };
 
+  interface HTMLVffImageBrowserElement extends Components.VffImageBrowser, HTMLStencilElement {}
+  var HTMLVffImageBrowserElement: {
+    prototype: HTMLVffImageBrowserElement;
+    new (): HTMLVffImageBrowserElement;
+  };
+
   interface HTMLVffRadioButtonElement extends Components.VffRadioButton, HTMLStencilElement {}
   var HTMLVffRadioButtonElement: {
     prototype: HTMLVffRadioButtonElement;
@@ -61,6 +68,7 @@ declare global {
   };
   interface HTMLElementTagNameMap {
     'vff-checkbox': HTMLVffCheckboxElement;
+    'vff-image-browser': HTMLVffImageBrowserElement;
     'vff-radio-button': HTMLVffRadioButtonElement;
     'vff-tab': HTMLVffTabElement;
     'vff-tabs': HTMLVffTabsElement;
@@ -72,6 +80,7 @@ declare namespace LocalJSX {
     'checked'?: boolean;
     'value'?: string;
   }
+  interface VffImageBrowser {}
   interface VffRadioButton {
     'checked'?: boolean;
     'name'?: string;
@@ -93,6 +102,7 @@ declare namespace LocalJSX {
 
   interface IntrinsicElements {
     'vff-checkbox': VffCheckbox;
+    'vff-image-browser': VffImageBrowser;
     'vff-radio-button': VffRadioButton;
     'vff-tab': VffTab;
     'vff-tabs': VffTabs;
@@ -106,6 +116,7 @@ declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
       'vff-checkbox': LocalJSX.VffCheckbox & JSXBase.HTMLAttributes<HTMLVffCheckboxElement>;
+      'vff-image-browser': LocalJSX.VffImageBrowser & JSXBase.HTMLAttributes<HTMLVffImageBrowserElement>;
       'vff-radio-button': LocalJSX.VffRadioButton & JSXBase.HTMLAttributes<HTMLVffRadioButtonElement>;
       'vff-tab': LocalJSX.VffTab & JSXBase.HTMLAttributes<HTMLVffTabElement>;
       'vff-tabs': LocalJSX.VffTabs & JSXBase.HTMLAttributes<HTMLVffTabsElement>;
