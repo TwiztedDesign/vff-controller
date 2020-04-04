@@ -7,6 +7,7 @@ import {Component, Host, h, Element, Prop, Watch} from '@stencil/core';
 })
 export class ImageBrowser {
   private previewZone: HTMLElement;
+  private searchBarInput: HTMLInputElement;
 
   @Prop({mutable: true}) selectedFiles: File[] = [];
 
@@ -16,17 +17,20 @@ export class ImageBrowser {
     this.addFiles = this.addFiles.bind(this);
     this.removeFile = this.removeFile.bind(this);
     this.previewFile = this.previewFile.bind(this);
+    this.fetchImage = this.fetchImage.bind(this);
   }
 
   @Watch('selectedFiles')
   handleFilesChange(newValue) {
     this.previewZone.innerHTML = '';
+    this.searchBarInput.value = '';
     if (newValue.length !== 0) {
       this.selectedFiles.forEach(this.previewFile);
     }
   }
 
   componentDidLoad() {
+    this.searchBarInput = this.el.shadowRoot.querySelector('#search-bar__input');
     this.previewZone = this.el.shadowRoot.querySelector('#preview');
 
     ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
@@ -93,6 +97,26 @@ export class ImageBrowser {
     }.bind(this);
   }
 
+  fetchImage() {
+    const url = this.searchBarInput.value;
+    if (!url) return;
+    window.fetch(url)
+      .then((response) => {
+        if (response.status !== 200) {
+          console.log('Looks like there was a problem. Status Code: ' + response.status);
+          return;
+        }
+        response.blob()
+          .then(data => {
+            const file = new File([data], `image-${Date.now()}`, {});
+            this.addFiles([file])
+          });
+      })
+      .catch(function (err) {
+        console.log('Fetch Error :-S', err);
+      });
+  }
+
   render() {
     const previewInstruction = this.selectedFiles.length === 0 ?
       <label htmlFor="preview__input" id="preview__instructions">
@@ -102,13 +126,12 @@ export class ImageBrowser {
     return (
       <Host>
         <div id="search-bar">
-          <input type="text"/>
-          <button type="button">Select Image</button>
+          <input placeholder="place url to grab an image ..." id="search-bar__input" type="text"/>
+          <button onClick={this.fetchImage} type="button">Select Image</button>
         </div>
         <input onChange={(e) => {
-          {/*
-          // @ts-ignore */}
-          this.addFiles(e.target.files)
+          const target = e.target as HTMLInputElement;
+          this.addFiles(target.files)
         }} id="preview__input" type="file" multiple accept="image/*"/>
         <div id="preview">{previewInstruction}</div>
       </Host>
