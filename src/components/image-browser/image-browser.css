@@ -65,6 +65,21 @@
   overflow: hidden;
 }
 
+#preview__input {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+  display: none;
+}
+
+#click {
+  cursor: pointer;
+  font-weight: bold;
+}
+
 #preview.highlight {
   border-color: var(--button-hover-color);
 }
@@ -102,10 +117,5 @@ img {
 }
 
 #preview__instructions {
-  display: none;
-}
-
-#preview #preview__instructions:only-child {
   align-self: center;
-  display: initial;
 }

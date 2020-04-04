@@ -14,7 +14,9 @@ export namespace Components {
     'checked': boolean;
     'value': string;
   }
-  interface VffImageBrowser {}
+  interface VffImageBrowser {
+    'selectedFiles': File[];
+  }
   interface VffRadioButton {
     'checked': boolean;
     'name': string;
@@ -80,7 +82,9 @@ declare namespace LocalJSX {
     'checked'?: boolean;
     'value'?: string;
   }
-  interface VffImageBrowser {}
+  interface VffImageBrowser {
+    'selectedFiles'?: File[];
+  }
   interface VffRadioButton {
     'checked'?: boolean;
     'name'?: string;

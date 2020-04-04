@@ -1,4 +1,4 @@
-import {Component, Host, h, Element} from '@stencil/core';
+import {Component, Host, h, Element, Prop, Watch} from '@stencil/core';
 
 @Component({
   tag: 'vff-image-browser',
@@ -8,7 +8,23 @@ import {Component, Host, h, Element} from '@stencil/core';
 export class ImageBrowser {
   private previewZone: HTMLElement;
 
+  @Prop({mutable: true}) selectedFiles: File[] = [];
+
   @Element() el: HTMLElement;
+
+  constructor() {
+    this.addFiles = this.addFiles.bind(this);
+    this.removeFile = this.removeFile.bind(this);
+    this.previewFile = this.previewFile.bind(this);
+  }
+
+  @Watch('selectedFiles')
+  handleFilesChange(newValue) {
+    this.previewZone.innerHTML = '';
+    if (newValue.length !== 0) {
+      this.selectedFiles.forEach(this.previewFile);
+    }
+  }
 
   componentDidLoad() {
     this.previewZone = this.el.shadowRoot.querySelector('#preview');
@@ -33,23 +49,19 @@ export class ImageBrowser {
     });
 
     this.previewZone.addEventListener('drop', (e) => {
-      let dt = e.dataTransfer;
-      let files = dt.files;
-      // @ts-ignore
-      ([...files]).forEach((file) => {
-        this.previewFile(file);
-        /*let url = 'YOUR URL HERE';
-        let formData = new FormData();
-
-        formData.append('file', file);
-
-        fetch(url, { method: 'POST', body: formData })
-          .then(() => {
-          })
-          .catch(() => {
-          });*/
-      })
+      this.addFiles(e.dataTransfer.files)
     }, false);
+  }
+
+  addFiles(files) {
+    if (files.length === 0) return;
+    // @ts-ignore
+    this.selectedFiles = [...this.selectedFiles, ...files];
+  }
+
+  removeFile(file) {
+    if (!file) return;
+    this.selectedFiles = this.selectedFiles.filter(lf => lf !== file);
   }
 
   previewFile(file) {
@@ -71,7 +83,8 @@ export class ImageBrowser {
       cancel.innerHTML = '&#10005;';
       ctrl.appendChild(cancel);
       cancel.addEventListener('click', () => {
-        this.previewZone.removeChild(imgContainer);
+        // this.previewZone.removeChild(imgContainer);
+        this.removeFile(file);
       });
 
       imgContainer.appendChild(img);
@@ -81,15 +94,23 @@ export class ImageBrowser {
   }
 
   render() {
+    const previewInstruction = this.selectedFiles.length === 0 ?
+      <label htmlFor="preview__input" id="preview__instructions">
+        Drop images here or <span id="click">click</span> to select.
+      </label> : null;
+
     return (
       <Host>
         <div id="search-bar">
           <input type="text"/>
           <button type="button">Select Image</button>
         </div>
-        <div id="preview">
-          <span id="preview__instructions">Drop images here or click to upload.</span>
-        </div>
+        <input onChange={(e) => {
+          {/*
+          // @ts-ignore */}
+          this.addFiles(e.target.files)
+        }} id="preview__input" type="file" multiple accept="image/*"/>
+        <div id="preview">{previewInstruction}</div>
       </Host>
     );
   }
