@@ -12,6 +12,7 @@ export class ImageBrowser {
 
   @Prop({mutable: true}) selectedFiles: File[] = [];
   @State() isError: boolean = false;
+  @State() isFetchingFile: boolean = false;
 
   @Element() el: HTMLElement;
 
@@ -36,6 +37,17 @@ export class ImageBrowser {
       setTimeout(() => {
         this.isError = false;
       }, 5000)
+    }
+  }
+
+  @Watch('isFetchingFile')
+  handleFileFetching(newValue: boolean) {
+    if (newValue) {
+      // todo : disable the button
+      // todo : show loader
+    } else {
+      // todo : enable the button
+      // todo : hide loader
     }
   }
 
@@ -96,7 +108,6 @@ export class ImageBrowser {
       cancel.innerHTML = '&#10005;';
       ctrl.appendChild(cancel);
       cancel.addEventListener('click', () => {
-        // this.previewZone.removeChild(imgContainer);
         this.removeFile(file);
       });
 
@@ -116,7 +127,9 @@ export class ImageBrowser {
                  }
                }}/>
         <button id="search-bar__btn" type="button" onClick={() => {
-          getImage(this.searchBarInput.value)
+          const value = this.searchBarInput.value;
+          if (!value) return;
+          getImage(value)
             .then((file) => {
               if (!file) return Promise.reject();
               this.addFiles(
@@ -152,14 +165,16 @@ export class ImageBrowser {
   }
 
   render() {
-
     return (
       <Host>
         {this.renderSearchBar()}
         {this.renderDropZone()}
-        {this.isError ? <div id="error-msg" onClick={() => {
-          this.isError = false
-        }}>There was an error getting your image, check the console to see more information.</div> : null}
+        {
+          this.isError ?
+            <div id="error-msg" onClick={() => this.isError = false}>
+              There was an error getting your image, check the console to see more information.
+            </div> : null
+        }
       </Host>
     );
   }
