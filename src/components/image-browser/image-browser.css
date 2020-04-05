@@ -3,6 +3,8 @@
   flex-direction: column;
   height: 130px;
   width: 130px;
+  position: relative;
+  overflow: hidden;
 }
 
 :host(*) {
@@ -118,4 +120,22 @@ img {
 
 #preview__instructions {
   align-self: center;
+}
+
+#error-msg {
+  animation: error-slid-in 500ms forwards;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 15px;
+  background-color: var(--theme-error-color);
+}
+
+@keyframes error-slid-in {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }

@@ -18,12 +18,16 @@ function _parseBlob(response) {
 function _fetch(url, method, headers?: object): Promise<any> {
   return window.fetch(url, {method, ...headers})
     .then(_checkStatus)
-    .catch(function (error) {
-      throw error;
+    .catch((error) => {
+      console.error(error);
     });
 }
 
 export function getImage(url): Promise<File> {
   if (!url) return;
-  return _fetch(url, 'GET').then(_parseBlob);
+  return _fetch(url, 'GET')
+    .then(_parseBlob)
+    .catch((error) => {
+      console.error(error);
+    });
 }

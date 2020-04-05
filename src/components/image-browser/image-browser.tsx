@@ -1,4 +1,4 @@
-import {Component, Host, h, Element, Prop, Watch} from '@stencil/core';
+import {Component, Host, h, Element, Prop, Watch, State} from '@stencil/core';
 import {getImage} from "../../utils/utils";
 
 @Component({
@@ -11,6 +11,7 @@ export class ImageBrowser {
   private searchBarInput: HTMLInputElement;
 
   @Prop({mutable: true}) selectedFiles: File[] = [];
+  @State() isError: boolean = false;
 
   @Element() el: HTMLElement;
 
@@ -26,6 +27,15 @@ export class ImageBrowser {
     this.searchBarInput.value = '';
     if (newValue.length !== 0) {
       this.selectedFiles.forEach(this.previewFile);
+    }
+  }
+
+  @Watch('isError')
+  handleErrorStateChange(newValue: boolean) {
+    if (newValue) {
+      setTimeout(() => {
+        this.isError = false;
+      }, 5000)
     }
   }
 
@@ -99,13 +109,22 @@ export class ImageBrowser {
   renderSearchBar() {
     return (
       <div id="search-bar">
-        <input placeholder="place url to grab an image ..." id="search-bar__input" type="text"/>
+        <input placeholder="place url to grab an image ..." id="search-bar__input" type="url"
+               onKeyUp={(e) => {
+                 if (e.code === 'Enter') {
+                   (this.el.shadowRoot.querySelector('#search-bar__btn') as HTMLElement).click();
+                 }
+               }}/>
         <button id="search-bar__btn" type="button" onClick={() => {
           getImage(this.searchBarInput.value)
             .then((file) => {
+              if (!file) return Promise.reject();
               this.addFiles(
                 [new File([file], `image-${Date.now()}`, {})]
               );
+            })
+            .catch(() => {
+              this.isError = true;
             });
         }}>
           Select Image
@@ -122,20 +141,25 @@ export class ImageBrowser {
 
     return (
       <div id="preview">
-        <input onChange={(e) => {
-          const target = e.target as HTMLInputElement;
-          this.addFiles(target.files)
-        }} id="preview__input" type="file" multiple accept="image/*"/>
+        <input id="preview__input" type="file" multiple accept="image/*"
+               onChange={(e) => {
+                 const target = e.target as HTMLInputElement;
+                 this.addFiles(target.files)
+               }}/>
         {previewInstruction}
       </div>
     )
   }
 
   render() {
+
     return (
       <Host>
         {this.renderSearchBar()}
         {this.renderDropZone()}
+        {this.isError ? <div id="error-msg" onClick={() => {
+          this.isError = false
+        }}>There was an error getting your image, check the console to see more information.</div> : null}
       </Host>
     );
   }
