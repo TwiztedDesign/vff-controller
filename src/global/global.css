@@ -97,9 +97,9 @@ body {
 /* ELEMENTS */
 /**********************/
 
-/*h1, h2, h3 {
-  margin: var(--header-spacing) 0 var(--element-spacing) 0;
-}*/
+h1, h2, h3 {
+  margin: 5px 0 0 0;
+}
 
 h4 {
   font-size: 12px;
@@ -212,10 +212,13 @@ select option {
 label {
   font-size: var(--element-font-size);
   align-items: center;
+  min-width: 115px;
+  margin-right: 5px;
 }
 
 table {
   table-layout: fixed;
+  width: 100%;
 }
 
 table th {
