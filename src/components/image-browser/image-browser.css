@@ -60,7 +60,7 @@
 #search-bar input:disabled,
 #search-bar input[disabled] {
   cursor: initial;
-  opacity: 0.2;
+  opacity: 0.5;
 }
 
 #preview {
