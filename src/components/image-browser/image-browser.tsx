@@ -1,4 +1,5 @@
 import {Component, Host, h, Element, Prop, Watch} from '@stencil/core';
+import {getImage} from "../../utils/utils";
 
 @Component({
   tag: 'vff-image-browser',
@@ -17,7 +18,6 @@ export class ImageBrowser {
     this.addFiles = this.addFiles.bind(this);
     this.removeFile = this.removeFile.bind(this);
     this.previewFile = this.previewFile.bind(this);
-    this.fetchImage = this.fetchImage.bind(this);
   }
 
   @Watch('selectedFiles')
@@ -59,7 +59,6 @@ export class ImageBrowser {
 
   addFiles(files) {
     if (files.length === 0) return;
-    // @ts-ignore
     this.selectedFiles = [...this.selectedFiles, ...files];
   }
 
@@ -97,43 +96,46 @@ export class ImageBrowser {
     }.bind(this);
   }
 
-  fetchImage() {
-    const url = this.searchBarInput.value;
-    if (!url) return;
-    window.fetch(url)
-      .then((response) => {
-        if (response.status !== 200) {
-          console.log('Looks like there was a problem. Status Code: ' + response.status);
-          return;
-        }
-        response.blob()
-          .then(data => {
-            const file = new File([data], `image-${Date.now()}`, {});
-            this.addFiles([file])
-          });
-      })
-      .catch(function (err) {
-        console.log('Fetch Error :-S', err);
-      });
+  renderSearchBar() {
+    return (
+      <div id="search-bar">
+        <input placeholder="place url to grab an image ..." id="search-bar__input" type="text"/>
+        <button id="search-bar__btn" type="button" onClick={() => {
+          getImage(this.searchBarInput.value)
+            .then((file) => {
+              this.addFiles(
+                [new File([file], `image-${Date.now()}`, {})]
+              );
+            });
+        }}>
+          Select Image
+        </button>
+      </div>
+    );
   }
 
-  render() {
+  renderDropZone() {
     const previewInstruction = this.selectedFiles.length === 0 ?
       <label htmlFor="preview__input" id="preview__instructions">
         Drop images here or <span id="click">click</span> to select.
       </label> : null;
 
     return (
-      <Host>
-        <div id="search-bar">
-          <input placeholder="place url to grab an image ..." id="search-bar__input" type="text"/>
-          <button onClick={this.fetchImage} type="button">Select Image</button>
-        </div>
+      <div id="preview">
         <input onChange={(e) => {
           const target = e.target as HTMLInputElement;
           this.addFiles(target.files)
         }} id="preview__input" type="file" multiple accept="image/*"/>
-        <div id="preview">{previewInstruction}</div>
+        {previewInstruction}
+      </div>
+    )
+  }
+
+  render() {
+    return (
+      <Host>
+        {this.renderSearchBar()}
+        {this.renderDropZone()}
       </Host>
     );
   }

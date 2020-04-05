@@ -1,8 +1,29 @@
+function _checkStatus(response) {
+  if (response.ok) {
+    return Promise.resolve(response)
+  } else {
+    return Promise.reject(new Error(response.statusText)) // this will trigger catch
+  }
+}
 
-export function format(first: string, middle: string, last: string): string {
-  return (
-    (first || '') +
-    (middle ? ` ${middle}` : '') +
-    (last ? ` ${last}` : '')
-  );
+// @ts-ignore
+function _parseJson(response): Promise<any> {
+  return response.json();
+}
+
+function _parseBlob(response) {
+  return response.blob();
+}
+
+function _fetch(url, method, headers?: object): Promise<any> {
+  return window.fetch(url, {method, ...headers})
+    .then(_checkStatus)
+    .catch(function (error) {
+      throw error;
+    });
+}
+
+export function getImage(url): Promise<File> {
+  if (!url) return;
+  return _fetch(url, 'GET').then(_parseBlob);
 }
