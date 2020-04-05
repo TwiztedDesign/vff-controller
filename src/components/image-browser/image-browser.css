@@ -49,8 +49,18 @@
   box-sizing: border-box;
 }
 
-#search-bar button:hover {
+#search-bar button:hover:not([disabled]) {
   background: var(--button-hover-color);
+}
+
+#search-bar button:disabled,
+#search-bar button:disabled:hover,
+#search-bar button[disabled],
+#search-bar button[disabled]:hover,
+#search-bar input:disabled,
+#search-bar input[disabled] {
+  cursor: initial;
+  opacity: 0.2;
 }
 
 #preview {
@@ -129,6 +139,10 @@ img {
   left: 0;
   padding: 15px;
   background-color: var(--theme-error-color);
+}
+
+#loader {
+  align-self: center;
 }
 
 @keyframes error-slid-in {
