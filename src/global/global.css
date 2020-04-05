@@ -4,6 +4,8 @@
   --theme-color-3: #FFF;
   --theme-color-4: #000;
 
+  --theme-error-color: #ff5722;
+
   --input-color: var(--theme-color-3);
   --input-bg-color: rgba(0, 0, 0, .4);
   --input-border-color: rgba(255, 255, 255, .25);
