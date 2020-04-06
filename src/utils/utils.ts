@@ -20,6 +20,7 @@ function _fetch(url, method, headers?: object): Promise<any> {
     .then(_checkStatus)
     .catch((error) => {
       console.error(error);
+      return Promise.reject();
     });
 }
 
@@ -29,5 +30,6 @@ export function getImage(url): Promise<File> {
     .then(_parseBlob)
     .catch((error) => {
       console.error(error);
+      return Promise.reject();
     });
 }

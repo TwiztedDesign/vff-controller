@@ -121,15 +121,12 @@ export class ImageBrowser {
         <button id="search-bar__btn" type="button"
                 disabled={disabled}
                 onClick={() => {
-                  const value = this.searchBarInput.value;
+                  const value = encodeURI(this.searchBarInput.value.trim());
                   if (!value) return;
                   this.isFetchingFile = true;
                   getImage(value)
                     .then((file) => {
-                      if (!file) return Promise.reject();
-                      this.addFiles(
-                        [new File([file], `image-${Date.now()}`, {})]
-                      );
+                      this.addFiles([new File([file], `image-${Date.now()}`, {})]);
                     })
                     .catch(() => {
                       this.isFetchError = true;
@@ -145,23 +142,24 @@ export class ImageBrowser {
   }
 
   renderDropZone() {
-    const previewInstruction = !this.isFetchingFile && this.selectedFiles.length === 0 ?
-      <label htmlFor="preview__input" id="preview__instructions">
-        Drop images here or <span id="click">click</span> to select.
-      </label> : null;
+    let content = null;
 
-    const loader = this.isFetchingFile ?
-      <div id="loader">Loading</div> : null;
+    if (this.isFetchingFile) {
+      content = <div id="loader">Loading</div>;
+    } else if (this.selectedFiles.length === 0) {
+      content = <label htmlFor="preview__input" id="preview__instructions">
+        Drop images here or <span id="click">click</span> to select.
+      </label>;
+    }
 
     return (
       <div id="preview">
-        {loader}
         <input id="preview__input" type="file" multiple accept="image/*"
                onChange={(e) => {
                  const target = e.target as HTMLInputElement;
                  this.addFiles(target.files)
                }}/>
-        {previewInstruction}
+        {content}
       </div>
     )
   }
