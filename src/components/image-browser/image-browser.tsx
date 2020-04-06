@@ -8,8 +8,8 @@ import {getImage, readFileAsync} from "../../utils/utils";
 })
 export class ImageBrowser {
   private previewZone: HTMLElement;
-  private searchBarInput: HTMLInputElement;
 
+  @State() searchBarInputValue = '';
   @State() previewList = [];
   @State() isFetchError: boolean = false;
   @State() isFetchingFile: boolean = false;
@@ -25,7 +25,6 @@ export class ImageBrowser {
 
   @Watch('selectedFiles')
   handleFilesChange(newValue) {
-    this.searchBarInput.value = '';
     if (newValue.length > 0) {
       const promises = this.selectedFiles.map(async file => {
         const data = await readFileAsync(file);
@@ -49,7 +48,6 @@ export class ImageBrowser {
   }
 
   componentDidLoad() {
-    this.searchBarInput = this.el.shadowRoot.querySelector('#search-bar__input');
     this.previewZone = this.el.shadowRoot.querySelector('#preview');
 
     ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
@@ -93,6 +91,10 @@ export class ImageBrowser {
       <div id="search-bar">
         <input placeholder="place url to grab an image ..." id="search-bar__input" type="url"
                disabled={disabled}
+               value={this.searchBarInputValue}
+               onChange={(e) => {
+                 this.searchBarInputValue = (e.target as HTMLInputElement).value;
+               }}
                onKeyUp={(e) => {
                  if (e.code === 'Enter') {
                    (this.el.shadowRoot.querySelector('#search-bar__btn') as HTMLElement).click();
@@ -101,11 +103,12 @@ export class ImageBrowser {
         <button id="search-bar__btn" type="button"
                 disabled={disabled}
                 onClick={() => {
-                  const value = encodeURI(this.searchBarInput.value.trim());
+                  const value = encodeURI(this.searchBarInputValue.trim());
                   if (!value) return;
                   this.isFetchingFile = true;
                   getImage(value)
                     .then((file) => {
+                      this.searchBarInputValue = '';
                       this.addFiles([new File([file], `image-${Date.now()}`, {})]);
                     })
                     .catch(() => {
