@@ -1,5 +1,5 @@
 import {Component, Host, h, Element, Prop, Watch, State} from '@stencil/core';
-import {getImage} from "../../utils/utils";
+import {getImage, readFileAsync} from "../../utils/utils";
 
 @Component({
   tag: 'vff-image-browser',
@@ -10,24 +10,32 @@ export class ImageBrowser {
   private previewZone: HTMLElement;
   private searchBarInput: HTMLInputElement;
 
-  @Prop({mutable: true}) selectedFiles: File[] = [];
+  @State() previewList = [];
   @State() isFetchError: boolean = false;
   @State() isFetchingFile: boolean = false;
+
+  @Prop({mutable: true}) selectedFiles: File[] = [];
 
   @Element() el: HTMLElement;
 
   constructor() {
     this.addFiles = this.addFiles.bind(this);
     this.removeFile = this.removeFile.bind(this);
-    this.previewFile = this.previewFile.bind(this);
   }
 
   @Watch('selectedFiles')
   handleFilesChange(newValue) {
-    this.previewZone.innerHTML = '';
     this.searchBarInput.value = '';
-    if (newValue.length !== 0) {
-      this.selectedFiles.forEach(this.previewFile);
+    if (newValue.length > 0) {
+      const promises = this.selectedFiles.map(async file => {
+        const data = await readFileAsync(file);
+        return {file, data}
+      });
+      Promise.all(promises).then((data) => {
+        this.previewList = data;
+      });
+    } else if (newValue.length === 0) {
+      this.previewList = [];
     }
   }
 
@@ -78,29 +86,6 @@ export class ImageBrowser {
     this.selectedFiles = this.selectedFiles.filter(lf => lf !== file);
   }
 
-  previewFile(file) {
-    let reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = function () {
-      const img = document.createElement('img');
-      img.src = (reader.result as string);
-      const imgContainer = document.createElement('div');
-      imgContainer.classList.add('img-container');
-      const ctrl = document.createElement('div');
-      ctrl.classList.add('img-ctrl');
-      const cancel = document.createElement('span');
-      cancel.classList.add('img-ctrl__cancel');
-      cancel.innerHTML = '&#10005;';
-      ctrl.appendChild(cancel);
-      cancel.addEventListener('click', () => {
-        this.removeFile(file);
-      });
-      imgContainer.appendChild(img);
-      imgContainer.appendChild(ctrl);
-      this.previewZone.appendChild(imgContainer)
-    }.bind(this);
-  }
-
   renderSearchBar() {
     const disabled = this.isFetchingFile;
 
@@ -145,6 +130,18 @@ export class ImageBrowser {
       content = <label htmlFor="preview__input" id="preview__instructions">
         Drop images here or <span id="click">click</span> to select.
       </label>;
+    } else if (this.previewList.length > 0) {
+      content = this.previewList.map((plObj) => {
+        const {file, data} = plObj;
+        return (
+          <div class="img-container">
+            <img src={data}/>
+            <div class="img-ctrl">
+              <span class="img-ctrl__cancel" onClick={() => this.removeFile(file)}>&#10005;</span>
+            </div>
+          </div>
+        );
+      })
     }
 
     return (
