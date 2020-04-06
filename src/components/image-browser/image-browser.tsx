@@ -11,7 +11,7 @@ export class ImageBrowser {
   private searchBarInput: HTMLInputElement;
 
   @Prop({mutable: true}) selectedFiles: File[] = [];
-  @State() isError: boolean = false;
+  @State() isFetchError: boolean = false;
   @State() isFetchingFile: boolean = false;
 
   @Element() el: HTMLElement;
@@ -31,11 +31,11 @@ export class ImageBrowser {
     }
   }
 
-  @Watch('isError')
+  @Watch('isFetchError')
   handleErrorStateChange(newValue: boolean) {
     if (newValue) {
       setTimeout(() => {
-        this.isError = false;
+        this.isFetchError = false;
       }, 5000)
     }
   }
@@ -132,7 +132,7 @@ export class ImageBrowser {
                       );
                     })
                     .catch(() => {
-                      this.isError = true;
+                      this.isFetchError = true;
                     })
                     .finally(() => {
                       this.isFetchingFile = false;
@@ -172,8 +172,8 @@ export class ImageBrowser {
         {this.renderSearchBar()}
         {this.renderDropZone()}
         {
-          this.isError ?
-            <div id="error-msg" onClick={() => this.isError = false}>
+          this.isFetchError ?
+            <div id="error-msg" onClick={() => this.isFetchError = false}>
               There was an error getting your image, check the console to see more information.
             </div> : null
         }
