@@ -83,15 +83,11 @@ export class ImageBrowser {
     reader.readAsDataURL(file);
     reader.onloadend = function () {
       const img = document.createElement('img');
-      // @ts-ignore
-      img.src = reader.result;
-
+      img.src = (reader.result as string);
       const imgContainer = document.createElement('div');
       imgContainer.classList.add('img-container');
-
       const ctrl = document.createElement('div');
       ctrl.classList.add('img-ctrl');
-
       const cancel = document.createElement('span');
       cancel.classList.add('img-ctrl__cancel');
       cancel.innerHTML = '&#10005;';
@@ -99,7 +95,6 @@ export class ImageBrowser {
       cancel.addEventListener('click', () => {
         this.removeFile(file);
       });
-
       imgContainer.appendChild(img);
       imgContainer.appendChild(ctrl);
       this.previewZone.appendChild(imgContainer)
