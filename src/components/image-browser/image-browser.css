@@ -49,8 +49,18 @@
   box-sizing: border-box;
 }
 
-#search-bar button:hover {
+#search-bar button:hover:not([disabled]) {
   background: var(--button-hover-color);
+}
+
+#search-bar button:disabled,
+#search-bar button:disabled:hover,
+#search-bar button[disabled],
+#search-bar button[disabled]:hover,
+#search-bar input:disabled,
+#search-bar input[disabled] {
+  cursor: initial;
+  opacity: 0.5;
 }
 
 #preview {
@@ -96,6 +106,7 @@ img {
 .img-container {
   position: relative;
   height: 100%;
+  text-align: center;
 }
 
 .img-container:hover .img-ctrl {
@@ -128,7 +139,11 @@ img {
   top: 0;
   left: 0;
   padding: 15px;
-  background-color: var(--theme-error-color);
+  background-color: var(--theme-color-error);
+}
+
+#loader {
+  align-self: center;
 }
 
 @keyframes error-slid-in {

@@ -1,5 +1,5 @@
 import {Component, Host, h, Element, Prop, Watch, State} from '@stencil/core';
-import {getImage} from "../../utils/utils";
+import {getImage, readFileAsync} from "../../utils/utils";
 
 @Component({
   tag: 'vff-image-browser',
@@ -8,39 +8,46 @@ import {getImage} from "../../utils/utils";
 })
 export class ImageBrowser {
   private previewZone: HTMLElement;
-  private searchBarInput: HTMLInputElement;
+
+  @State() searchBarInputValue = '';
+  @State() previewList = [];
+  @State() isFetchError: boolean = false;
+  @State() isFetchingFile: boolean = false;
 
   @Prop({mutable: true}) selectedFiles: File[] = [];
-  @State() isError: boolean = false;
 
   @Element() el: HTMLElement;
 
   constructor() {
     this.addFiles = this.addFiles.bind(this);
     this.removeFile = this.removeFile.bind(this);
-    this.previewFile = this.previewFile.bind(this);
   }
 
   @Watch('selectedFiles')
   handleFilesChange(newValue) {
-    this.previewZone.innerHTML = '';
-    this.searchBarInput.value = '';
-    if (newValue.length !== 0) {
-      this.selectedFiles.forEach(this.previewFile);
+    if (newValue.length > 0) {
+      const promises = this.selectedFiles.map(async file => {
+        const data = await readFileAsync(file);
+        return {file, data}
+      });
+      Promise.all(promises).then((data) => {
+        this.previewList = data;
+      });
+    } else if (newValue.length === 0) {
+      this.previewList = [];
     }
   }
 
-  @Watch('isError')
+  @Watch('isFetchError')
   handleErrorStateChange(newValue: boolean) {
     if (newValue) {
       setTimeout(() => {
-        this.isError = false;
+        this.isFetchError = false;
       }, 5000)
     }
   }
 
   componentDidLoad() {
-    this.searchBarInput = this.el.shadowRoot.querySelector('#search-bar__input');
     this.previewZone = this.el.shadowRoot.querySelector('#preview');
 
     ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
@@ -77,56 +84,40 @@ export class ImageBrowser {
     this.selectedFiles = this.selectedFiles.filter(lf => lf !== file);
   }
 
-  previewFile(file) {
-    let reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = function () {
-      const img = document.createElement('img');
-      // @ts-ignore
-      img.src = reader.result;
-
-      const imgContainer = document.createElement('div');
-      imgContainer.classList.add('img-container');
-
-      const ctrl = document.createElement('div');
-      ctrl.classList.add('img-ctrl');
-
-      const cancel = document.createElement('span');
-      cancel.classList.add('img-ctrl__cancel');
-      cancel.innerHTML = '&#10005;';
-      ctrl.appendChild(cancel);
-      cancel.addEventListener('click', () => {
-        // this.previewZone.removeChild(imgContainer);
-        this.removeFile(file);
-      });
-
-      imgContainer.appendChild(img);
-      imgContainer.appendChild(ctrl);
-      this.previewZone.appendChild(imgContainer)
-    }.bind(this);
-  }
-
   renderSearchBar() {
+    const disabled = this.isFetchingFile;
+
     return (
       <div id="search-bar">
         <input placeholder="place url to grab an image ..." id="search-bar__input" type="url"
+               disabled={disabled}
+               value={this.searchBarInputValue}
+               onChange={(e) => {
+                 this.searchBarInputValue = (e.target as HTMLInputElement).value;
+               }}
                onKeyUp={(e) => {
                  if (e.code === 'Enter') {
                    (this.el.shadowRoot.querySelector('#search-bar__btn') as HTMLElement).click();
                  }
                }}/>
-        <button id="search-bar__btn" type="button" onClick={() => {
-          getImage(this.searchBarInput.value)
-            .then((file) => {
-              if (!file) return Promise.reject();
-              this.addFiles(
-                [new File([file], `image-${Date.now()}`, {})]
-              );
-            })
-            .catch(() => {
-              this.isError = true;
-            });
-        }}>
+        <button id="search-bar__btn" type="button"
+                disabled={disabled}
+                onClick={() => {
+                  const value = encodeURI(this.searchBarInputValue.trim());
+                  if (!value) return;
+                  this.isFetchingFile = true;
+                  getImage(value)
+                    .then((file) => {
+                      this.searchBarInputValue = '';
+                      this.addFiles([new File([file], `image-${Date.now()}`, {})]);
+                    })
+                    .catch(() => {
+                      this.isFetchError = true;
+                    })
+                    .finally(() => {
+                      this.isFetchingFile = false;
+                    });
+                }}>
           Select Image
         </button>
       </div>
@@ -134,10 +125,27 @@ export class ImageBrowser {
   }
 
   renderDropZone() {
-    const previewInstruction = this.selectedFiles.length === 0 ?
-      <label htmlFor="preview__input" id="preview__instructions">
+    let content = null;
+
+    if (this.isFetchingFile) {
+      content = <div id="loader">Loading</div>;
+    } else if (this.selectedFiles.length === 0) {
+      content = <label htmlFor="preview__input" id="preview__instructions">
         Drop images here or <span id="click">click</span> to select.
-      </label> : null;
+      </label>;
+    } else if (this.previewList.length > 0) {
+      content = this.previewList.map((plObj) => {
+        const {file, data} = plObj;
+        return (
+          <div class="img-container">
+            <img src={data}/>
+            <div class="img-ctrl">
+              <span class="img-ctrl__cancel" onClick={() => this.removeFile(file)}>&#10005;</span>
+            </div>
+          </div>
+        );
+      })
+    }
 
     return (
       <div id="preview">
@@ -146,20 +154,22 @@ export class ImageBrowser {
                  const target = e.target as HTMLInputElement;
                  this.addFiles(target.files)
                }}/>
-        {previewInstruction}
+        {content}
       </div>
     )
   }
 
   render() {
-
     return (
       <Host>
         {this.renderSearchBar()}
         {this.renderDropZone()}
-        {this.isError ? <div id="error-msg" onClick={() => {
-          this.isError = false
-        }}>There was an error getting your image, check the console to see more information.</div> : null}
+        {
+          this.isFetchError ?
+            <div id="error-msg" onClick={() => this.isFetchError = false}>
+              There was an error getting your image, check the console to see more information.
+            </div> : null
+        }
       </Host>
     );
   }
