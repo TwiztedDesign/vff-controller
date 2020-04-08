@@ -316,11 +316,11 @@ vff-image-browser {
 .ctrl-container-row {
   display: flex;
   align-items: center;
-  margin-bottom: var(--element-spacing);
+  padding: var(--element-spacing) 0;
 }
 
-.ctrl-container-row.indent{
-  padding-left: 15px;
+.ctrl-container-row.indent {
+  padding: var(--element-spacing) 0 var(--element-spacing) 15px;
 }
 
 .ctrl-container-row > input,
