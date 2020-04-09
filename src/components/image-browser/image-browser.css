@@ -134,6 +134,7 @@ img {
 }
 
 #error-msg {
+  display: none;
   animation: error-slid-in 500ms forwards;
   position: absolute;
   top: 0;
@@ -142,8 +143,8 @@ img {
   background-color: var(--theme-color-error);
 }
 
-#loader {
-  align-self: center;
+#error-msg.active {
+  display: initial;
 }
 
 @keyframes error-slid-in {

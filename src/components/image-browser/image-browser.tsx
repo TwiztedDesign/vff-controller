@@ -1,5 +1,5 @@
 import {Component, Host, h, Element, Prop, Watch, State} from '@stencil/core';
-import {getImage, readFileAsync} from "../../utils/utils";
+import {readFileAsync} from "../../utils/utils";
 
 @Component({
   tag: 'vff-image-browser',
@@ -8,11 +8,11 @@ import {getImage, readFileAsync} from "../../utils/utils";
 })
 export class ImageBrowser {
   private previewZone: HTMLElement;
+  private inputFile: HTMLInputElement;
+  private numOfFilesLimit = 1;
 
-  @State() searchBarInputValue = '';
   @State() previewList = [];
-  @State() isFetchError: boolean = false;
-  @State() isFetchingFile: boolean = false;
+  @State() isNumOfFilesLimitError: boolean = false;
 
   @Prop({mutable: true}) selectedFiles: File[] = [];
 
@@ -21,6 +21,16 @@ export class ImageBrowser {
   constructor() {
     this.addFiles = this.addFiles.bind(this);
     this.removeFile = this.removeFile.bind(this);
+    this.clearErrors = this.clearErrors.bind(this);
+  }
+
+  @Watch('isNumOfFilesLimitError')
+  handleNumOfFilesLimitError(newValue) {
+    if (newValue) {
+      setTimeout(() => {
+        this.isNumOfFilesLimitError = false;
+      }, 5000)
+    }
   }
 
   @Watch('selectedFiles')
@@ -38,16 +48,8 @@ export class ImageBrowser {
     }
   }
 
-  @Watch('isFetchError')
-  handleErrorStateChange(newValue: boolean) {
-    if (newValue) {
-      setTimeout(() => {
-        this.isFetchError = false;
-      }, 5000)
-    }
-  }
-
   componentDidLoad() {
+    this.inputFile = this.el.shadowRoot.querySelector('#preview__input');
     this.previewZone = this.el.shadowRoot.querySelector('#preview');
 
     ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
@@ -70,13 +72,18 @@ export class ImageBrowser {
     });
 
     this.previewZone.addEventListener('drop', (e) => {
-      this.addFiles(e.dataTransfer.files)
+      this.addFiles(e.dataTransfer.files);
     }, false);
   }
 
   addFiles(files) {
     if (files.length === 0) return;
+    if ((files.length + this.selectedFiles.length) > this.numOfFilesLimit) {
+      this.isNumOfFilesLimitError = true;
+      return;
+    }
     this.selectedFiles = [...this.selectedFiles, ...files];
+    this.inputFile.value = ''; // if not reset, it will prevent to cancel and upload the same file
   }
 
   removeFile(file) {
@@ -84,52 +91,14 @@ export class ImageBrowser {
     this.selectedFiles = this.selectedFiles.filter(lf => lf !== file);
   }
 
-  renderSearchBar() {
-    const disabled = this.isFetchingFile;
-
-    return (
-      <div id="search-bar">
-        <input placeholder="place url to grab an image ..." id="search-bar__input" type="url"
-               disabled={disabled}
-               value={this.searchBarInputValue}
-               onChange={(e) => {
-                 this.searchBarInputValue = (e.target as HTMLInputElement).value;
-               }}
-               onKeyUp={(e) => {
-                 if (e.code === 'Enter') {
-                   (this.el.shadowRoot.querySelector('#search-bar__btn') as HTMLElement).click();
-                 }
-               }}/>
-        <button id="search-bar__btn" type="button"
-                disabled={disabled}
-                onClick={() => {
-                  const value = encodeURI(this.searchBarInputValue.trim());
-                  if (!value) return;
-                  this.isFetchingFile = true;
-                  getImage(value)
-                    .then((file) => {
-                      this.searchBarInputValue = '';
-                      this.addFiles([new File([file], `image-${Date.now()}`, {})]);
-                    })
-                    .catch(() => {
-                      this.isFetchError = true;
-                    })
-                    .finally(() => {
-                      this.isFetchingFile = false;
-                    });
-                }}>
-          Select Image
-        </button>
-      </div>
-    );
+  clearErrors() {
+    this.isNumOfFilesLimitError = false;
   }
 
-  renderDropZone() {
+  render() {
     let content = null;
 
-    if (this.isFetchingFile) {
-      content = <div id="loader">Loading</div>;
-    } else if (this.selectedFiles.length === 0) {
+    if (this.selectedFiles.length === 0) {
       content = <label htmlFor="preview__input" id="preview__instructions">
         Drop images here or <span id="click">click</span> to select.
       </label>;
@@ -147,30 +116,27 @@ export class ImageBrowser {
       })
     }
 
-    return (
-      <div id="preview">
-        <input id="preview__input" type="file" multiple accept="image/*"
-               onChange={(e) => {
-                 const target = e.target as HTMLInputElement;
-                 this.addFiles(target.files)
-               }}/>
-        {content}
-      </div>
-    )
-  }
+    let errorMsg = null, error = false;
 
-  render() {
+    if (this.isNumOfFilesLimitError) {
+      error = true;
+      errorMsg = `Allowed number of files for selection is ${this.numOfFilesLimit}`
+    }
+
     return (
       <Host>
-        {this.renderSearchBar()}
-        {this.renderDropZone()}
-        {
-          this.isFetchError ?
-            <div id="error-msg" onClick={() => this.isFetchError = false}>
-              There was an error getting your image, check the console to see more information.
-            </div> : null
-        }
+        <div id="preview">
+          <input id="preview__input" type="file" accept="image/*"
+                 onChange={(e) => {
+                   const target = e.target as HTMLInputElement;
+                   this.addFiles(target.files)
+                 }}/>
+          {content}
+          <div class={error ? 'active' : null} id="error-msg" onClick={() => this.clearErrors()}>
+            {errorMsg}
+          </div>
+        </div>
       </Host>
-    );
+    )
   }
 }
