@@ -4,7 +4,7 @@
   --theme-color-3: #FFF;
   --theme-color-4: #000;
 
-  --theme-color-error: var(--theme-color-1);
+  --theme-color-error: #ff5722;
 
   --input-color: var(--theme-color-3);
   --input-bg-color: rgba(0, 0, 0, .4);
@@ -98,11 +98,11 @@ body {
 /**********************/
 
 h1, h2, h3 {
-  margin: 30px 5px 10px 5px;
+  margin:   30px 5px 10px 5px;
 }
 
-h1:first-child, h2:first-child, h3:first-child {
-  margin: 5px 5px 10px 5px;
+h1:first-child, h2:first-child, h3:first-child{
+  margin:   5px 5px 10px 5px;
 }
 
 h4 {
@@ -135,15 +135,19 @@ input, select, label {
 
 input[type=text],
 input[type=number],
+textarea,
 select {
   background-color: var(--input-bg-color);
   border: 0.5px solid var(--input-border-color);
   color: var(--input-color);
   font-size: var(--element-font-size);
   padding: 0 5px;
-  min-width: 50px;
   width: 100%;
   flex: 0 0 auto;
+}
+
+textarea{
+  resize: vertical;
 }
 
 input[type=color] {
@@ -151,6 +155,7 @@ input[type=color] {
   width: 100%;
   background: transparent;
   padding: 0.5px;
+  cursor: pointer;
 }
 
 input[type=color]::-webkit-color-swatch-wrapper {
@@ -238,6 +243,7 @@ table th > input {
 table td {
   font-size: 12px;
   background-color: var(--input-bg-color);
+  vertical-align: top;
 }
 
 table td > vff-checkbox,
@@ -301,7 +307,6 @@ vff-image-browser {
 /**********************/
 
 .ctrl-container {
-  padding: 5px;
   overflow: auto;
 }
 
@@ -317,7 +322,7 @@ vff-image-browser {
   display: flex;
   align-items: center;
   padding: var(--element-spacing) 5px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  /*border-bottom: 1px solid rgba(255,255,255,0.05);*/
 }
 
 .ctrl-container-row.indent {
@@ -339,5 +344,23 @@ vff-image-browser {
 .ctrl-container-row > input:last-child,
 .ctrl-container-row > select:last-child,
 .ctrl-container-row > label:last-child {
+  margin: 0;
+}
+
+.ctrl-container-block{
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px 5px 0 0;
+  width: 100%;
+  min-width: 120px;
+  overflow: hidden;
+}
+
+.ctrl-container-block:not(:last-child){
+  margin-right: 10px;
+}
+
+.ctrl-container-block label:first-child{
+  font-size: 14px;
   margin: 0;
 }
