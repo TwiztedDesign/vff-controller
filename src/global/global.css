@@ -301,7 +301,6 @@ vff-image-browser {
 /**********************/
 
 .ctrl-container {
-  padding: 5px;
   overflow: auto;
 }
 
