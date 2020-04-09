@@ -142,10 +142,6 @@ img {
   background-color: var(--theme-color-error);
 }
 
-#loader {
-  align-self: center;
-}
-
 @keyframes error-slid-in {
   0% {
     transform: translateX(-100%);

@@ -8,8 +8,10 @@ import {readFileAsync} from "../../utils/utils";
 })
 export class ImageBrowser {
   private previewZone: HTMLElement;
+  private numOfFilesLimit = 1;
 
   @State() previewList = [];
+  @State() isNumOfFilesLimitError: boolean = false;
 
   @Prop({mutable: true}) selectedFiles: File[] = [];
 
@@ -18,6 +20,15 @@ export class ImageBrowser {
   constructor() {
     this.addFiles = this.addFiles.bind(this);
     this.removeFile = this.removeFile.bind(this);
+  }
+
+  @Watch('isNumOfFilesLimitError')
+  handleNumOfFilesLimitError(newValue) {
+    if (newValue) {
+      setTimeout(() => {
+        this.isNumOfFilesLimitError = false;
+      }, 5000)
+    }
   }
 
   @Watch('selectedFiles')
@@ -58,12 +69,16 @@ export class ImageBrowser {
     });
 
     this.previewZone.addEventListener('drop', (e) => {
-      this.addFiles(e.dataTransfer.files)
+      this.addFiles(e.dataTransfer.files);
     }, false);
   }
 
   addFiles(files) {
     if (files.length === 0) return;
+    if (files.length > this.numOfFilesLimit) {
+      this.isNumOfFilesLimitError = true;
+      return;
+    }
     this.selectedFiles = [...this.selectedFiles, ...files];
   }
 
@@ -93,15 +108,24 @@ export class ImageBrowser {
       })
     }
 
+    let errorMsg = null;
+
+    if (this.isNumOfFilesLimitError) {
+      errorMsg = <div id="error-msg" onClick={() => this.isNumOfFilesLimitError = false}>
+        Allowed number of files to select is {this.numOfFilesLimit}
+      </div>
+    }
+
     return (
       <Host>
         <div id="preview">
-          <input id="preview__input" type="file" multiple accept="image/*"
+          <input id="preview__input" type="file" accept="image/*"
                  onChange={(e) => {
                    const target = e.target as HTMLInputElement;
                    this.addFiles(target.files)
                  }}/>
           {content}
+          {errorMsg}
         </div>
       </Host>
     )
