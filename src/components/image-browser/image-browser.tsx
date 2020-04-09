@@ -21,6 +21,7 @@ export class ImageBrowser {
   constructor() {
     this.addFiles = this.addFiles.bind(this);
     this.removeFile = this.removeFile.bind(this);
+    this.clearErrors = this.clearErrors.bind(this);
   }
 
   @Watch('isNumOfFilesLimitError')
@@ -90,6 +91,10 @@ export class ImageBrowser {
     this.selectedFiles = this.selectedFiles.filter(lf => lf !== file);
   }
 
+  clearErrors() {
+    this.isNumOfFilesLimitError = false;
+  }
+
   render() {
     let content = null;
 
@@ -111,12 +116,11 @@ export class ImageBrowser {
       })
     }
 
-    let errorMsg = null;
+    let errorMsg = null, error = false;
 
     if (this.isNumOfFilesLimitError) {
-      errorMsg = <div id="error-msg" onClick={() => this.isNumOfFilesLimitError = false}>
-        Allowed number of files to select is {this.numOfFilesLimit}
-      </div>
+      error = true;
+      errorMsg = `Allowed number of files for selection is ${this.numOfFilesLimit}`
     }
 
     return (
@@ -128,7 +132,9 @@ export class ImageBrowser {
                    this.addFiles(target.files)
                  }}/>
           {content}
-          {errorMsg}
+          <div class={error ? 'active' : null} id="error-msg" onClick={() => this.clearErrors()}>
+            {errorMsg}
+          </div>
         </div>
       </Host>
     )

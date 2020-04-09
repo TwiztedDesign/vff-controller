@@ -134,12 +134,17 @@ img {
 }
 
 #error-msg {
+  display: none;
   animation: error-slid-in 500ms forwards;
   position: absolute;
   top: 0;
   left: 0;
   padding: 15px;
   background-color: var(--theme-color-error);
+}
+
+#error-msg.active {
+  display: initial;
 }
 
 @keyframes error-slid-in {
