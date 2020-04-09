@@ -8,6 +8,7 @@ import {readFileAsync} from "../../utils/utils";
 })
 export class ImageBrowser {
   private previewZone: HTMLElement;
+  private inputFile: HTMLInputElement;
   private numOfFilesLimit = 1;
 
   @State() previewList = [];
@@ -47,6 +48,7 @@ export class ImageBrowser {
   }
 
   componentDidLoad() {
+    this.inputFile = this.el.shadowRoot.querySelector('#preview__input');
     this.previewZone = this.el.shadowRoot.querySelector('#preview');
 
     ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
@@ -75,11 +77,12 @@ export class ImageBrowser {
 
   addFiles(files) {
     if (files.length === 0) return;
-    if (files.length > this.numOfFilesLimit) {
+    if ((files.length + this.selectedFiles.length) > this.numOfFilesLimit) {
       this.isNumOfFilesLimitError = true;
       return;
     }
     this.selectedFiles = [...this.selectedFiles, ...files];
+    this.inputFile.value = ''; // if not reset, it will prevent to cancel and upload the same file
   }
 
   removeFile(file) {
