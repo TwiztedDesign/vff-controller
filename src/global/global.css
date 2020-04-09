@@ -2,7 +2,7 @@
   --theme-color-1: #ff0036;
   --theme-color-2: #474747;
   --theme-color-3: #FFF;
-  --theme-color-4: #000;
+  --theme-color-4: rgba(255,255,255,0.15);
 
   --theme-color-error: #ff5722;
 
@@ -38,8 +38,6 @@
 * {
   outline: none;
   user-select: none;
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
