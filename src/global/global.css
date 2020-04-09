@@ -4,7 +4,7 @@
   --theme-color-3: #FFF;
   --theme-color-4: #000;
 
-  --theme-color-error: #ff5722;
+  --theme-color-error: var(--theme-color-1);
 
   --input-color: var(--theme-color-3);
   --input-bg-color: rgba(0, 0, 0, .4);
@@ -98,11 +98,11 @@ body {
 /**********************/
 
 h1, h2, h3 {
-  margin:   30px 5px 10px 5px;
+  margin: 30px 5px 10px 5px;
 }
 
-h1:first-child, h2:first-child, h3:first-child{
-  margin:   5px 5px 10px 5px;
+h1:first-child, h2:first-child, h3:first-child {
+  margin: 5px 5px 10px 5px;
 }
 
 h4 {
@@ -317,7 +317,7 @@ vff-image-browser {
   display: flex;
   align-items: center;
   padding: var(--element-spacing) 5px;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .ctrl-container-row.indent {
