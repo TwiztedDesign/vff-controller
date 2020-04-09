@@ -1,12 +1,13 @@
 :host {
-  display: flex;
-  padding: 5px 0;
+  display: block;
+  min-width: 120px;
 }
 
 .element-checkbox {
   display: flex;
   align-items: center;
   cursor: pointer;
+  padding: 5px 0;
 }
 
 .element-checkbox .element-checkbox-text {
