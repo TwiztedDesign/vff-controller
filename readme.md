@@ -126,7 +126,7 @@ Checkbox properties<br/>
     <vff-radio-button name="radio-group">Radio3</vff-radio-button>
 ```
 
-Checkbox properties<br/>
+Radio button properties<br/>
 <table>
   <thead>
     <tr>
