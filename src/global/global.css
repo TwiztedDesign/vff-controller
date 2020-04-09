@@ -155,6 +155,7 @@ input[type=color] {
   width: 100%;
   background: transparent;
   padding: 0.5px;
+  cursor: pointer;
 }
 
 input[type=color]::-webkit-color-swatch-wrapper {
@@ -242,6 +243,7 @@ table th > input {
 table td {
   font-size: 12px;
   background-color: var(--input-bg-color);
+  vertical-align: top;
 }
 
 table td > vff-checkbox,
@@ -320,7 +322,7 @@ vff-image-browser {
   display: flex;
   align-items: center;
   padding: var(--element-spacing) 5px;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+  /*border-bottom: 1px solid rgba(255,255,255,0.05);*/
 }
 
 .ctrl-container-row.indent {
@@ -342,5 +344,23 @@ vff-image-browser {
 .ctrl-container-row > input:last-child,
 .ctrl-container-row > select:last-child,
 .ctrl-container-row > label:last-child {
+  margin: 0;
+}
+
+.ctrl-container-block{
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px 5px 0 0;
+  width: 100%;
+  min-width: 120px;
+  overflow: hidden;
+}
+
+.ctrl-container-block:not(:last-child){
+  margin-right: 10px;
+}
+
+.ctrl-container-block label:first-child{
+  font-size: 14px;
   margin: 0;
 }
