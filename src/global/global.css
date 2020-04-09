@@ -13,7 +13,7 @@
 
   --header-spacing: 20px;
 
-  --element-spacing: 5px;
+  --element-spacing: 10px;
   --elememt-min-height: 25px;
   --element-font-size: 12px;
   --element-font-family: sans-serif;
@@ -98,7 +98,11 @@ body {
 /**********************/
 
 h1, h2, h3 {
-  margin: 5px 0 0 0;
+  margin:   30px 5px 10px 5px;
+}
+
+h1:first-child, h2:first-child, h3:first-child{
+  margin:   5px 5px 10px 5px;
 }
 
 h4 {
@@ -312,7 +316,12 @@ vff-image-browser {
 .ctrl-container-row {
   display: flex;
   align-items: center;
-  margin-bottom: var(--element-spacing);
+  padding: var(--element-spacing) 5px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.ctrl-container-row.indent {
+  padding: var(--element-spacing) 5px var(--element-spacing) 15px;
 }
 
 .ctrl-container-row > input,
