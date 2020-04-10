@@ -24,7 +24,7 @@
   --checker-color-a: rgba(255, 255, 255, 0.1);
   --checker-color-b: transparent;
 
-  --tabs-height: 40px;
+  --tabs-height: 50px;
   --tabs-bg-color: #12161b;
   --tabs-border-color: var(--theme-color-4);
   --tabs-tab-color: var(--theme-color-3);
