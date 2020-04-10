@@ -7,12 +7,19 @@ import {readFileAsync} from "../../utils/utils";
   shadow: true
 })
 export class ImageBrowser {
+  private allowedFileTypes = [
+    'image/gif',
+    'image/jpeg',
+    'image/jpg',
+    'image/png',
+    'image/svg',
+  ];
+  private numOfFilesLimit = 1;
   private previewZone: HTMLElement;
   private inputFile: HTMLInputElement;
-  private numOfFilesLimit = 1;
 
   @State() previewList = [];
-  @State() isNumOfFilesLimitError: boolean = false;
+  @State() error: string = '';
 
   @Prop({mutable: true}) selectedFiles: File[] = [];
 
@@ -21,15 +28,14 @@ export class ImageBrowser {
   constructor() {
     this.addFiles = this.addFiles.bind(this);
     this.removeFile = this.removeFile.bind(this);
-    this.clearErrors = this.clearErrors.bind(this);
   }
 
-  @Watch('isNumOfFilesLimitError')
-  handleNumOfFilesLimitError(newValue) {
-    if (newValue) {
+  @Watch('error')
+  handleFileTypeError(newValue: string) {
+    if (newValue.length > 0) {
       setTimeout(() => {
-        this.isNumOfFilesLimitError = false;
-      }, 5000)
+        this.error = '';
+      }, 10000)
     }
   }
 
@@ -78,12 +84,19 @@ export class ImageBrowser {
 
   addFiles(files) {
     if (files.length === 0) return;
+    // make sure amount of files is not over the allowed limit
     if ((files.length + this.selectedFiles.length) > this.numOfFilesLimit) {
-      this.isNumOfFilesLimitError = true;
+      this.error = `Allowed number of files for selection is: ${this.numOfFilesLimit}`;
       return;
     }
+    // make sure that passed file(s) type match the allowed file type setting
+    if ([...files].find((file) => this.allowedFileTypes.indexOf(file.type) === -1)) {
+      this.error = `Only the following file types allowed: ${this.allowedFileTypes}`;
+      return;
+    }
+
     this.selectedFiles = [...this.selectedFiles, ...files];
-    this.inputFile.value = ''; // if not reset, it will prevent to cancel and upload the same file
+    this.inputFile.value = ''; // without reset, it will fail to cancel and upload the same file with button option
   }
 
   removeFile(file) {
@@ -91,18 +104,14 @@ export class ImageBrowser {
     this.selectedFiles = this.selectedFiles.filter(lf => lf !== file);
   }
 
-  clearErrors() {
-    this.isNumOfFilesLimitError = false;
-  }
-
   render() {
     let content = null;
 
-    if (this.selectedFiles.length === 0) {
+    if (this.selectedFiles.length === 0) { // no files to preview
       content = <label htmlFor="preview__input" id="preview__instructions">
         Drop images here or <span id="click">click</span> to select.
       </label>;
-    } else if (this.previewList.length > 0) {
+    } else if (this.previewList.length > 0) { // now there are files to preview
       content = this.previewList.map((plObj) => {
         const {file, data} = plObj;
         return (
@@ -116,24 +125,20 @@ export class ImageBrowser {
       })
     }
 
-    let errorMsg = null, error = false;
-
-    if (this.isNumOfFilesLimitError) {
-      error = true;
-      errorMsg = `Allowed number of files for selection is ${this.numOfFilesLimit}`
-    }
-
     return (
       <Host>
         <div id="preview">
-          <input id="preview__input" type="file" accept="image/*"
+          {/*
+          // @ts-ignore*/}
+          <input id="preview__input" type="file" accept={...this.allowedFileTypes}
                  onChange={(e) => {
                    const target = e.target as HTMLInputElement;
                    this.addFiles(target.files)
                  }}/>
           {content}
-          <div class={error ? 'active' : null} id="error-msg" onClick={() => this.clearErrors()}>
-            {errorMsg}
+          <div class={this.error ? 'active' : null} id="error-msg" onClick={() => this.error = ''}>
+            <span id="error__msg-text">{this.error}</span>
+            <span id="error__close-btn">&#10005;</span>
           </div>
         </div>
       </Host>

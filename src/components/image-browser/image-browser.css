@@ -144,7 +144,16 @@ img {
 }
 
 #error-msg.active {
-  display: initial;
+  display: flex;
+  justify-content: space-between;
+}
+
+#error__close-btn {
+  cursor: pointer;
+}
+
+#error__msg-text {
+  flex-basis: 90%;
 }
 
 @keyframes error-slid-in {

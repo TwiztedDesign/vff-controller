@@ -5,6 +5,9 @@
 * [Starter Template](#Starter_Template)
 * [How to use this library](#How_to_use_this_library)
 * [Available Controllers](#Available_Controllers)
+  - [vff-checkbox](#vff-checkbox)
+  - [vff-radio-button](#vff-radio-button)
+  - [vff-image-browser](#vff-image-browser)
 
 ## <a name="Videoflow_Controllers_Library"></a> Videoflow Controllers Library
 
@@ -96,8 +99,8 @@ In order to allow a section to be bound to a tab it must have the same ```id=sec
 ```
 
 ## <a name="Available_Controllers"></a> Available Controllers
-
-###### vff-checkbox:
+ 
+###### <a name="vff-checkbox"></a> vff-checkbox:
 
 ```html 
     <vff-checkbox>You can have you're text here!</vff-checkbox>
@@ -118,7 +121,7 @@ Checkbox properties<br/>
 </table>
 <br/>
 
-###### vff-radio-button:
+###### <a name="vff-radio-button"></a> vff-radio-button:
 
 ```html 
     <vff-radio-button name="radio-group">Radio1</vff-radio-button>
@@ -138,6 +141,28 @@ Radio button properties<br/>
     <tr><td>name</td><td>Sets or returns the value of the name attribute of the radio button</td></tr>
     <tr><td>value</td><td>Sets or returns the value of the value attribute of the radio button</td></tr>
     <tr><td>checked</td><td>Sets or returns the checked state of a radio button</td></tr>
+  </tbody>
+</table>
+<br/>
+
+###### <a name="vff-image-browser"></a> vff-image-browser:
+
+<p>Image Browser provides drag’n’drop and upload button file uploads with image previews.</p>
+
+```html
+    <vff-image-browser></vff-image-browser>
+```
+
+Image Browser properties<br/>
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>selectedFiles</td><td>Returns an array of File objects that represent selected file or files</td></tr>   
   </tbody>
 </table>
 <br/>
