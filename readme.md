@@ -192,8 +192,10 @@ Image Browser properties<br/>
     </tr>
   </thead>
   <tbody>
-    <tr><td>selectedFiles</td><td>Returns array of File objects that represent selected file or files</td></tr>
+    <tr><td>selectedFiles</td><td>Returns array of File objects that represent selected file or files.</td></tr>
     <tr><td>error</td><td>Set related error messages. Error text is cleared after 10 secs or on click.</td></tr>
+    <tr><td>progress</td><td>Set this property to enable progress bar UI.</td></tr>
+    <tr><td>progress-status</td><td>Set to control the progress bar value.</td></tr>
   </tbody>
 </table>
 <br/>
