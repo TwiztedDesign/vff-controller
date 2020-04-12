@@ -167,7 +167,7 @@ Image Browser properties<br/>
 </table>
 <br/>
 
-Image Browser Methods<br/>
+Image Browser methods<br/>
 <table>
   <thead>
     <tr>
@@ -183,7 +183,7 @@ Image Browser Methods<br/>
 </table>
 <br/>
 
-Image Browser Events<br/>
+Image Browser events<br/>
 <table>
   <thead>
     <tr>

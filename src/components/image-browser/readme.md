@@ -5,11 +5,18 @@
 <!-- Auto Generated Below -->
 
 
+## Properties
+
+| Property        | Attribute | Description | Type     | Default |
+| --------------- | --------- | ----------- | -------- | ------- |
+| `selectedFiles` | --        |             | `File[]` | `[]`    |
+
+
 ## Events
 
-| Event    | Description | Type               |
-| -------- | ----------- | ------------------ |
-| `change` |             | `CustomEvent<any>` |
+| Event        | Description | Type               |
+| ------------ | ----------- | ------------------ |
+| `vff:change` |             | `CustomEvent<any>` |
 
 
 ## Methods
@@ -21,16 +28,6 @@
 #### Returns
 
 Type: `Promise<void>`
-
-
-
-### `getSelectedFiles() => Promise<File[]>`
-
-
-
-#### Returns
-
-Type: `Promise<File[]>`
 
 
 

@@ -81,6 +81,7 @@ declare global {
 declare namespace LocalJSX {
   interface VffCheckbox {
     'checked'?: boolean;
+    'onVff:change'?: (event: CustomEvent<any>) => void;
     'value'?: string;
   }
   interface VffImageBrowser {
@@ -91,6 +92,7 @@ declare namespace LocalJSX {
     'checked'?: boolean;
     'name'?: string;
     'onRadioButtonStateChange'?: (event: CustomEvent<any>) => void;
+    'onVff:change'?: (event: CustomEvent<any>) => void;
     'value'?: string;
   }
   interface VffTab {
