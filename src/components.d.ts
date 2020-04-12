@@ -17,7 +17,6 @@ export namespace Components {
   interface VffImageBrowser {
     'addFiles': (files: any) => Promise<void>;
     'getSelectedFiles': () => Promise<File[]>;
-    'value': string;
   }
   interface VffRadioButton {
     'checked': boolean;
@@ -86,7 +85,6 @@ declare namespace LocalJSX {
   }
   interface VffImageBrowser {
     'onChange'?: (event: CustomEvent<any>) => void;
-    'value'?: string;
   }
   interface VffRadioButton {
     'checked'?: boolean;

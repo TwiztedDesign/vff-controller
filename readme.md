@@ -153,16 +153,34 @@ Radio button properties<br/>
     <vff-image-browser></vff-image-browser>
 ```
 
-Image Browser properties<br/>
+Image Browser Methods<br/>
 <table>
   <thead>
     <tr>
-      <th>Property</th>
+      <th>Method</th>
+      <th>Arguments</th>
+      <th>Returns</th>
       <th>Description</th>
     </tr>
   </thead>
   <tbody>
-    <tr><td>selectedFiles</td><td>Returns an array of File objects that represent selected file or files</td></tr>   
+    <tr><td>addFiles</td><td>[File]</td><td>n/a</td><td>Sets File objects that represent selected file or files</td></tr>   
+    <tr><td>getSelectedFiles</td><td>n/a</td><td>promise which resolves with an array of File objects</td><td>Returns a promise which resolves with an array of File objects that represent selected file or files</td></tr>   
+  </tbody>
+</table>
+<br/>
+
+Image Browser Events<br/>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>     
+      <th>Data</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>change</td><td>array of files</td><td>n/a</td><td>Each change to files in the image browser will result in change event</td></tr>   
   </tbody>
 </table>
 <br/>
