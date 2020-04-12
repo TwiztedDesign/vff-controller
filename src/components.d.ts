@@ -18,6 +18,8 @@ export namespace Components {
     'addFiles': (files: any) => Promise<void>;
     'error': string;
     'selectedFiles': File[];
+    'upload': boolean;
+    'uploadStatus': number;
   }
   interface VffProgressBar {
     'status': number;
@@ -99,6 +101,8 @@ declare namespace LocalJSX {
     'error'?: string;
     'onVff:change'?: (event: CustomEvent<any>) => void;
     'selectedFiles'?: File[];
+    'upload'?: boolean;
+    'uploadStatus'?: number;
   }
   interface VffProgressBar {
     'status'?: number;

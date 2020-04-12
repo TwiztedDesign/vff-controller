@@ -1,5 +1,6 @@
 :host {
   display: block;
+  align-self: center;
   overflow: hidden;
   min-width: 100px;
   width: 50%;

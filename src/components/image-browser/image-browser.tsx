@@ -29,6 +29,9 @@ export class ImageBrowser {
   @Prop({mutable: true}) error: string = '';
   @Prop({mutable: true}) selectedFiles: File[] = [];
 
+  @Prop() upload: boolean = false;
+  @Prop() uploadStatus: number = 0;
+
   @Element() el: HTMLElement;
 
   @Event({
@@ -125,7 +128,9 @@ export class ImageBrowser {
   render() {
     let content = null;
 
-    if (this.selectedFiles.length === 0) { // no files to preview
+    if (this.upload) {
+      content = <vff-progress-bar status={this.uploadStatus}/>;
+    } else if (this.selectedFiles.length === 0) { // no files to preview
       content = <label htmlFor="preview__input" id="preview__instructions">
         Drop images here or <span id="click">click</span> to select.
       </label>;
