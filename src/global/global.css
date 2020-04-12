@@ -5,6 +5,7 @@
   --theme-color-4: rgba(255, 255, 255, 0.15);
 
   --theme-color-error: #ff5722;
+  --theme-coloe-success: #138808;
 
   --input-color: var(--theme-color-3);
   --input-bg-color: rgba(0, 0, 0, .4);
@@ -83,7 +84,6 @@
 
 body {
   color: #fff;
-  background-color: #000;
   font-family: var(--element-font-family);
   display: flex;
   flex-direction: column;
