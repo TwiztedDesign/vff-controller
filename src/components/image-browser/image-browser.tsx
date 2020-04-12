@@ -8,11 +8,17 @@ import {readFileAsync} from "../../utils/utils";
 })
 export class ImageBrowser {
   private allowedFileTypes = [
-    'image/gif',
-    'image/jpeg',
+    "image/apng",
+    "image/bmp",
+    "image/gif",
+    "image/jpeg",
     'image/jpg',
-    'image/png',
-    'image/svg',
+    "image/png",
+    "image/svg",
+    "image/svg+xml",
+    "image/tiff",
+    "image/webp",
+    "image/x-icon"
   ];
   private numOfFilesLimit = 1;
   private previewZone: HTMLElement;
