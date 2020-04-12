@@ -9,7 +9,7 @@ export class Checkbox {
   private checkBoxInput: HTMLInputElement;
 
   @Prop() value = 'check-box';
-  @Prop({reflect: true, mutable: true}) checked = false;
+  @Prop({reflect: true, mutable: true}) checked: boolean = false;
 
   @Element() el: HTMLElement;
 

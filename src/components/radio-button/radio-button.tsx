@@ -12,7 +12,7 @@ export class RadioButton {
 
   @Prop() name = 'radio';
   @Prop() value = 'on';
-  @Prop({reflect: true, mutable: true}) checked = false;
+  @Prop({reflect: true, mutable: true}) checked: boolean = false;
 
   @Event({
     eventName: 'radioButtonStateChange',

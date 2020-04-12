@@ -17,9 +17,9 @@ export namespace Components {
   interface VffImageBrowser {
     'addFiles': (files: any) => Promise<void>;
     'error': string;
+    'progress': boolean;
+    'progressStatus': number;
     'selectedFiles': File[];
-    'upload': boolean;
-    'uploadStatus': number;
   }
   interface VffProgressBar {
     'status': number;
@@ -100,9 +100,9 @@ declare namespace LocalJSX {
   interface VffImageBrowser {
     'error'?: string;
     'onVff:change'?: (event: CustomEvent<any>) => void;
+    'progress'?: boolean;
+    'progressStatus'?: number;
     'selectedFiles'?: File[];
-    'upload'?: boolean;
-    'uploadStatus'?: number;
   }
   interface VffProgressBar {
     'status'?: number;
