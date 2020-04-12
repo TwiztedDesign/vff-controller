@@ -25,8 +25,8 @@ export class ImageBrowser {
   private inputFile: HTMLInputElement;
 
   @State() previewList = [];
-  @State() error: string = '';
 
+  @Prop({mutable: true}) error: string = '';
   @Prop({mutable: true}) selectedFiles: File[] = [];
 
   @Element() el: HTMLElement;
