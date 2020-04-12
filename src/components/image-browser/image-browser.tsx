@@ -1,4 +1,4 @@
-import {Component, Host, h, Element, Prop, Watch, State, Method, Event, EventEmitter} from '@stencil/core';
+import {Component, Host, h, Element, Watch, State, Method, Event, EventEmitter} from '@stencil/core';
 import {readFileAsync} from "../../utils/utils";
 
 @Component({
@@ -21,8 +21,6 @@ export class ImageBrowser {
   @State() previewList = [];
   @State() error: string = '';
   @State() selectedFiles: File[] = [];
-
-  @Prop() value: string;
 
   @Element() el: HTMLElement;
 
