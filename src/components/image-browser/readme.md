@@ -5,11 +5,34 @@
 <!-- Auto Generated Below -->
 
 
-## Properties
+## Events
 
-| Property        | Attribute | Description | Type     | Default |
-| --------------- | --------- | ----------- | -------- | ------- |
-| `selectedFiles` | --        |             | `File[]` | `[]`    |
+| Event    | Description | Type               |
+| -------- | ----------- | ------------------ |
+| `change` |             | `CustomEvent<any>` |
+
+
+## Methods
+
+### `addFiles(files: any) => Promise<void>`
+
+
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
+### `getSelectedFiles() => Promise<File[]>`
+
+
+
+#### Returns
+
+Type: `Promise<File[]>`
+
+
 
 
 ----------------------------------------------

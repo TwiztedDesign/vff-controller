@@ -1,5 +1,5 @@
 {
-  "timestamp": "2020-04-11T05:56:30",
+  "timestamp": "2020-04-12T07:51:36",
   "compiler": {
     "name": "@stencil/core",
     "version": "1.8.8",
@@ -66,26 +66,42 @@
       "docs": "",
       "docsTags": [],
       "usage": {},
-      "props": [
+      "props": [],
+      "methods": [
         {
-          "name": "selectedFiles",
-          "type": "File[]",
-          "mutable": true,
-          "reflectToAttr": false,
+          "name": "addFiles",
+          "returns": {
+            "type": "Promise<void>",
+            "docs": ""
+          },
+          "signature": "addFiles(files: any) => Promise<void>",
+          "parameters": [],
           "docs": "",
-          "docsTags": [],
-          "default": "[]",
-          "values": [
-            {
-              "type": "File[]"
-            }
-          ],
-          "optional": false,
-          "required": false
+          "docsTags": []
+        },
+        {
+          "name": "getSelectedFiles",
+          "returns": {
+            "type": "Promise<File[]>",
+            "docs": ""
+          },
+          "signature": "getSelectedFiles() => Promise<File[]>",
+          "parameters": [],
+          "docs": "",
+          "docsTags": []
         }
       ],
-      "methods": [],
-      "events": [],
+      "events": [
+        {
+          "event": "change",
+          "detail": "any",
+          "bubbles": true,
+          "cancelable": true,
+          "composed": true,
+          "docs": "",
+          "docsTags": []
+        }
+      ],
       "styles": [],
       "slots": [],
       "dependents": [],

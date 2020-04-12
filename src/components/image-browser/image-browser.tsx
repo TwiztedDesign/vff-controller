@@ -1,4 +1,4 @@
-import {Component, Host, h, Element, Watch, State, Method, Event, EventEmitter} from '@stencil/core';
+import {Component, Host, h, Element, Watch, State, Method, Event, EventEmitter, Prop} from '@stencil/core';
 import {readFileAsync} from "../../utils/utils";
 
 @Component({
@@ -20,17 +20,13 @@ export class ImageBrowser {
 
   @State() previewList = [];
   @State() error: string = '';
-  @State() selectedFiles: File[] = [];
+
+  @Prop({mutable: true}) selectedFiles: File[] = [];
 
   @Element() el: HTMLElement;
 
-  constructor() {
-    this.addFiles = this.addFiles.bind(this);
-    this.removeFile = this.removeFile.bind(this);
-  }
-
   @Event({
-    eventName: 'change',
+    eventName: 'vff:change',
     bubbles: true,
     cancelable: true,
     composed: true
@@ -62,6 +58,11 @@ export class ImageBrowser {
     } else if (newValue.length === 0) {
       this.previewList = [];
     }
+  }
+
+  constructor() {
+    this.addFiles = this.addFiles.bind(this);
+    this.removeFile = this.removeFile.bind(this);
   }
 
   componentDidLoad() {
@@ -108,11 +109,6 @@ export class ImageBrowser {
 
     this.selectedFiles = [...this.selectedFiles, ...files];
     this.inputFile.value = ''; // without reset, it will fail to cancel and upload the same file with button option
-  }
-
-  @Method()
-  async getSelectedFiles() {
-    return this.selectedFiles;
   }
 
   private removeFile(file) {
