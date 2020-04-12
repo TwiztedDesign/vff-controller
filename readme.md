@@ -121,6 +121,21 @@ Checkbox properties<br/>
 </table>
 <br/>
 
+Checkbox events<br/>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>     
+      <th>Data</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>vff:change</td><td>boolean</td><td>Event data represents checkbox checked state</td></tr>   
+  </tbody>
+</table>
+<br/>
+
 ###### <a name="vff-radio-button"></a> vff-radio-button:
 
 ```html 
@@ -141,6 +156,21 @@ Radio button properties<br/>
     <tr><td>name</td><td>Sets or returns the value of the name attribute of the radio button</td></tr>
     <tr><td>value</td><td>Sets or returns the value of the value attribute of the radio button</td></tr>
     <tr><td>checked</td><td>Sets or returns the checked state of a radio button</td></tr>
+  </tbody>
+</table>
+<br/>
+
+Radio button events<br/>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>     
+      <th>Data</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>vff:change</td><td>boolean</td><td>Event data represents radio button checked state</td></tr>   
   </tbody>
 </table>
 <br/>
@@ -193,7 +223,7 @@ Image Browser events<br/>
     </tr>
   </thead>
   <tbody>
-    <tr><td>change</td><td>array of files</td><td>Each change to files in the image browser will result in change event</td></tr>   
+    <tr><td>vff:change</td><td>array of files</td><td>Each change to files in the image browser will result in change event</td></tr>   
   </tbody>
 </table>
 <br/>

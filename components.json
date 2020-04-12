@@ -1,5 +1,5 @@
 {
-  "timestamp": "2020-04-12T08:19:25",
+  "timestamp": "2020-04-12T08:37:10",
   "compiler": {
     "name": "@stencil/core",
     "version": "1.8.8",
@@ -51,7 +51,17 @@
         }
       ],
       "methods": [],
-      "events": [],
+      "events": [
+        {
+          "event": "vff:change",
+          "detail": "any",
+          "bubbles": true,
+          "cancelable": true,
+          "composed": true,
+          "docs": "",
+          "docsTags": []
+        }
+      ],
       "styles": [],
       "slots": [],
       "dependents": [],
@@ -179,6 +189,15 @@
       "events": [
         {
           "event": "radioButtonStateChange",
+          "detail": "any",
+          "bubbles": true,
+          "cancelable": true,
+          "composed": true,
+          "docs": "",
+          "docsTags": []
+        },
+        {
+          "event": "vff:change",
           "detail": "any",
           "bubbles": true,
           "cancelable": true,
