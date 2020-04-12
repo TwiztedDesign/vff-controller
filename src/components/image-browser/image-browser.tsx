@@ -1,4 +1,4 @@
-import {Component, Host, h, Element, Prop, Watch, State} from '@stencil/core';
+import {Component, Host, h, Element, Prop, Watch, State, Method, Event, EventEmitter} from '@stencil/core';
 import {readFileAsync} from "../../utils/utils";
 
 @Component({
@@ -20,8 +20,9 @@ export class ImageBrowser {
 
   @State() previewList = [];
   @State() error: string = '';
+  @State() selectedFiles: File[] = [];
 
-  @Prop({mutable: true}) selectedFiles: File[] = [];
+  @Prop() value: string;
 
   @Element() el: HTMLElement;
 
@@ -29,6 +30,13 @@ export class ImageBrowser {
     this.addFiles = this.addFiles.bind(this);
     this.removeFile = this.removeFile.bind(this);
   }
+
+  @Event({
+    eventName: 'change',
+    bubbles: true,
+    cancelable: true,
+    composed: true
+  }) changeSelectedFiles: EventEmitter;
 
   @Watch('error')
   handleFileTypeError(newValue: string) {
@@ -41,6 +49,10 @@ export class ImageBrowser {
 
   @Watch('selectedFiles')
   handleFilesChange(newValue) {
+    this.changeSelectedFiles.emit({
+      data: newValue
+    });
+
     if (newValue.length > 0) {
       const promises = this.selectedFiles.map(async file => {
         const data = await readFileAsync(file);
@@ -82,7 +94,8 @@ export class ImageBrowser {
     }, false);
   }
 
-  addFiles(files) {
+  @Method()
+  async addFiles(files) {
     if (files.length === 0) return;
     // make sure amount of files is not over the allowed limit
     if ((files.length + this.selectedFiles.length) > this.numOfFilesLimit) {
@@ -99,7 +112,12 @@ export class ImageBrowser {
     this.inputFile.value = ''; // without reset, it will fail to cancel and upload the same file with button option
   }
 
-  removeFile(file) {
+  @Method()
+  async getSelectedFiles() {
+    return this.selectedFiles;
+  }
+
+  private removeFile(file) {
     if (!file) return;
     this.selectedFiles = this.selectedFiles.filter(lf => lf !== file);
   }

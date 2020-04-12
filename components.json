@@ -1,5 +1,5 @@
 {
-  "timestamp": "2020-04-10T21:41:17",
+  "timestamp": "2020-04-11T05:56:30",
   "compiler": {
     "name": "@stencil/core",
     "version": "1.8.8",
@@ -7,10 +7,10 @@
   },
   "components": [
     {
-      "filePath": "src\\components\\checkbox\\checkbox.tsx",
+      "filePath": "src/components/checkbox/checkbox.tsx",
       "encapsulation": "shadow",
       "tag": "vff-checkbox",
-      "readme": "# vff-checkbox\r\n\r\n\r\n\r",
+      "readme": "# vff-checkbox\n\n\n",
       "docs": "",
       "docsTags": [],
       "usage": {},
@@ -59,10 +59,10 @@
       "dependencyGraph": {}
     },
     {
-      "filePath": "src\\components\\image-browser\\image-browser.tsx",
+      "filePath": "src/components/image-browser/image-browser.tsx",
       "encapsulation": "shadow",
       "tag": "vff-image-browser",
-      "readme": "# vff-image-browser\r\n\r\n\r\n\r",
+      "readme": "# vff-image-browser\n\n\n",
       "docs": "",
       "docsTags": [],
       "usage": {},
@@ -93,10 +93,10 @@
       "dependencyGraph": {}
     },
     {
-      "filePath": "src\\components\\radio-button\\radio-button.tsx",
+      "filePath": "src/components/radio-button/radio-button.tsx",
       "encapsulation": "shadow",
       "tag": "vff-radio-button",
-      "readme": "# vff-radio-button\r\n\r\n\r\n\r",
+      "readme": "# vff-radio-button\n\n\n",
       "docs": "",
       "docsTags": [],
       "usage": {},
@@ -172,10 +172,10 @@
       "dependencyGraph": {}
     },
     {
-      "filePath": "src\\components\\tab\\tab.tsx",
+      "filePath": "src/components/tab/tab.tsx",
       "encapsulation": "shadow",
       "tag": "vff-tab",
-      "readme": "# vff-tab\r\n\r\n\r\n\r",
+      "readme": "# vff-tab\n\n\n",
       "docs": "",
       "docsTags": [],
       "usage": {},
@@ -207,10 +207,10 @@
       "dependencyGraph": {}
     },
     {
-      "filePath": "src\\components\\tabs\\tabs.tsx",
+      "filePath": "src/components/tabs/tabs.tsx",
       "encapsulation": "shadow",
       "tag": "vff-tabs",
-      "readme": "# vff-tabs\r\n\r\n\r\n\r",
+      "readme": "# vff-tabs\n\n\n",
       "docs": "",
       "docsTags": [],
       "usage": {},
@@ -221,7 +221,7 @@
           "mutable": false,
           "attr": "default",
           "reflectToAttr": false,
-          "docs": "Default tab to be selected when tabs component loads.\r\nWhen property is not provided, default will be the most first tab",
+          "docs": "Default tab to be selected when tabs component loads.\nWhen property is not provided, default will be the most first tab",
           "docsTags": [],
           "default": "''",
           "values": [
