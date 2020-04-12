@@ -193,6 +193,7 @@ Image Browser properties<br/>
   </thead>
   <tbody>
     <tr><td>selectedFiles</td><td>Returns array of File objects that represent selected file or files</td></tr>
+    <tr><td>error</td><td>Set related error messages. Error text is cleared after 10 secs or on click.</td></tr>
   </tbody>
 </table>
 <br/>
