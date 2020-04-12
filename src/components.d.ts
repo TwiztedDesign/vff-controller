@@ -19,6 +19,9 @@ export namespace Components {
     'error': string;
     'selectedFiles': File[];
   }
+  interface VffProgressBar {
+    'status': number;
+  }
   interface VffRadioButton {
     'checked': boolean;
     'name': string;
@@ -53,6 +56,12 @@ declare global {
     new (): HTMLVffImageBrowserElement;
   };
 
+  interface HTMLVffProgressBarElement extends Components.VffProgressBar, HTMLStencilElement {}
+  var HTMLVffProgressBarElement: {
+    prototype: HTMLVffProgressBarElement;
+    new (): HTMLVffProgressBarElement;
+  };
+
   interface HTMLVffRadioButtonElement extends Components.VffRadioButton, HTMLStencilElement {}
   var HTMLVffRadioButtonElement: {
     prototype: HTMLVffRadioButtonElement;
@@ -73,6 +82,7 @@ declare global {
   interface HTMLElementTagNameMap {
     'vff-checkbox': HTMLVffCheckboxElement;
     'vff-image-browser': HTMLVffImageBrowserElement;
+    'vff-progress-bar': HTMLVffProgressBarElement;
     'vff-radio-button': HTMLVffRadioButtonElement;
     'vff-tab': HTMLVffTabElement;
     'vff-tabs': HTMLVffTabsElement;
@@ -89,6 +99,9 @@ declare namespace LocalJSX {
     'error'?: string;
     'onVff:change'?: (event: CustomEvent<any>) => void;
     'selectedFiles'?: File[];
+  }
+  interface VffProgressBar {
+    'status'?: number;
   }
   interface VffRadioButton {
     'checked'?: boolean;
@@ -113,6 +126,7 @@ declare namespace LocalJSX {
   interface IntrinsicElements {
     'vff-checkbox': VffCheckbox;
     'vff-image-browser': VffImageBrowser;
+    'vff-progress-bar': VffProgressBar;
     'vff-radio-button': VffRadioButton;
     'vff-tab': VffTab;
     'vff-tabs': VffTabs;
@@ -127,6 +141,7 @@ declare module "@stencil/core" {
     interface IntrinsicElements {
       'vff-checkbox': LocalJSX.VffCheckbox & JSXBase.HTMLAttributes<HTMLVffCheckboxElement>;
       'vff-image-browser': LocalJSX.VffImageBrowser & JSXBase.HTMLAttributes<HTMLVffImageBrowserElement>;
+      'vff-progress-bar': LocalJSX.VffProgressBar & JSXBase.HTMLAttributes<HTMLVffProgressBarElement>;
       'vff-radio-button': LocalJSX.VffRadioButton & JSXBase.HTMLAttributes<HTMLVffRadioButtonElement>;
       'vff-tab': LocalJSX.VffTab & JSXBase.HTMLAttributes<HTMLVffTabElement>;
       'vff-tabs': LocalJSX.VffTabs & JSXBase.HTMLAttributes<HTMLVffTabsElement>;
