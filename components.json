@@ -1,5 +1,5 @@
 {
-  "timestamp": "2020-04-13T15:23:17",
+  "timestamp": "2020-04-13T16:17:51",
   "compiler": {
     "name": "@stencil/core",
     "version": "1.8.8",
@@ -185,6 +185,7 @@
       "filePath": "src\\components\\progress-bar\\progress-bar.tsx",
       "encapsulation": "shadow",
       "tag": "vff-progress-bar",
+      "readme": "# vff-progress-bar\n\n\n",
       "docs": "",
       "docsTags": [],
       "usage": {},
