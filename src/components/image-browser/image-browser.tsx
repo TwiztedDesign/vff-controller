@@ -1,4 +1,4 @@
-import {Component, Host, h, Element, Prop, Watch, State} from '@stencil/core';
+import {Component, Host, h, Element, Watch, State, Method, Event, EventEmitter, Prop} from '@stencil/core';
 import {readFileAsync} from "../../utils/utils";
 
 @Component({
@@ -8,27 +8,38 @@ import {readFileAsync} from "../../utils/utils";
 })
 export class ImageBrowser {
   private allowedFileTypes = [
-    'image/gif',
-    'image/jpeg',
+    "image/apng",
+    "image/bmp",
+    "image/gif",
+    "image/jpeg",
     'image/jpg',
-    'image/png',
-    'image/svg',
+    "image/png",
+    "image/svg",
+    "image/svg+xml",
+    "image/tiff",
+    "image/webp",
+    "image/x-icon"
   ];
   private numOfFilesLimit = 1;
   private previewZone: HTMLElement;
   private inputFile: HTMLInputElement;
 
   @State() previewList = [];
-  @State() error: string = '';
 
+  @Prop({mutable: true}) error: string = '';
   @Prop({mutable: true}) selectedFiles: File[] = [];
+
+  @Prop() progress: boolean = false;
+  @Prop() progressStatus: number = 0;
 
   @Element() el: HTMLElement;
 
-  constructor() {
-    this.addFiles = this.addFiles.bind(this);
-    this.removeFile = this.removeFile.bind(this);
-  }
+  @Event({
+    eventName: 'vff:change',
+    bubbles: true,
+    cancelable: true,
+    composed: true
+  }) changeSelectedFiles: EventEmitter;
 
   @Watch('error')
   handleFileTypeError(newValue: string) {
@@ -41,6 +52,10 @@ export class ImageBrowser {
 
   @Watch('selectedFiles')
   handleFilesChange(newValue) {
+    this.changeSelectedFiles.emit({
+      data: newValue
+    });
+
     if (newValue.length > 0) {
       const promises = this.selectedFiles.map(async file => {
         const data = await readFileAsync(file);
@@ -52,6 +67,11 @@ export class ImageBrowser {
     } else if (newValue.length === 0) {
       this.previewList = [];
     }
+  }
+
+  constructor() {
+    this.addFiles = this.addFiles.bind(this);
+    this.removeFile = this.removeFile.bind(this);
   }
 
   componentDidLoad() {
@@ -82,7 +102,8 @@ export class ImageBrowser {
     }, false);
   }
 
-  addFiles(files) {
+  @Method()
+  async addFiles(files) {
     if (files.length === 0) return;
     // make sure amount of files is not over the allowed limit
     if ((files.length + this.selectedFiles.length) > this.numOfFilesLimit) {
@@ -99,7 +120,7 @@ export class ImageBrowser {
     this.inputFile.value = ''; // without reset, it will fail to cancel and upload the same file with button option
   }
 
-  removeFile(file) {
+  private removeFile(file) {
     if (!file) return;
     this.selectedFiles = this.selectedFiles.filter(lf => lf !== file);
   }
@@ -107,7 +128,9 @@ export class ImageBrowser {
   render() {
     let content = null;
 
-    if (this.selectedFiles.length === 0) { // no files to preview
+    if (this.progress) {
+      content = <vff-progress-bar status={this.progressStatus}/>;
+    } else if (this.selectedFiles.length === 0) { // no files to preview
       content = <label htmlFor="preview__input" id="preview__instructions">
         Drop images here or <span id="click">click</span> to select.
       </label>;

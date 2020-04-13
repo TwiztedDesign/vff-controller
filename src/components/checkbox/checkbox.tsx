@@ -1,4 +1,4 @@
-import {Component, Host, h, Prop, Watch, Element} from '@stencil/core';
+import {Component, Host, h, Prop, Watch, Element, Event, EventEmitter} from '@stencil/core';
 
 @Component({
   tag: 'vff-checkbox',
@@ -9,13 +9,23 @@ export class Checkbox {
   private checkBoxInput: HTMLInputElement;
 
   @Prop() value = 'check-box';
-  @Prop({reflect: true, mutable: true}) checked = false;
+  @Prop({reflect: true, mutable: true}) checked: boolean = false;
 
   @Element() el: HTMLElement;
+
+  @Event({
+    eventName: 'vff:change',
+    bubbles: true,
+    cancelable: true,
+    composed: true
+  }) changeChecked: EventEmitter;
 
   @Watch('checked')
   validateCheckedPropChange(newValue: boolean) {
     this.checkBoxInput.checked = newValue;
+    this.changeChecked.emit({
+      data: newValue
+    });
   }
 
   constructor() {

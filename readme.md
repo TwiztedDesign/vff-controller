@@ -111,12 +111,28 @@ Checkbox properties<br/>
   <thead>
     <tr>
       <th>Property</th>
+      <th>Value</th>
       <th>Description</th>
     </tr>
   </thead>
   <tbody>
-    <tr><td>value</td><td>Sets or returns the value of the value attribute of the checkbox</td></tr>
-    <tr><td>checked</td><td>Sets or returns the checked state of a checkbox</td></tr>
+    <tr><td>value</td><td>string</td><td>Sets or returns the value of the value attribute of the checkbox</td></tr>
+    <tr><td>checked</td><td>boolean</td><td>Sets or returns the checked state of a checkbox</td></tr>
+  </tbody>
+</table>
+<br/>
+
+Checkbox events<br/>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>     
+      <th>Data</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>vff:change</td><td>boolean</td><td>Event data represents checkbox checked state</td></tr>   
   </tbody>
 </table>
 <br/>
@@ -134,13 +150,29 @@ Radio button properties<br/>
   <thead>
     <tr>
       <th>Property</th>
+      <th>Value</th>
       <th>Description</th>
     </tr>
   </thead>
   <tbody>
-    <tr><td>name</td><td>Sets or returns the value of the name attribute of the radio button</td></tr>
-    <tr><td>value</td><td>Sets or returns the value of the value attribute of the radio button</td></tr>
-    <tr><td>checked</td><td>Sets or returns the checked state of a radio button</td></tr>
+    <tr><td>name</td><td>string</td><td>Sets or returns the value of the name attribute of the radio button</td></tr>
+    <tr><td>value</td><td>string</td><td>Sets or returns the value of the value attribute of the radio button</td></tr>
+    <tr><td>checked</td><td>boolean</td><td>Sets or returns the checked state of a radio button</td></tr>
+  </tbody>
+</table>
+<br/>
+
+Radio button events<br/>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>     
+      <th>Data</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>vff:change</td><td>boolean</td><td>Event data represents radio button checked state</td></tr>   
   </tbody>
 </table>
 <br/>
@@ -158,11 +190,46 @@ Image Browser properties<br/>
   <thead>
     <tr>
       <th>Property</th>
+      <th>Value</th>
       <th>Description</th>
     </tr>
   </thead>
   <tbody>
-    <tr><td>selectedFiles</td><td>Returns an array of File objects that represent selected file or files</td></tr>   
+    <tr><td>selectedFiles</td><td>[File]</td><td>Returns array of File objects that represent selected file or files.</td></tr>
+    <tr><td>error</td><td>string</td><td>Set related error messages. Error text is cleared after 10 secs or on click.</td></tr>
+    <tr><td>progress</td><td>boolean</td><td>Set this property to enable progress bar UI.</td></tr>
+    <tr><td>progress-status</td><td>int [0-100]</td><td>Set to control the progress bar value.</td></tr>
+  </tbody>
+</table>
+<br/>
+
+Image Browser methods<br/>
+<table>
+  <thead>
+    <tr>
+      <th>Method</th>
+      <th>Arguments</th>
+      <th>Returns</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>addFiles</td><td>[File]</td><td>n/a</td><td>Sets File objects that represent selected file or files</td></tr>   
+  </tbody>
+</table>
+<br/>
+
+Image Browser events<br/>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>     
+      <th>Data</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>vff:change</td><td>array of files</td><td>Each change to files in the image browser will result in change event</td></tr>   
   </tbody>
 </table>
 <br/>

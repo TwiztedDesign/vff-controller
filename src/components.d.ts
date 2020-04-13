@@ -15,7 +15,14 @@ export namespace Components {
     'value': string;
   }
   interface VffImageBrowser {
+    'addFiles': (files: any) => Promise<void>;
+    'error': string;
+    'progress': boolean;
+    'progressStatus': number;
     'selectedFiles': File[];
+  }
+  interface VffProgressBar {
+    'status': number;
   }
   interface VffRadioButton {
     'checked': boolean;
@@ -51,6 +58,12 @@ declare global {
     new (): HTMLVffImageBrowserElement;
   };
 
+  interface HTMLVffProgressBarElement extends Components.VffProgressBar, HTMLStencilElement {}
+  var HTMLVffProgressBarElement: {
+    prototype: HTMLVffProgressBarElement;
+    new (): HTMLVffProgressBarElement;
+  };
+
   interface HTMLVffRadioButtonElement extends Components.VffRadioButton, HTMLStencilElement {}
   var HTMLVffRadioButtonElement: {
     prototype: HTMLVffRadioButtonElement;
@@ -71,6 +84,7 @@ declare global {
   interface HTMLElementTagNameMap {
     'vff-checkbox': HTMLVffCheckboxElement;
     'vff-image-browser': HTMLVffImageBrowserElement;
+    'vff-progress-bar': HTMLVffProgressBarElement;
     'vff-radio-button': HTMLVffRadioButtonElement;
     'vff-tab': HTMLVffTabElement;
     'vff-tabs': HTMLVffTabsElement;
@@ -80,15 +94,24 @@ declare global {
 declare namespace LocalJSX {
   interface VffCheckbox {
     'checked'?: boolean;
+    'onVff:change'?: (event: CustomEvent<any>) => void;
     'value'?: string;
   }
   interface VffImageBrowser {
+    'error'?: string;
+    'onVff:change'?: (event: CustomEvent<any>) => void;
+    'progress'?: boolean;
+    'progressStatus'?: number;
     'selectedFiles'?: File[];
+  }
+  interface VffProgressBar {
+    'status'?: number;
   }
   interface VffRadioButton {
     'checked'?: boolean;
     'name'?: string;
     'onRadioButtonStateChange'?: (event: CustomEvent<any>) => void;
+    'onVff:change'?: (event: CustomEvent<any>) => void;
     'value'?: string;
   }
   interface VffTab {
@@ -107,6 +130,7 @@ declare namespace LocalJSX {
   interface IntrinsicElements {
     'vff-checkbox': VffCheckbox;
     'vff-image-browser': VffImageBrowser;
+    'vff-progress-bar': VffProgressBar;
     'vff-radio-button': VffRadioButton;
     'vff-tab': VffTab;
     'vff-tabs': VffTabs;
@@ -121,6 +145,7 @@ declare module "@stencil/core" {
     interface IntrinsicElements {
       'vff-checkbox': LocalJSX.VffCheckbox & JSXBase.HTMLAttributes<HTMLVffCheckboxElement>;
       'vff-image-browser': LocalJSX.VffImageBrowser & JSXBase.HTMLAttributes<HTMLVffImageBrowserElement>;
+      'vff-progress-bar': LocalJSX.VffProgressBar & JSXBase.HTMLAttributes<HTMLVffProgressBarElement>;
       'vff-radio-button': LocalJSX.VffRadioButton & JSXBase.HTMLAttributes<HTMLVffRadioButtonElement>;
       'vff-tab': LocalJSX.VffTab & JSXBase.HTMLAttributes<HTMLVffTabElement>;
       'vff-tabs': LocalJSX.VffTabs & JSXBase.HTMLAttributes<HTMLVffTabsElement>;

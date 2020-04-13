@@ -19,6 +19,7 @@
 | Event                    | Description | Type               |
 | ------------------------ | ----------- | ------------------ |
 | `radioButtonStateChange` |             | `CustomEvent<any>` |
+| `vff:change`             |             | `CustomEvent<any>` |
 
 
 ----------------------------------------------

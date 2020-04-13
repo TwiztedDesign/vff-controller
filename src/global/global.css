@@ -2,9 +2,10 @@
   --theme-color-1: #ff0036;
   --theme-color-2: #474747;
   --theme-color-3: #FFF;
-  --theme-color-4: rgba(255,255,255,0.15);
+  --theme-color-4: rgba(255, 255, 255, 0.15);
 
   --theme-color-error: #ff5722;
+  --theme-coloe-success: #138808;
 
   --input-color: var(--theme-color-3);
   --input-bg-color: rgba(0, 0, 0, .4);
@@ -97,11 +98,11 @@ body {
 /**********************/
 
 h1, h2, h3 {
-  margin:   30px 5px 0 5px;
+  margin: 30px 5px 0 5px;
 }
 
-h1:first-child, h2:first-child, h3:first-child{
-  margin:   5px 5px 0 5px;
+h1:first-child, h2:first-child, h3:first-child {
+  margin: 5px 5px 0 5px;
 }
 
 h4 {
@@ -145,7 +146,7 @@ select {
   flex: 0 0 auto;
 }
 
-textarea{
+textarea {
   resize: vertical;
 }
 
@@ -345,20 +346,20 @@ vff-image-browser {
   margin: 0;
 }
 
-.ctrl-container-block{
+.ctrl-container-block {
   display: flex;
   flex-direction: column;
   border-radius: 2px;
   width: 100%;
   overflow: hidden;
   padding: 0 5px 5px 5px;
-  background: rgba(255,255,255,0.05);
+  background: rgba(255, 255, 255, 0.05);
 }
 
-.ctrl-container-block:not(:last-child){
+.ctrl-container-block:not(:last-child) {
   margin-right: 5px;
 }
 
-.ctrl-container-block label{
+.ctrl-container-block label {
   margin: 0;
 }

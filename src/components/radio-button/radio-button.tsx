@@ -12,7 +12,21 @@ export class RadioButton {
 
   @Prop() name = 'radio';
   @Prop() value = 'on';
-  @Prop({reflect: true, mutable: true}) checked = false;
+  @Prop({reflect: true, mutable: true}) checked: boolean = false;
+
+  @Event({
+    eventName: 'radioButtonStateChange',
+    composed: true,
+    cancelable: true,
+    bubbles: true,
+  }) radioButtonStateChange: EventEmitter;
+
+  @Event({
+    eventName: 'vff:change',
+    bubbles: true,
+    cancelable: true,
+    composed: true
+  }) changeChecked: EventEmitter;
 
   @Watch('checked')
   validateCheckedPropChange(newValue: boolean) {
@@ -24,14 +38,10 @@ export class RadioButton {
         checked: this.checked
       });
     }
+    this.changeChecked.emit({
+      data: this.radioButton.checked
+    })
   }
-
-  @Event({
-    eventName: 'radioButtonStateChange',
-    composed: true,
-    cancelable: true,
-    bubbles: true,
-  }) radioButtonStateChange: EventEmitter;
 
   @Listen('radioButtonStateChange', {target: 'document'})
   handleRadioButtonStateChange(event: CustomEvent) {
