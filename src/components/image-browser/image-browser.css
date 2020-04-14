@@ -132,6 +132,8 @@ img {
 
 #preview__instructions {
   align-self: center;
+  font-size: 12px;
+  padding: 2px;
 }
 
 #error-msg {
