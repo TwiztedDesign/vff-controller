@@ -20,6 +20,7 @@ export namespace Components {
     'progress': boolean;
     'progressStatus': number;
     'selectedFiles': File[];
+    'value': string;
   }
   interface VffProgressBar {
     'status': number;
@@ -103,6 +104,7 @@ declare namespace LocalJSX {
     'progress'?: boolean;
     'progressStatus'?: number;
     'selectedFiles'?: File[];
+    'value'?: string;
   }
   interface VffProgressBar {
     'status'?: number;

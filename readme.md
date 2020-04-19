@@ -195,6 +195,7 @@ Image Browser properties<br/>
     </tr>
   </thead>
   <tbody>
+    <tr><td>value</td><td>string</td><td>Sets and returns image url for preview only. Previed image will not be registered in selectedFiles.</td></tr>
     <tr><td>selectedFiles</td><td>[File]</td><td>Returns array of File objects that represent selected file or files.</td></tr>
     <tr><td>error</td><td>string</td><td>Set related error messages. Error text is cleared after 10 secs or on click.</td></tr>
     <tr><td>progress</td><td>boolean</td><td>Set this property to enable progress bar UI.</td></tr>

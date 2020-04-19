@@ -7,12 +7,13 @@
 
 ## Properties
 
-| Property         | Attribute         | Description | Type      | Default |
-| ---------------- | ----------------- | ----------- | --------- | ------- |
-| `error`          | `error`           |             | `string`  | `''`    |
-| `progress`       | `progress`        |             | `boolean` | `false` |
-| `progressStatus` | `progress-status` |             | `number`  | `0`     |
-| `selectedFiles`  | --                |             | `File[]`  | `[]`    |
+| Property         | Attribute         | Description | Type      | Default     |
+| ---------------- | ----------------- | ----------- | --------- | ----------- |
+| `error`          | `error`           |             | `string`  | `''`        |
+| `progress`       | `progress`        |             | `boolean` | `false`     |
+| `progressStatus` | `progress-status` |             | `number`  | `0`         |
+| `selectedFiles`  | --                |             | `File[]`  | `[]`        |
+| `value`          | `value`           |             | `string`  | `undefined` |
 
 
 ## Events
