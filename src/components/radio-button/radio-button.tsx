@@ -11,8 +11,7 @@ export class RadioButton {
   @Element() el: HTMLElement;
 
   @Prop() name = 'radio';
-  @Prop() value = 'on';
-  @Prop({reflect: true, mutable: true}) checked: boolean = false;
+  @Prop({attribute: 'checked', reflect: true, mutable: true}) value: boolean = false;
 
   @Event({
     eventName: 'radioButtonStateChange',
@@ -26,19 +25,19 @@ export class RadioButton {
     bubbles: true,
     cancelable: true,
     composed: true
-  }) changeChecked: EventEmitter;
+  }) changeValue: EventEmitter;
 
-  @Watch('checked')
+  @Watch('value')
   validateCheckedPropChange(newValue: boolean) {
     this.radioButton.checked = newValue;
     if (newValue) { // If one button is enabled, others should disable themselves. Let's notify them.
       this.radioButtonStateChange.emit({
         origin: this.radioButton,
         name: (this.name || this.el.getAttribute('name')), // When changed from DOM "name" prop will be null.
-        checked: this.checked
+        checked: this.value
       });
     }
-    this.changeChecked.emit({
+    this.changeValue.emit({
       data: this.radioButton.checked
     })
   }
@@ -48,7 +47,7 @@ export class RadioButton {
     const {origin, name} = event.detail;
     if (origin === this.radioButton) return;
     if (name === this.name) {
-      this.checked = false;
+      this.value = false;
     }
   }
 
@@ -58,11 +57,11 @@ export class RadioButton {
 
   componentDidLoad() {
     this.radioButton = this.el.shadowRoot.querySelector('input');
-    this.radioButton.checked = this.checked; // In case attribute was set in HTML on initial render.
+    this.radioButton.checked = this.value; // In case attribute was set in HTML on initial render.
   }
 
   handleClick() {
-    !this.checked && (this.checked = true); // Radio button can't disable itself.
+    !this.value && (this.value = true); // Radio button can't disable itself.
   }
 
   render() {
