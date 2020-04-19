@@ -7,11 +7,10 @@
 
 ## Properties
 
-| Property  | Attribute | Description | Type      | Default   |
-| --------- | --------- | ----------- | --------- | --------- |
-| `checked` | `checked` |             | `boolean` | `false`   |
-| `name`    | `name`    |             | `string`  | `'radio'` |
-| `value`   | `value`   |             | `string`  | `'on'`    |
+| Property | Attribute | Description | Type      | Default   |
+| -------- | --------- | ----------- | --------- | --------- |
+| `name`   | `name`    |             | `string`  | `'radio'` |
+| `value`  | `checked` |             | `boolean` | `false`   |
 
 
 ## Events
