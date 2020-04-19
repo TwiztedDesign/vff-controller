@@ -17,12 +17,12 @@ export class Checkbox {
     bubbles: true,
     cancelable: true,
     composed: true
-  }) changeChecked: EventEmitter;
+  }) changeValue: EventEmitter;
 
   @Watch('value')
   validateCheckedPropChange(newValue: boolean) {
     this.checkBoxInput.checked = newValue;
-    this.changeChecked.emit({
+    this.changeValue.emit({
       data: newValue
     });
   }
