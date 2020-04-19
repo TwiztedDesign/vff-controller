@@ -1,6 +1,6 @@
 import {Component, Host, h, Element, Watch, State, Method, Event, EventEmitter, Prop} from '@stencil/core';
 import {readFileAsync} from "../../utils/utils";
-import {PreviewObject} from "../../interface/interface";
+import {PreviewItem} from "../../interface/interface";
 
 @Component({
   tag: 'vff-image-browser',
@@ -25,7 +25,7 @@ export class ImageBrowser {
   private previewZone: HTMLElement;
   private inputFile: HTMLInputElement;
 
-  @State() previewList: PreviewObject[] = [];
+  @State() previewList: PreviewItem[] = [];
 
   @Prop({mutable: true}) error: string = '';
   @Prop({mutable: true}) selectedFiles: File[] = [];

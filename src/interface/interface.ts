@@ -1,4 +1,4 @@
-export interface PreviewObject {
+export interface PreviewItem {
   file: File;
   data: string | ArrayBuffer
 }
