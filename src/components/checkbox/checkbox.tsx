@@ -8,8 +8,7 @@ import {Component, Host, h, Prop, Watch, Element, Event, EventEmitter} from '@st
 export class Checkbox {
   private checkBoxInput: HTMLInputElement;
 
-  @Prop() value = 'check-box';
-  @Prop({reflect: true, mutable: true}) checked: boolean = false;
+  @Prop({attribute: 'checked', reflect: true, mutable: true}) value: boolean = false;
 
   @Element() el: HTMLElement;
 
@@ -20,7 +19,7 @@ export class Checkbox {
     composed: true
   }) changeChecked: EventEmitter;
 
-  @Watch('checked')
+  @Watch('value')
   validateCheckedPropChange(newValue: boolean) {
     this.checkBoxInput.checked = newValue;
     this.changeChecked.emit({
@@ -34,11 +33,11 @@ export class Checkbox {
 
   componentDidLoad() {
     this.checkBoxInput = this.el.shadowRoot.querySelector('input');
-    this.checkBoxInput.checked = this.checked;
+    this.checkBoxInput.checked = this.value;
   }
 
   handleClick() {
-    this.checked = !this.checked;
+    this.value = !this.value;
   }
 
   render() {
