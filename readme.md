@@ -257,3 +257,18 @@ Color picker properties<br/>
   </tbody>
 </table>
 <br/>
+
+Color picker events<br/>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>     
+      <th>Data</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>vff:change</td><td>string</td><td>Each color related change will trigger this event with HEX(A) value.</td></tr>   
+  </tbody>
+</table>
+<br/>
