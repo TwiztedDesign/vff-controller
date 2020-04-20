@@ -8,6 +8,7 @@
   - [vff-checkbox](#vff-checkbox)
   - [vff-radio-button](#vff-radio-button)
   - [vff-image-browser](#vff-image-browser)
+  - [vff-color-picker](#vff-color-picker)
 
 ## <a name="Videoflow_Controllers_Library"></a> Videoflow Controllers Library
 
@@ -230,6 +231,29 @@ Image Browser events<br/>
   </thead>
   <tbody>
     <tr><td>vff:change</td><td>array of files</td><td>Each change to files in the image browser will result in change event</td></tr>   
+  </tbody>
+</table>
+<br/>
+
+###### <a name="vff-color-picker"></a> vff-color-picker:
+
+<p>This component is a wrapper of color <a href="https://github.com/Simonwep/pickr">pickr</a> by Simonwep</p>
+
+```html
+    <vff-color-picker></vff-color-picker>
+```
+
+Color picker properties<br/>
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Value</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>value</td><td>string</td><td>Sets or gets color representation in HEX(A)</td></tr>
   </tbody>
 </table>
 <br/>

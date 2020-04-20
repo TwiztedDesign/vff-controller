@@ -34,5 +34,8 @@
     "videoflow",
     "controllers"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@simonwep/pickr": "^1.5.1"
+  }
 }
