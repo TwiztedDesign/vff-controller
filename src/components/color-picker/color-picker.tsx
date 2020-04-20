@@ -24,13 +24,8 @@ export class ColorPicker {
   @Watch('value')
   handleValuePropChange(newValue) {
     this.colorPicker.setColor(newValue);
-  }
-
-  _onColorChange(color) {
-    const colorStr = color.toHEXA().toString();
-    this.value = colorStr;
     this.changeColorProperty.emit({
-      data: colorStr
+      data: newValue
     });
   }
 
@@ -78,10 +73,10 @@ export class ColorPicker {
     // attach events
     this.colorPicker
       .on('change', (color) => {
-        this._onColorChange(color);
+        this.value = color.toHEXA().toString();
       })
       .on('swatchselect', (color) => {
-        this._onColorChange(color);
+        this.value = color.toHEXA().toString();
       });
   }
 
