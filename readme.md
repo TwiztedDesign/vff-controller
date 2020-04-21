@@ -9,6 +9,7 @@
   - [vff-radio-button](#vff-radio-button)
   - [vff-image-browser](#vff-image-browser)
   - [vff-color-picker](#vff-color-picker)
+  - [vff-select](#vff-select)
 
 ## <a name="Videoflow_Controllers_Library"></a> Videoflow Controllers Library
 
@@ -269,6 +270,77 @@ Color picker events<br/>
   </thead>
   <tbody>
     <tr><td>vff:change</td><td>string</td><td>Each color related change will trigger this event with HEX(A) value.</td></tr>   
+  </tbody>
+</table>
+<br/>
+
+###### <a name="vff-select"></a> vff-select:
+
+```html
+    <vff-select></vff-select>
+```
+
+Select interfaces<br/>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>    
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>SelectItem</td><td>{ key: 'string', value: 'string' }.</td></tr>
+  </tbody>
+</table>
+<br/>
+
+Select properties<br/>
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Value</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>value</td><td>SelectItem[]</td><td>Sets or gets selected options.</td></tr>
+    <tr><td>multiple</td><td>boolean</td><td>Enables multiple selection.</td></tr>
+  </tbody>
+</table>
+<br/>
+
+Select methods<br/>
+<table>
+  <thead>
+    <tr>
+      <th>Method</th>
+      <th>Arguments</th>
+      <th>Returns</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>addOptions</td><td>SelectItem | SelectItem[]</td><td>n/a</td><td>
+    Sets options for select component.<br/>
+    <strong>Important: </strong>
+    When setting the options for selection, the <strong>key</strong> must be a unique value to avoid unexpected behaviour.
+    </td></tr>   
+  </tbody>
+</table>
+<br/>
+
+Select Events<br/>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>     
+      <th>Data</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>vff:change</td><td>string</td><td>Each option toggle will trigger this event with updated selected options.</td></tr>   
   </tbody>
 </table>
 <br/>
