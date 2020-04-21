@@ -30,6 +30,9 @@
   --tabs-border-color: var(--theme-color-4);
   --tabs-tab-color: var(--theme-color-3);
   --tabs-tab-hover: var(--theme-color-1);
+
+  --select-color: var(--theme-color-1);
+  --select-color-selected: #dd0036;
 }
 
 /**********************/

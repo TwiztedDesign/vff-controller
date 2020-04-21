@@ -1,4 +1,4 @@
-# vff-checkbox
+# vff-color-picker
 
 
 
@@ -7,9 +7,9 @@
 
 ## Properties
 
-| Property | Attribute | Description | Type      | Default |
-| -------- | --------- | ----------- | --------- | ------- |
-| `value`  | `checked` |             | `boolean` | `false` |
+| Property | Attribute | Description | Type     | Default     |
+| -------- | --------- | ----------- | -------- | ----------- |
+| `value`  | `value`   |             | `string` | `'#FFFFFF'` |
 
 
 ## Events

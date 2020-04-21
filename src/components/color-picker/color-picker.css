@@ -1,0 +1,16 @@
+:host {
+  display: block;
+  width: 150px;
+  height: 25px;
+}
+
+.pickr {
+  height: 100%;
+}
+
+.pickr .pcr-button {
+  box-sizing: border-box;
+  box-shadow: none !important;
+  width: 100%;
+  height: 100%;
+}
