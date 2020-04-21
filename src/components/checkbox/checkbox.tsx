@@ -22,9 +22,6 @@ export class Checkbox {
   @Watch('value')
   validateCheckedPropChange(newValue: boolean) {
     this.checkBoxInput.checked = newValue;
-    this.changeValue.emit({
-      data: newValue
-    });
   }
 
   constructor() {
@@ -38,6 +35,9 @@ export class Checkbox {
 
   handleClick() {
     this.value = !this.value;
+    this.changeValue.emit({
+      data: this.value
+    });
   }
 
   render() {
