@@ -157,7 +157,8 @@ Radio button properties<br/>
   </thead>
   <tbody>
     <tr><td>name</td><td>string</td><td>Sets or returns the value of the name attribute of the radio button</td></tr>
-    <tr><td>value</td><td>boolean</td><td>Sets or returns the checked state of a radio button</td></tr>
+    <tr><td>value</td><td>string</td><td>Sets or returns the value of the value attribute of the radio button</td></tr>
+    <tr><td>checked</td><td>boolean</td><td>Sets or returns the checked state of a radio button</td></tr>
   </tbody>
 </table>
 <br/>
