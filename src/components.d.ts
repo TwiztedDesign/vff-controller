@@ -14,6 +14,9 @@ export namespace Components {
     'checked': boolean;
     'value': string;
   }
+  interface VffColorPicker {
+    'value': string;
+  }
   interface VffImageBrowser {
     'addFiles': (files: any) => Promise<void>;
     'error': string;
@@ -52,6 +55,12 @@ declare global {
     new (): HTMLVffCheckboxElement;
   };
 
+  interface HTMLVffColorPickerElement extends Components.VffColorPicker, HTMLStencilElement {}
+  var HTMLVffColorPickerElement: {
+    prototype: HTMLVffColorPickerElement;
+    new (): HTMLVffColorPickerElement;
+  };
+
   interface HTMLVffImageBrowserElement extends Components.VffImageBrowser, HTMLStencilElement {}
   var HTMLVffImageBrowserElement: {
     prototype: HTMLVffImageBrowserElement;
@@ -83,6 +92,7 @@ declare global {
   };
   interface HTMLElementTagNameMap {
     'vff-checkbox': HTMLVffCheckboxElement;
+    'vff-color-picker': HTMLVffColorPickerElement;
     'vff-image-browser': HTMLVffImageBrowserElement;
     'vff-progress-bar': HTMLVffProgressBarElement;
     'vff-radio-button': HTMLVffRadioButtonElement;
@@ -94,6 +104,10 @@ declare global {
 declare namespace LocalJSX {
   interface VffCheckbox {
     'checked'?: boolean;
+    'onVff:change'?: (event: CustomEvent<any>) => void;
+    'value'?: string;
+  }
+  interface VffColorPicker {
     'onVff:change'?: (event: CustomEvent<any>) => void;
     'value'?: string;
   }
@@ -129,6 +143,7 @@ declare namespace LocalJSX {
 
   interface IntrinsicElements {
     'vff-checkbox': VffCheckbox;
+    'vff-color-picker': VffColorPicker;
     'vff-image-browser': VffImageBrowser;
     'vff-progress-bar': VffProgressBar;
     'vff-radio-button': VffRadioButton;
@@ -144,6 +159,7 @@ declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
       'vff-checkbox': LocalJSX.VffCheckbox & JSXBase.HTMLAttributes<HTMLVffCheckboxElement>;
+      'vff-color-picker': LocalJSX.VffColorPicker & JSXBase.HTMLAttributes<HTMLVffColorPickerElement>;
       'vff-image-browser': LocalJSX.VffImageBrowser & JSXBase.HTMLAttributes<HTMLVffImageBrowserElement>;
       'vff-progress-bar': LocalJSX.VffProgressBar & JSXBase.HTMLAttributes<HTMLVffProgressBarElement>;
       'vff-radio-button': LocalJSX.VffRadioButton & JSXBase.HTMLAttributes<HTMLVffRadioButtonElement>;
