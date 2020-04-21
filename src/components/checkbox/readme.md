@@ -7,10 +7,9 @@
 
 ## Properties
 
-| Property  | Attribute | Description | Type      | Default       |
-| --------- | --------- | ----------- | --------- | ------------- |
-| `checked` | `checked` |             | `boolean` | `false`       |
-| `value`   | `value`   |             | `string`  | `'check-box'` |
+| Property | Attribute | Description | Type      | Default |
+| -------- | --------- | ----------- | --------- | ------- |
+| `value`  | `checked` |             | `boolean` | `false` |
 
 
 ## Events

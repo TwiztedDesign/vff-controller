@@ -12,7 +12,7 @@ export class RadioButton {
 
   @Prop() name = 'radio';
   @Prop() value = 'on';
-  @Prop({reflect: true, mutable: true}) checked: boolean = false;
+  @Prop({reflect: true, mutable: true}) checked = false;
 
   @Event({
     eventName: 'radioButtonStateChange',
@@ -38,9 +38,6 @@ export class RadioButton {
         checked: this.checked
       });
     }
-    this.changeChecked.emit({
-      data: this.radioButton.checked
-    })
   }
 
   @Listen('radioButtonStateChange', {target: 'document'})
@@ -62,7 +59,12 @@ export class RadioButton {
   }
 
   handleClick() {
-    !this.checked && (this.checked = true); // Radio button can't disable itself.
+    if (!this.checked) {// Radio button can't disable itself.
+      this.checked = true;
+      this.changeChecked.emit({
+        data: this.checked
+      })
+    }
   }
 
   render() {

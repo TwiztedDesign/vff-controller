@@ -1,5 +1,6 @@
 import {Component, Host, h, Element, Watch, State, Method, Event, EventEmitter, Prop} from '@stencil/core';
 import {readFileAsync} from "../../utils/utils";
+import {PreviewItem} from "../../interface/interface";
 
 @Component({
   tag: 'vff-image-browser',
@@ -24,13 +25,13 @@ export class ImageBrowser {
   private previewZone: HTMLElement;
   private inputFile: HTMLInputElement;
 
-  @State() previewList = [];
+  @State() previewList: PreviewItem[] = [];
 
   @Prop({mutable: true}) error: string = '';
   @Prop({mutable: true}) selectedFiles: File[] = [];
-
   @Prop() progress: boolean = false;
   @Prop() progressStatus: number = 0;
+  @Prop({reflect: true, mutable: true}) value: string;
 
   @Element() el: HTMLElement;
 
@@ -40,6 +41,17 @@ export class ImageBrowser {
     cancelable: true,
     composed: true
   }) changeSelectedFiles: EventEmitter;
+
+  @Watch('value') // it is used when ever the image just need to be previewed and not to go to selectedFiles
+  handleValueChangeProp(newValue) {
+    if (!newValue) {
+      this.selectedFiles = [];
+      return;
+    }
+    this.selectedFiles.length = 0; // don't want to trigger Watchers and events
+    this.previewList = [];
+    this.previewList = [{file: new File([], 'placeholder'), data: newValue}];
+  }
 
   @Watch('error')
   handleFileTypeError(newValue: string) {
@@ -61,8 +73,8 @@ export class ImageBrowser {
         const data = await readFileAsync(file);
         return {file, data}
       });
-      Promise.all(promises).then((data) => {
-        this.previewList = data;
+      Promise.all(promises).then((files) => {
+        this.previewList = files;
       });
     } else if (newValue.length === 0) {
       this.previewList = [];
@@ -122,6 +134,7 @@ export class ImageBrowser {
 
   private removeFile(file) {
     if (!file) return;
+    this.value = '';
     this.selectedFiles = this.selectedFiles.filter(lf => lf !== file);
   }
 
@@ -134,12 +147,14 @@ export class ImageBrowser {
       content = <label htmlFor="preview__input" id="preview__instructions">
         Drop images here or <span id="click">click</span> to select.
       </label>;
-    } else if (this.previewList.length > 0) { // now there are files to preview
+    }
+    // previewList can be independent from selectedFiles in case of files that are set with value Prop
+    if (this.previewList.length > 0) { // now there are files to preview
       content = this.previewList.map((plObj) => {
         const {file, data} = plObj;
         return (
           <div class="img-container">
-            <img src={data}/>
+            <img src={data as string}/>
             <div class="img-ctrl">
               <span class="img-ctrl__cancel" onClick={() => this.removeFile(file)}>&#10005;</span>
             </div>
