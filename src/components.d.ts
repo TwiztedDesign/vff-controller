@@ -7,7 +7,9 @@
 
 
 import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
-
+import {
+  SelectItem,
+} from './interface/interface';
 
 export namespace Components {
   interface VffCheckbox {
@@ -31,6 +33,12 @@ export namespace Components {
     'checked': boolean;
     'name': string;
     'value': string;
+  }
+  interface VffSelect {
+    'addOptions': (options: SelectItem | SelectItem[]) => Promise<void>;
+    'multiple': boolean;
+    'selectText': string;
+    'value': SelectItem[];
   }
   interface VffTab {
     /**
@@ -79,6 +87,12 @@ declare global {
     new (): HTMLVffRadioButtonElement;
   };
 
+  interface HTMLVffSelectElement extends Components.VffSelect, HTMLStencilElement {}
+  var HTMLVffSelectElement: {
+    prototype: HTMLVffSelectElement;
+    new (): HTMLVffSelectElement;
+  };
+
   interface HTMLVffTabElement extends Components.VffTab, HTMLStencilElement {}
   var HTMLVffTabElement: {
     prototype: HTMLVffTabElement;
@@ -96,6 +110,7 @@ declare global {
     'vff-image-browser': HTMLVffImageBrowserElement;
     'vff-progress-bar': HTMLVffProgressBarElement;
     'vff-radio-button': HTMLVffRadioButtonElement;
+    'vff-select': HTMLVffSelectElement;
     'vff-tab': HTMLVffTabElement;
     'vff-tabs': HTMLVffTabsElement;
   }
@@ -128,6 +143,12 @@ declare namespace LocalJSX {
     'onVff:change'?: (event: CustomEvent<any>) => void;
     'value'?: string;
   }
+  interface VffSelect {
+    'multiple'?: boolean;
+    'onVff:change'?: (event: CustomEvent<any>) => void;
+    'selectText'?: string;
+    'value'?: SelectItem[];
+  }
   interface VffTab {
     /**
     * Refers to the id of the element this tab is associated with.
@@ -147,6 +168,7 @@ declare namespace LocalJSX {
     'vff-image-browser': VffImageBrowser;
     'vff-progress-bar': VffProgressBar;
     'vff-radio-button': VffRadioButton;
+    'vff-select': VffSelect;
     'vff-tab': VffTab;
     'vff-tabs': VffTabs;
   }
@@ -163,6 +185,7 @@ declare module "@stencil/core" {
       'vff-image-browser': LocalJSX.VffImageBrowser & JSXBase.HTMLAttributes<HTMLVffImageBrowserElement>;
       'vff-progress-bar': LocalJSX.VffProgressBar & JSXBase.HTMLAttributes<HTMLVffProgressBarElement>;
       'vff-radio-button': LocalJSX.VffRadioButton & JSXBase.HTMLAttributes<HTMLVffRadioButtonElement>;
+      'vff-select': LocalJSX.VffSelect & JSXBase.HTMLAttributes<HTMLVffSelectElement>;
       'vff-tab': LocalJSX.VffTab & JSXBase.HTMLAttributes<HTMLVffTabElement>;
       'vff-tabs': LocalJSX.VffTabs & JSXBase.HTMLAttributes<HTMLVffTabsElement>;
     }
