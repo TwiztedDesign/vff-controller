@@ -26,11 +26,11 @@ export class Select {
   }
 
   @Method()
-  async addOptions(options: SelectItem | SelectItem[]) {
+  async setOptions(options: SelectItem | SelectItem[]) {
     if (Array.isArray(options)) {
-      this.options = [...this.options, ...options];
+      this.options = [...options];
     } else if (typeof options === 'object') {
-      this.options = [...this.options, options];
+      this.options = [options];
     }
   }
 

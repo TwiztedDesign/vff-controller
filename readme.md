@@ -321,7 +321,7 @@ Select methods<br/>
     </tr>
   </thead>
   <tbody>
-    <tr><td>addOptions</td><td>SelectItem | SelectItem[]</td><td>n/a</td><td>
+    <tr><td>setOptions</td><td>SelectItem | SelectItem[]</td><td>n/a</td><td>
     Sets options for select component.<br/>
     <strong>Important: </strong>
     When setting the options for selection, the <strong>key</strong> must be a unique value to avoid unexpected behaviour.

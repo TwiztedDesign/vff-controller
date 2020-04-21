@@ -34,13 +34,13 @@ describe('vff-select', () => {
     expect(selectItems.children.length).toEqual(3);
   });
 
-  it('should extend existing options', async () => {
-    await component.callMethod('addOptions', singleOption);
+  it('should replace existing options', async () => {
+    await component.callMethod('setOptions', singleOption);
     await page.waitForChanges();
-    await component.callMethod('addOptions', multipleOptions);
+    await component.callMethod('setOptions', multipleOptions);
     await page.waitForChanges();
     const selectItems = await page.find('vff-select >>> .select__options');
-    expect(selectItems.children.length).toEqual(4);
+    expect(selectItems.children.length).toEqual(3);
   });
 
   it('should set value when option is clicked', async () => {
