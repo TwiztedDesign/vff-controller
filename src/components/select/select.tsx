@@ -70,16 +70,17 @@ export class Select {
   }
 
   render() {
-    let selectText: string | object[] = this.selectText;
+    let selectText: string = this.selectText;
+    let selectedItems: HTMLElement[] = [];
     if (this.value.length > 0) {
-      selectText = this.value.map(value => <div class="select__selected">{value.key}</div>);
+      selectedItems = this.value.map(value => <div class="select__selected">{value.key}</div>);
     }
 
     return (
       <Host>
         <div class="select__result"
              onClick={() => this.handleSelectClick()}>
-          {selectText}
+          {selectedItems.length > 0 && selectedItems || selectText}
         </div>
         {this.isOptionsVisible && (<div class={"select__options"}>
           {this.options.map((option) => {
