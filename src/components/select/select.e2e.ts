@@ -21,7 +21,7 @@ describe('vff-select', () => {
   it('should add single option to select options', async () => {
     const selectItems = await page.find('vff-select >>> .select__options');
     expect(selectItems.children.length).toEqual(0);
-    await component.callMethod('addOptions', singleOption);
+    await component.callMethod('setOptions', singleOption);
     await page.waitForChanges();
     expect(selectItems.children.length).toEqual(1);
   });
@@ -29,7 +29,7 @@ describe('vff-select', () => {
   it('should add multiple options to select options', async () => {
     const selectItems = await page.find('vff-select >>> .select__options');
     expect(selectItems.children.length).toEqual(0);
-    await component.callMethod('addOptions', multipleOptions);
+    await component.callMethod('setOptions', multipleOptions);
     await page.waitForChanges();
     expect(selectItems.children.length).toEqual(3);
   });
@@ -45,7 +45,7 @@ describe('vff-select', () => {
 
   it('should set value when option is clicked', async () => {
     let value;
-    await component.callMethod('addOptions', multipleOptions);
+    await component.callMethod('setOptions', multipleOptions);
     await page.waitForChanges();
     value = await component.getProperty('value');
     expect(value.length).toEqual(0);
@@ -63,7 +63,7 @@ describe('vff-select', () => {
     let value;
     component.setProperty('multiple', true);
     await page.waitForChanges();
-    await component.callMethod('addOptions', multipleOptions);
+    await component.callMethod('setOptions', multipleOptions);
     await page.waitForChanges();
     const selectBtn = await page.find('vff-select >>> .select__result');
     await selectBtn.click();
@@ -82,7 +82,7 @@ describe('vff-select', () => {
   it('should emit vff:change event when user selects value from UI', async () => {
     // setup
     const vffChange = await page.spyOnEvent('vff:change');
-    await component.callMethod('addOptions', multipleOptions);
+    await component.callMethod('setOptions', multipleOptions);
     await page.waitForChanges();
     const selectBtn = await page.find('vff-select >>> .select__result');
     await selectBtn.click();
@@ -97,7 +97,7 @@ describe('vff-select', () => {
   it('should present all chosen keys in select__result', async () => {
     component.setProperty('multiple', true);
     await page.waitForChanges();
-    await component.callMethod('addOptions', multipleOptions);
+    await component.callMethod('setOptions', multipleOptions);
     await page.waitForChanges();
     const selectBtn = await page.find('vff-select >>> .select__result');
     await selectBtn.click();
@@ -115,7 +115,7 @@ describe('vff-select', () => {
   it('should toggle class "selected" on options', async () => {
     component.setProperty('multiple', true);
     await page.waitForChanges();
-    await component.callMethod('addOptions', multipleOptions);
+    await component.callMethod('setOptions', multipleOptions);
     await page.waitForChanges();
     const selectBtn = await page.find('vff-select >>> .select__result');
     await selectBtn.click();
@@ -133,7 +133,7 @@ describe('vff-select', () => {
   it('should reflect selected status on rendered options when value is populated by user', async () => {
     // setup
     component.setProperty('multiple', true);
-    await component.callMethod('addOptions', multipleOptions);
+    await component.callMethod('setOptions', multipleOptions);
     await page.waitForChanges();
     // set values by updating property
     component.setProperty('value', [
@@ -154,7 +154,7 @@ describe('vff-select', () => {
   it('should not emit vff:change event when user injects value with value property', async () => {
     // setup
     const vffChange = await page.spyOnEvent('vff:change');
-    await component.callMethod('addOptions', multipleOptions);
+    await component.callMethod('setOptions', multipleOptions);
     await page.waitForChanges();
     component.setProperty('value', [
       {key: 'key1', value: 'value1'},
