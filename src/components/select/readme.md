@@ -23,7 +23,7 @@
 
 ## Methods
 
-### `addOptions(options: SelectItem | SelectItem[]) => Promise<void>`
+### `setOptions(options: SelectItem | SelectItem[]) => Promise<void>`
 
 
 

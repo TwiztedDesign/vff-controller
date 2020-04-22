@@ -1,4 +1,4 @@
-import {Component, Host, h, Prop, Event, EventEmitter, Method, State} from '@stencil/core';
+import {Component, Host, h, Prop, Event, EventEmitter, Method, State, Listen, Element} from '@stencil/core';
 import {SelectItem} from "../../interface/interface";
 
 @Component({
@@ -14,15 +14,24 @@ export class Select {
     composed: true
   }) changeValue: EventEmitter;
 
-  @State() optionsVisible: boolean = false;
+  @State() isOptionsVisible: boolean = false;
   @State() options: SelectItem[] = [];
 
   @Prop() multiple: boolean = false;
   @Prop() selectText: string = 'CHOOSE OPTION';
   @Prop({mutable: true}) value: SelectItem[] = []; // chosen option
 
+  @Element() el: HTMLElement;
+
   constructor() {
     this.onOptionClick = this.onOptionClick.bind(this);
+  }
+
+  @Listen('click', {target: "document"})
+  toggleOptionsPanel(e) {
+    if (e.target !== this.el) {
+      this.isOptionsVisible && (this.isOptionsVisible = false);
+    }
   }
 
   @Method()
@@ -53,11 +62,11 @@ export class Select {
     this.changeValue.emit({ // emit event only from UI interaction
       data: this.value
     });
-    this.optionsVisible = this.multiple;
+    this.isOptionsVisible = this.multiple; // leave options panel open after selection if multiple
   }
 
   handleSelectClick() {
-    this.optionsVisible = !this.optionsVisible;
+    this.isOptionsVisible = !this.isOptionsVisible;
   }
 
   render() {
@@ -72,7 +81,7 @@ export class Select {
              onClick={() => this.handleSelectClick()}>
           {selectText}
         </div>
-        <div class={"select__options" + (this.optionsVisible ? ' show' : '')}>
+        {this.isOptionsVisible && (<div class={"select__options"}>
           {this.options.map((option) => {
             const isSelected = !!this.value.find((val) => {
               return val.key == option.key;
@@ -86,7 +95,7 @@ export class Select {
               </div>
             );
           })}
-        </div>
+        </div>)}
       </Host>
     );
   }
