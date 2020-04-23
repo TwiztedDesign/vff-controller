@@ -306,27 +306,9 @@ Select properties<br/>
   <tbody>
     <tr><td>value</td><td>SelectItem[]</td><td>Sets or gets selected options.</td></tr>
     <tr><td>multiple</td><td>boolean</td><td>Enables multiple selection.</td></tr>
-    <tr><td>options</td><td>SelectItem[]</td><td>Get all available options.</td></tr>
-  </tbody>
-</table>
-<br/>
-
-Select methods<br/>
-<table>
-  <thead>
-    <tr>
-      <th>Method</th>
-      <th>Arguments</th>
-      <th>Returns</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>setOptions</td><td>SelectItem | SelectItem[]</td><td>n/a</td><td>
-    Sets options for select component.<br/>
-    <strong>Important: </strong>
-    When setting the options for selection, the <strong>key</strong> must be a unique value to avoid unexpected behaviour.
-    </td></tr>   
+    <tr><td>options</td><td>SelectItem | SelectItem[]</td>
+    <td>Sets or Gets all available options.<br/> 
+    <strong>Important: </strong>When setting the options, the <strong>key</strong> must be a unique value to avoid unexpected behaviour.</td></tr>
   </tbody>
 </table>
 <br/>

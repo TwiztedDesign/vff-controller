@@ -1,4 +1,4 @@
-import {Component, Host, h, Prop, Event, EventEmitter, Method, State, Listen, Element} from '@stencil/core';
+import {Component, Host, h, Prop, Event, EventEmitter, State, Listen, Element, Watch} from '@stencil/core';
 import {SelectItem} from "../../interface/interface";
 
 @Component({
@@ -15,8 +15,9 @@ export class Select {
   }) changeValue: EventEmitter;
 
   @State() isOptionsVisible: boolean = false;
+  @State() _options: SelectItem[] = [];
 
-  @Prop({mutable: true}) options: SelectItem[] = [];
+  @Prop() options: SelectItem[] = [];
   @Prop() multiple: boolean = false;
   @Prop() selectText: string = 'CHOOSE OPTION';
   @Prop({mutable: true}) value: SelectItem[] = []; // chosen option
@@ -34,12 +35,12 @@ export class Select {
     }
   }
 
-  @Method()
-  async setOptions(options: SelectItem | SelectItem[]) {
+  @Watch('options')
+  handleOptionsChange(options: SelectItem | SelectItem[]) {
     if (Array.isArray(options)) {
-      this.options = [...options];
+      this._options = [...options];
     } else if (typeof options === 'object') {
-      this.options = [options];
+      this._options = [options];
     }
   }
 
@@ -91,7 +92,7 @@ export class Select {
           <div class={"select__arrow" + (this.isOptionsVisible ? ' open' : '')}/>
         </div>
         {this.isOptionsVisible && (<div class={"select__options"}>
-          {this.options.map((option) => {
+          {this._options.map((option) => {
             const isSelected = !!this.value.find((val) => {
               return val.key == option.key;
             });
