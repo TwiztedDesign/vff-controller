@@ -78,9 +78,17 @@ export class Select {
 
     return (
       <Host>
-        <div class="select__result"
+        <div id="select"
              onClick={() => this.handleSelectClick()}>
-          {selectedItems.length > 0 && selectedItems || selectText}
+          <div id="select__result">
+            {selectedItems.length > 0 && selectedItems[0] || selectText}
+            {selectedItems.length > 1 && '...'}
+            <div id="select__utils">
+              <div id="fade"/>
+              {selectedItems.length > 1 && <div id="select__hidden">+{selectedItems.length - 1}</div>}
+            </div>
+          </div>
+          <div class={"select__arrow" + (this.isOptionsVisible ? ' open' : '')}/>
         </div>
         {this.isOptionsVisible && (<div class={"select__options"}>
           {this.options.map((option) => {
