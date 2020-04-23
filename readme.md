@@ -306,6 +306,7 @@ Select properties<br/>
   <tbody>
     <tr><td>value</td><td>SelectItem[]</td><td>Sets or gets selected options.</td></tr>
     <tr><td>multiple</td><td>boolean</td><td>Enables multiple selection.</td></tr>
+    <tr><td>options</td><td>SelectItem[]</td><td>Get all available options.</td></tr>
   </tbody>
 </table>
 <br/>
