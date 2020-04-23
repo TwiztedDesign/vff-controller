@@ -15,8 +15,8 @@ export class Select {
   }) changeValue: EventEmitter;
 
   @State() isOptionsVisible: boolean = false;
-  @State() options: SelectItem[] = [];
 
+  @Prop({mutable: true}) options: SelectItem[] = [];
   @Prop() multiple: boolean = false;
   @Prop() selectText: string = 'CHOOSE OPTION';
   @Prop({mutable: true}) value: SelectItem[] = []; // chosen option
