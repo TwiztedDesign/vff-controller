@@ -13,6 +13,8 @@
   cursor: pointer;
   display: flex;
   justify-content: space-between;
+  border: 1px solid;
+  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
 }
 
 #select__hidden {
@@ -34,15 +36,13 @@
 
 #fade {
   width: 100%;
-  background-image: linear-gradient(to right, rgba(255, 0, 0, 0) 35%, var(--select-color) 100%);
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0) 35%, var(--select-color) 100%);
 }
 
 #select__result {
   width: 100%;
   position: relative;
   padding: 8px 16px;
-  border: 1px solid;
-  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
   white-space: nowrap;
   overflow: hidden;
 }
@@ -50,7 +50,7 @@
 .select__arrow {
   position: relative;
   height: 100%;
-  min-width: 50px;
+  min-width: 32px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -59,7 +59,7 @@
 .select__arrow:after {
   position: absolute;
   content: "";
-  top: 14px;
+  top: 15px;
   right: 10px;
   width: 0;
   height: 0;
@@ -68,7 +68,7 @@
 }
 
 .select__arrow.open:after {
-  top: 7px;
+  top: 9px;
   border-color: transparent transparent #fff transparent;
 }
 
@@ -78,7 +78,7 @@
 }
 
 .select__options {
-  position: relative;
+  position: absolute;
   top: 100%;
   left: 0;
   right: 0;

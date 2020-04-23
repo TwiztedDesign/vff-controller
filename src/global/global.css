@@ -31,8 +31,8 @@
   --tabs-tab-color: var(--theme-color-3);
   --tabs-tab-hover: var(--theme-color-1);
 
-  --select-color: var(--theme-color-1);
-  --select-color-selected: #dd0036;
+  --select-color: rgb(150, 150, 150);
+  --select-color-selected: rgb(100, 100, 100);
 }
 
 /**********************/
@@ -360,7 +360,7 @@ vff-image-browser {
   flex-direction: column;
   border-radius: 2px;
   width: 100%;
-  overflow: hidden;
+  /*overflow: hidden;*/
   padding: 0 5px 5px 5px;
   background: rgba(255, 255, 255, 0.05);
 }
