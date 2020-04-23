@@ -20,7 +20,7 @@ describe('vff-select', () => {
 
   it('should add single option to select options', async () => {
     // start: open options panel
-    const selectBtn = await page.find('vff-select >>> .select__result');
+    const selectBtn = await page.find('vff-select >>> #select');
     await selectBtn.click();
     await page.waitForChanges();
     // end: open options panel
@@ -33,7 +33,7 @@ describe('vff-select', () => {
 
   it('should add multiple options to select options', async () => {
     // start: open options panel
-    const selectBtn = await page.find('vff-select >>> .select__result');
+    const selectBtn = await page.find('vff-select >>> #select');
     await selectBtn.click();
     await page.waitForChanges();
     // end: open options panel
@@ -54,7 +54,7 @@ describe('vff-select', () => {
     await page.waitForChanges();
 
     // open options panel
-    const selectBtn = await page.find('vff-select >>> .select__result');
+    const selectBtn = await page.find('vff-select >>> #select');
     await selectBtn.click();
     await page.waitForChanges();
 
@@ -68,7 +68,7 @@ describe('vff-select', () => {
     await page.waitForChanges();
     value = await component.getProperty('value');
     expect(value.length).toEqual(0);
-    const selectBtn = await page.find('vff-select >>> .select__result');
+    const selectBtn = await page.find('vff-select >>> #select');
     await selectBtn.click();
     await page.waitForChanges();
     const option = await page.find('vff-select >>> .select__option');
@@ -84,7 +84,7 @@ describe('vff-select', () => {
     await page.waitForChanges();
     await component.callMethod('setOptions', multipleOptions);
     await page.waitForChanges();
-    const selectBtn = await page.find('vff-select >>> .select__result');
+    const selectBtn = await page.find('vff-select >>> #select');
     await selectBtn.click();
     await page.waitForChanges();
     const option = await page.find('vff-select >>> .select__option');
@@ -103,7 +103,7 @@ describe('vff-select', () => {
     const vffChange = await page.spyOnEvent('vff:change');
     await component.callMethod('setOptions', multipleOptions);
     await page.waitForChanges();
-    const selectBtn = await page.find('vff-select >>> .select__result');
+    const selectBtn = await page.find('vff-select >>> #select');
     await selectBtn.click();
     await page.waitForChanges();
     const option = await page.find('vff-select >>> .select__option');
@@ -118,7 +118,7 @@ describe('vff-select', () => {
     await page.waitForChanges();
     await component.callMethod('setOptions', multipleOptions);
     await page.waitForChanges();
-    const selectBtn = await page.find('vff-select >>> .select__result');
+    const selectBtn = await page.find('vff-select >>> #select');
     await selectBtn.click();
     await page.waitForChanges();
     const options = await page.findAll('vff-select >>> .select__option');
@@ -128,7 +128,9 @@ describe('vff-select', () => {
     await page.waitForChanges();
     options[2].click();
     await page.waitForChanges();
-    expect(selectBtn.innerHTML).toEqual('<div class="select__selected">key1</div><div class="select__selected">key2</div><div class="select__selected">key3</div>');
+    expect(selectBtn.innerHTML).toEqual(
+      '<div id="select__result"><div class="select__selected">key1</div>...<div id="select__utils"><div id="fade"></div><div id="select__hidden">+2</div></div></div><div class="select__arrow open"></div>'
+    );
   });
 
   it('should toggle class "selected" on options', async () => {
@@ -136,7 +138,7 @@ describe('vff-select', () => {
     await page.waitForChanges();
     await component.callMethod('setOptions', multipleOptions);
     await page.waitForChanges();
-    const selectBtn = await page.find('vff-select >>> .select__result');
+    const selectBtn = await page.find('vff-select >>> #select');
     await selectBtn.click();
     await page.waitForChanges();
     const option = await page.find('vff-select >>> .select__option');
@@ -161,7 +163,7 @@ describe('vff-select', () => {
     ]);
     await page.waitForChanges();
     // start: open options panel
-    const selectBtn = await page.find('vff-select >>> .select__result');
+    const selectBtn = await page.find('vff-select >>> #select');
     await selectBtn.click();
     await page.waitForChanges();
     // end: open options panel
@@ -195,7 +197,7 @@ describe('vff-select', () => {
     await page.waitForChanges();
 
     // open options panel
-    const selectBtn = await page.find('vff-select >>> .select__result');
+    const selectBtn = await page.find('vff-select >>> #select');
     await selectBtn.click();
     await page.waitForChanges();
 
