@@ -1,0 +1,102 @@
+:host {
+  display: block;
+  position: relative;
+  box-sizing: border-box;
+  background-color: var(--select-color);
+}
+
+:host(*) {
+  box-sizing: border-box;
+}
+
+#select {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid;
+  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+}
+
+#select__hidden {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  background-color: var(--select-color);
+}
+
+#select__utils {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 100px;
+  display: flex;
+}
+
+#fade {
+  width: 100%;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0) 35%, var(--select-color) 100%);
+}
+
+#select__result {
+  width: 100%;
+  position: relative;
+  padding: 8px 16px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.select__arrow {
+  position: relative;
+  height: 100%;
+  min-width: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.select__arrow:after {
+  position: absolute;
+  content: "";
+  top: 15px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #fff transparent transparent transparent;
+}
+
+.select__arrow.open:after {
+  top: 9px;
+  border-color: transparent transparent #fff transparent;
+}
+
+.select__selected {
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.select__options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  max-height: 200px;
+}
+
+.select__option {
+  padding: 8px 16px;
+  cursor: pointer;
+  background-color: var(--select-color);
+  border: 1px solid;
+  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;;
+}
+
+.select__option.selected {
+  background-color: var(--select-color-selected);
+}

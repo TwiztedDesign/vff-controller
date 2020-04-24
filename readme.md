@@ -8,6 +8,8 @@
   - [vff-checkbox](#vff-checkbox)
   - [vff-radio-button](#vff-radio-button)
   - [vff-image-browser](#vff-image-browser)
+  - [vff-color-picker](#vff-color-picker)
+  - [vff-select](#vff-select)
 
 ## <a name="Videoflow_Controllers_Library"></a> Videoflow Controllers Library
 
@@ -116,8 +118,7 @@ Checkbox properties<br/>
     </tr>
   </thead>
   <tbody>
-    <tr><td>value</td><td>string</td><td>Sets or returns the value of the value attribute of the checkbox</td></tr>
-    <tr><td>checked</td><td>boolean</td><td>Sets or returns the checked state of a checkbox</td></tr>
+    <tr><td>value</td><td>boolean</td><td>Sets or returns the checked state of a checkbox</td></tr>
   </tbody>
 </table>
 <br/>
@@ -195,6 +196,7 @@ Image Browser properties<br/>
     </tr>
   </thead>
   <tbody>
+    <tr><td>value</td><td>string</td><td>Sets and returns image url for preview only. Previed image will not be registered in selectedFiles.</td></tr>
     <tr><td>selectedFiles</td><td>[File]</td><td>Returns array of File objects that represent selected file or files.</td></tr>
     <tr><td>error</td><td>string</td><td>Set related error messages. Error text is cleared after 10 secs or on click.</td></tr>
     <tr><td>progress</td><td>boolean</td><td>Set this property to enable progress bar UI.</td></tr>
@@ -230,6 +232,98 @@ Image Browser events<br/>
   </thead>
   <tbody>
     <tr><td>vff:change</td><td>array of files</td><td>Each change to files in the image browser will result in change event</td></tr>   
+  </tbody>
+</table>
+<br/>
+
+###### <a name="vff-color-picker"></a> vff-color-picker:
+
+<p>This component is a wrapper of color <a href="https://github.com/Simonwep/pickr">pickr</a> by Simonwep</p>
+
+```html
+    <vff-color-picker></vff-color-picker>
+```
+
+Color picker properties<br/>
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Value</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>value</td><td>string</td><td>Sets or gets color representation in HEX(A)</td></tr>
+  </tbody>
+</table>
+<br/>
+
+Color picker events<br/>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>     
+      <th>Data</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>vff:change</td><td>string</td><td>Each color related change will trigger this event with HEX(A) value.</td></tr>   
+  </tbody>
+</table>
+<br/>
+
+###### <a name="vff-select"></a> vff-select:
+
+```html
+    <vff-select></vff-select>
+```
+
+Select interfaces<br/>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>    
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>SelectItem</td><td>{ key: 'string', value: 'string' }.</td></tr>
+  </tbody>
+</table>
+<br/>
+
+Select properties<br/>
+<table>
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Value</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>value</td><td>SelectItem[]</td><td>Sets or gets selected options.</td></tr>
+    <tr><td>multiple</td><td>boolean</td><td>Enables multiple selection.</td></tr>
+    <tr><td>options</td><td>SelectItem | SelectItem[]</td>
+    <td>Sets or Gets all available options.<br/> 
+    <strong>Important: </strong>When setting the options, the <strong>key</strong> must be a unique value to avoid unexpected behaviour.</td></tr>
+  </tbody>
+</table>
+<br/>
+
+Select Events<br/>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>     
+      <th>Data</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>vff:change</td><td>string</td><td>Each option toggle will trigger this event with updated selected options.</td></tr>   
   </tbody>
 </table>
 <br/>

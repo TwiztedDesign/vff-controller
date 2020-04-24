@@ -1,6 +1,6 @@
 {
   "name": "vff-controllers",
-  "version": "1.0.27",
+  "version": "1.0.33",
   "description": "Videoflow controller components",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -17,7 +17,7 @@
     "build": "stencil build --docs",
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e",
-    "test.watch": "stencil test --spec --e2e --watchAll --coverage",
+    "test.watch": "stencil test --spec --e2e --watchAll",
     "generate": "stencil generate",
     "prepublishOnly": "npm run build"
   },
@@ -34,5 +34,8 @@
     "videoflow",
     "controllers"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@simonwep/pickr": "^1.5.1"
+  }
 }
