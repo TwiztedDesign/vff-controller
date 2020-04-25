@@ -2,18 +2,22 @@
   display: block;
 }
 
-slot{
+slot {
   display: none;
 }
 
-.table__row{
+.table__row {
   display: flex;
 }
 
-.row__handle{
+.table__column {
+
+}
+
+.row__handle {
   cursor: move;
 }
 
-.sortable-placeholder{
+.sortable-placeholder {
   outline: 1px dashed var(--theme-color-1);
 }

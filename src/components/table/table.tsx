@@ -34,8 +34,7 @@ export class Table {
   }
 
   @Method()
-  async dataEntryPoint() {
-    const data = [{}, {}, {}];
+  async dataEntryPoint(data) {
     this.tableData = data.map(row => {
       return {row, _rowId: this._rowId++}
     });
@@ -87,9 +86,19 @@ export class Table {
   private createRow(data: any) {
     return (
       <div class="table__row" key={data._rowId.toString()}>{
-        this.template.map(node => {
-          return (<span>
-            <node.nodeName value={data._rowId}>{node.textContent}</node.nodeName>
+        this.template.map((el: HTMLElement) => {
+          let attr = {};
+          if (el.attributes.length > 0) {
+            Array.prototype.slice.call(el.attributes)
+              .forEach(_attr => {
+                attr[_attr.name] = _attr.value;
+              })
+          }
+          let value = data.row && data.row[el.attributes.getNamedItem('vff-data').value] || null;
+          return (<span class="table__column">
+            <el.nodeName {...attr}
+                         value={value}>{el.innerText}
+            </el.nodeName>
           </span>)
         })
       }
@@ -108,7 +117,7 @@ export class Table {
         <div id="table">
           <div id="table__head">
             <div class="table__row">{this._headTitles.map((title) => {
-              return (<span>{title}</span>);
+              return (<span class="table__column">{title}</span>);
             })}</div>
           </div>
           <div id="table__body">{
