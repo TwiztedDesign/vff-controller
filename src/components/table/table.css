@@ -1,0 +1,19 @@
+:host {
+  display: block;
+}
+
+slot{
+  display: none;
+}
+
+.table__row{
+  display: flex;
+}
+
+.row__handle{
+  cursor: move;
+}
+
+.sortable-placeholder{
+  outline: 1px dashed var(--theme-color-1);
+}

@@ -36,6 +36,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@simonwep/pickr": "^1.5.1"
+    "@simonwep/pickr": "^1.5.1",
+    "html5sortable": "^0.9.17"
   }
 }
