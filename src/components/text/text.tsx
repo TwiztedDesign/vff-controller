@@ -1,4 +1,5 @@
 import {Component, Host, h, Prop, Event, EventEmitter, Listen, Element} from '@stencil/core';
+import {isValidAttribute} from "../../utils/template.utils";
 
 @Component({
   tag: 'vff-text',
@@ -33,10 +34,9 @@ export class Text {
   @Listen('vff:update', {target: 'document'})
   handleVffUpdate(newValue: CustomEvent) {
     const {dataAttrName, dataAttrValue, value} = newValue.detail;
-    const currentAttrValue = this.el.getAttribute(dataAttrName);
-    if (!currentAttrValue || currentAttrValue !== dataAttrValue) return;
-    // else
-    this.value = value;
+    if (isValidAttribute(dataAttrName, dataAttrValue, this.el)) {
+      this.value = value;
+    }
   }
 
   connectedCallback() {
