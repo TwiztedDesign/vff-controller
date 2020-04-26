@@ -25,6 +25,13 @@ export class Text {
     composed: true
   }) changeValue: EventEmitter;
 
+  @Event({
+    eventName: 'vff:remove',
+    bubbles: true,
+    cancelable: true,
+    composed: true,
+  }) componentRemoved: EventEmitter;
+
   @Element() el: HTMLElement;
 
   constructor() {
@@ -41,6 +48,10 @@ export class Text {
 
   connectedCallback() {
     this.componentInit.emit({data: this.value});
+  }
+
+  disconnectedCallback() {
+    this.componentRemoved.emit({data: this.el});
   }
 
   private onValueChange(e) {
