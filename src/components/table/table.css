@@ -11,7 +11,7 @@ slot {
 }
 
 .table__column {
-
+  width: 150px;
 }
 
 .row__handle {

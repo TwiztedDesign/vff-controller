@@ -1,5 +1,6 @@
 import {Component, Host, h, State, Element, Prop, Method, Event, EventEmitter} from '@stencil/core';
 import {makeSortable, SORT_EVENTS} from '../../utils/sortable.utils';
+import {TableRow} from "../../interface/interface";
 
 @Component({
   tag: 'vff-table',
@@ -15,7 +16,7 @@ export class Table {
   @State() template: Node[] = []; // will be defined in slot
 
   @Prop() headTitles: string = '';
-
+  @Prop() src = '';
   @Element() el: HTMLElement;
 
   @Event({
@@ -35,17 +36,22 @@ export class Table {
 
   @Method()
   async dataEntryPoint(data) {
-    this.tableData = data.map(row => {
-      return {row, _rowId: this._rowId++}
+    this.tableData = data.map((rowData: object): TableRow => {
+      return {rowData, _rowId: this._rowId++}
     });
   }
 
   componentDidLoad() {
-    this.template = this.el.shadowRoot.querySelector('slot')
-      .assignedNodes()
-      .filter((node) => {
-        return node.nodeType == 1; // getting rid of all the text nodes
-      });
+    this.template = this.el.shadowRoot.querySelector('slot').assignedElements();
+    this.template.forEach(node => {
+      /**
+       * Removing slotted elements from DOM to ensure vff controller doesn't see them
+       * since they might have vff-data attribute on them, it might produce unexpected
+       * behaviour.
+       */
+      const parent = node.parentElement;
+      parent.removeChild(node);
+    });
   }
 
   componentWillRender() {
@@ -55,6 +61,7 @@ export class Table {
   componentDidRender() {
     this._sortable = makeSortable(this.el.shadowRoot.querySelector('#table__body'), {
       handle: '.row__handle',
+      hoverClass: 'is-hovered',
       forcePlaceholderSize: true
     });
     this._sortable.on(SORT_EVENTS.sortUpdate, this.onTableUpdate);
@@ -83,9 +90,9 @@ export class Table {
     this.onTableUpdate();
   }
 
-  private createRow(data: any) {
+  private createRow(data: TableRow, index: number) {
     return (
-      <div class="table__row" key={data._rowId.toString()}>{
+      <tr key={data._rowId.toString()}>{
         this.template.map((el: HTMLElement) => {
           let attr = {};
           if (el.attributes.length > 0) {
@@ -94,19 +101,20 @@ export class Table {
                 attr[_attr.name] = _attr.value;
               })
           }
-          let value = data.row && data.row[el.attributes.getNamedItem('vff-data').value] || null;
-          return (<span class="table__column">
-            <el.nodeName {...attr}
-                         value={value}>{el.innerText}
-            </el.nodeName>
-          </span>)
+          // todo: this should go out of the component
+          let value = data.rowData && data.rowData[el.attributes.getNamedItem('vff-data').value] || null;
+          attr["vff-data"] = `${this.src}.${index}.${el.attributes.getNamedItem('vff-data').value}`;
+          //
+          return (<td>
+            <el.nodeName {...attr} value={value}>{el.innerText}</el.nodeName>
+          </td>)
         })
       }
-        <span>
+        <td>
           <button onClick={() => this.removeRow(data._rowId)}>X</button>
-        </span>
-        <span class="row__handle">M</span>
-      </div>
+          <span class="row__handle">M</span>
+        </td>
+      </tr>
     )
   }
 
@@ -114,16 +122,16 @@ export class Table {
     return (
       <Host>
         <slot></slot>
-        <div id="table">
-          <div id="table__head">
-            <div class="table__row">{this._headTitles.map((title) => {
-              return (<span class="table__column">{title}</span>);
-            })}</div>
-          </div>
-          <div id="table__body">{
-            this.tableData.map((row) => this.createRow(row))
-          }</div>
-        </div>
+        <table id="table">
+          <thead id="table__head">
+          <tr>{this._headTitles.map((title) => {
+            return (<th>{title}</th>);
+          })}</tr>
+          </thead>
+          <tbody id="table__body">{
+            this.tableData.map((row, i) => this.createRow(row, i))
+          }</tbody>
+        </table>
         <button onClick={this.handleAddRowClick}>Add Row</button>
       </Host>
     );
