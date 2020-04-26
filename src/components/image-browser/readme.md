@@ -7,13 +7,13 @@
 
 ## Properties
 
-| Property         | Attribute         | Description | Type      | Default     |
-| ---------------- | ----------------- | ----------- | --------- | ----------- |
-| `error`          | `error`           |             | `string`  | `''`        |
-| `progress`       | `progress`        |             | `boolean` | `false`     |
-| `progressStatus` | `progress-status` |             | `number`  | `0`         |
-| `selectedFiles`  | --                |             | `File[]`  | `[]`        |
-| `value`          | `value`           |             | `string`  | `undefined` |
+| Property         | Attribute         | Description | Type      | Default |
+| ---------------- | ----------------- | ----------- | --------- | ------- |
+| `error`          | `error`           |             | `string`  | `''`    |
+| `progress`       | `progress`        |             | `boolean` | `false` |
+| `progressStatus` | `progress-status` |             | `number`  | `0`     |
+| `selectedFiles`  | --                |             | `File[]`  | `[]`    |
+| `value`          | `value`           |             | `string`  | `''`    |
 
 
 ## Events
@@ -21,6 +21,7 @@
 | Event        | Description | Type               |
 | ------------ | ----------- | ------------------ |
 | `vff:change` |             | `CustomEvent<any>` |
+| `vff:init`   |             | `CustomEvent<any>` |
 
 
 ## Methods

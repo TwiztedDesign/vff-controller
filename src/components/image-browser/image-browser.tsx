@@ -1,6 +1,7 @@
-import {Component, Host, h, Element, Watch, State, Method, Event, EventEmitter, Prop} from '@stencil/core';
+import {Component, Host, h, Element, Watch, State, Method, Event, EventEmitter, Prop, Listen} from '@stencil/core';
 import {readFileAsync} from "../../utils/utils";
 import {PreviewItem} from "../../interface/interface";
+import {isValidAttribute, triggerRemoveEvent} from "../../utils/template.utils";
 
 @Component({
   tag: 'vff-image-browser',
@@ -31,7 +32,7 @@ export class ImageBrowser {
   @Prop({mutable: true}) selectedFiles: File[] = [];
   @Prop() progress: boolean = false;
   @Prop() progressStatus: number = 0;
-  @Prop({reflect: true, mutable: true}) value: string;
+  @Prop({reflect: true, mutable: true}) value: string = '';
 
   @Element() el: HTMLElement;
 
@@ -41,6 +42,21 @@ export class ImageBrowser {
     cancelable: true,
     composed: true
   }) changeSelectedFiles: EventEmitter;
+
+  @Event({
+    eventName: 'vff:init',
+    bubbles: true,
+    cancelable: true,
+    composed: true
+  }) componentInit: EventEmitter;
+
+  @Listen('vff:update', {target: 'document'})
+  handleVffUpdate(newValue: CustomEvent) {
+    const {dataAttrName, dataAttrValue, value} = newValue.detail;
+    if (isValidAttribute(dataAttrName, dataAttrValue, this.el)) {
+      this.value = value;
+    }
+  }
 
   @Watch('value') // it is used when ever the image just need to be previewed and not to go to selectedFiles
   handleValueChangeProp(newValue) {
@@ -65,7 +81,8 @@ export class ImageBrowser {
   @Watch('selectedFiles')
   handleFilesChange(newValue) {
     this.changeSelectedFiles.emit({
-      data: newValue
+      data: newValue,
+      el: this.el
     });
 
     if (newValue.length > 0) {
@@ -84,6 +101,13 @@ export class ImageBrowser {
   constructor() {
     this.addFiles = this.addFiles.bind(this);
     this.removeFile = this.removeFile.bind(this);
+  }
+
+  connectedCallback() {
+    this.componentInit.emit({
+      data: this.value,
+      el: this.el
+    });
   }
 
   componentDidLoad() {
@@ -112,6 +136,10 @@ export class ImageBrowser {
     this.previewZone.addEventListener('drop', (e) => {
       this.addFiles(e.dataTransfer.files);
     }, false);
+  }
+
+  disconnectedCallback() {
+    triggerRemoveEvent(this.el);
   }
 
   @Method()

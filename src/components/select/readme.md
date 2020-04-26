@@ -22,19 +22,6 @@
 | `vff:change` |             | `CustomEvent<any>` |
 
 
-## Methods
-
-### `setOptions(options: SelectItem | SelectItem[]) => Promise<void>`
-
-
-
-#### Returns
-
-Type: `Promise<void>`
-
-
-
-
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*

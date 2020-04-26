@@ -1,5 +1,6 @@
 import {Component, Host, h, Prop, Event, EventEmitter, State, Listen, Element, Watch} from '@stencil/core';
 import {SelectItem} from "../../interface/interface";
+import {isValidAttribute, triggerRemoveEvent} from "../../utils/template.utils";
 
 @Component({
   tag: 'vff-select',
@@ -7,6 +8,13 @@ import {SelectItem} from "../../interface/interface";
   shadow: true
 })
 export class Select {
+  @Event({
+    eventName: 'vff:init',
+    bubbles: true,
+    cancelable: true,
+    composed: true
+  }) componentInit: EventEmitter;
+
   @Event({
     eventName: 'vff:change',
     bubbles: true,
@@ -35,6 +43,14 @@ export class Select {
     }
   }
 
+  @Listen('vff:update', {target: 'document'})
+  handleVffUpdate(newValue: CustomEvent) {
+    const {dataAttrName, dataAttrValue, value} = newValue.detail;
+    if (isValidAttribute(dataAttrName, dataAttrValue, this.el)) {
+      this.value = value;
+    }
+  }
+
   @Watch('options')
   handleOptionsChange(options: SelectItem | SelectItem[]) {
     if (Array.isArray(options)) {
@@ -44,7 +60,18 @@ export class Select {
     }
   }
 
-  onOptionClick(option: SelectItem) {
+  connectedCallback() {
+    this.componentInit.emit({
+      data: this.value,
+      el: this.el
+    });
+  }
+
+  disconnectedCallback() {
+    triggerRemoveEvent(this.el);
+  }
+
+  private onOptionClick(option: SelectItem) {
     if (this.multiple) { // allow multiple values to be selected
       const excluded = this.value.filter((_option) => {
         return option.key !== _option.key;
@@ -61,12 +88,13 @@ export class Select {
       this.value = [option];
     }
     this.changeValue.emit({ // emit event only from UI interaction
-      data: this.value
+      data: this.value,
+      el: this.el
     });
     this.isOptionsVisible = this.multiple; // leave options panel open after selection if multiple
   }
 
-  handleSelectClick() {
+  private handleSelectClick() {
     this.isOptionsVisible = !this.isOptionsVisible;
   }
 

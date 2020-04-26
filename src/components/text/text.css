@@ -1,0 +1,27 @@
+:host {
+  display: block;
+  width: 130px;
+}
+
+input[type=text] {
+  padding: 0 5px;
+  min-height: var(--elememt-min-height);
+}
+
+textarea {
+  padding: 5px;
+  resize: vertical;
+}
+
+input[type=text],
+textarea {
+  outline: none;
+  box-sizing: border-box;
+  background-color: var(--input-bg-color);
+  border: 0.5px solid var(--input-border-color);
+  color: var(--input-color);
+  font-size: var(--element-font-size);
+  width: 100%;
+  flex: 0 0 auto;
+  font-family: inherit;
+}

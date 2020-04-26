@@ -1,4 +1,5 @@
-import {Component, Host, h, Prop, Watch, Element, Event, EventEmitter} from '@stencil/core';
+import {Component, Host, h, Prop, Watch, Element, Event, EventEmitter, Listen} from '@stencil/core';
+import {isValidAttribute, triggerRemoveEvent} from "../../utils/template.utils";
 
 @Component({
   tag: 'vff-checkbox',
@@ -13,6 +14,13 @@ export class Checkbox {
   @Element() el: HTMLElement;
 
   @Event({
+    eventName: 'vff:init',
+    bubbles: true,
+    cancelable: true,
+    composed: true
+  }) componentInit: EventEmitter;
+
+  @Event({
     eventName: 'vff:change',
     bubbles: true,
     cancelable: true,
@@ -24,8 +32,23 @@ export class Checkbox {
     this.checkBoxInput.checked = newValue;
   }
 
+  @Listen('vff:update', {target: 'document'})
+  handleVffUpdate(newValue: CustomEvent) {
+    const {dataAttrName, dataAttrValue, value} = newValue.detail;
+    if (isValidAttribute(dataAttrName, dataAttrValue, this.el)) {
+      this.value = value;
+    }
+  }
+
   constructor() {
     this.handleClick = this.handleClick.bind(this);
+  }
+
+  connectedCallback() {
+    this.componentInit.emit({
+      data: this.value,
+      el: this.el
+    });
   }
 
   componentDidLoad() {
@@ -33,10 +56,15 @@ export class Checkbox {
     this.checkBoxInput.checked = this.value;
   }
 
-  handleClick() {
+  disconnectedCallback() {
+    triggerRemoveEvent(this.el);
+  }
+
+  private handleClick() {
     this.value = !this.value;
     this.changeValue.emit({
-      data: this.value
+      data: this.value,
+      el: this.el
     });
   }
 
@@ -53,5 +81,4 @@ export class Checkbox {
       </Host>
     );
   }
-
 }

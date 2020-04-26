@@ -76,7 +76,7 @@ Controllers are HTML elements and can be simply used inside you're HTML.
 A section must have a ```ctrl-container``` class ```html<div id="section1" class="ctrl-container">```
 This is needed in order to control section visibility and give a section the initial CSS it needs.
 <br/>
-Each direct descendant of a ```ctrl-container``` must be wrapped in  ```ctrl-container-row``` class.
+Each direct descendant of a ```ctrl-container``` must have in  ```ctrl-container-row``` class.
 ```html
 <div id="section1" class="ctrl-container">
     <div class="ctrl-container-row">[YOUR HTML HERE]</div>
@@ -99,6 +99,11 @@ In order to allow a section to be bound to a tab it must have the same ```id=sec
 ```html
 <div id="section1" class="ctrl-container"></div>
 ```
+
+##### Classes
+###### .ctrl-container
+###### .ctrl-container-row
+###### .ctrl-container-block
 
 ## <a name="Available_Controllers"></a> Available Controllers
  

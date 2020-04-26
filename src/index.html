@@ -224,10 +224,20 @@
 
 </section>
 <section id="section2" class="section ctrl-container">
-  <vff-image-browser/>
+  <vff-text placeholder="some text on multi" vff-data="custom" multiline></vff-text>
+  <vff-text placeholder="some text on single" vff-data="custom"></vff-text>
+  <vff-range min="20" max="150"></vff-range>
+  <vff-image-browser vff-data="images"></vff-image-browser>
 </section>
 <section id="section3" class="section ctrl-container">
-  <vff-select multiple="multiple" select-text="Hello Select"/>
+  <vff-table src="baseItems" head-titles="Image, Title, Sub Title, Description, Action, Link">
+    <vff-image-browser vff-data="img"></vff-image-browser>
+    <vff-text vff-data="baseItems.{index}.title" type="text"></vff-text>
+    <input vff-data="subTitle" type="text"/>
+    <textarea vff-data="desc"></textarea>
+    <input vff-data="action" type="text"/>
+    <input vff-data="actionLink" type="text"/>
+  </vff-table>
 </section>
 </body>
 </html>
