@@ -52,7 +52,10 @@ export class Range {
   }
 
   connectedCallback() {
-    this.componentInit.emit({data: this.value});
+    this.componentInit.emit({
+      data: this.value,
+      el: this.el
+    });
   }
 
   disconnectedCallback() {
@@ -61,7 +64,10 @@ export class Range {
 
   private onValueInput(e) {
     this.value = e.target.value;
-    this.changeValue.emit({data: this.value});
+    this.changeValue.emit({
+      data: this.value,
+      el: this.el
+    });
   }
 
   render() {

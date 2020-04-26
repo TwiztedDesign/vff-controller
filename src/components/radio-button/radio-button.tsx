@@ -1,4 +1,5 @@
 import {Component, Host, h, Prop, Element, Event, EventEmitter, Listen, Watch} from '@stencil/core';
+import {isValidAttribute, triggerRemoveEvent} from "../../utils/template.utils";
 
 @Component({
   tag: 'vff-radio-button',
@@ -22,6 +23,13 @@ export class RadioButton {
   }) radioButtonStateChange: EventEmitter;
 
   @Event({
+    eventName: 'vff:init',
+    bubbles: true,
+    cancelable: true,
+    composed: true
+  }) componentInit: EventEmitter;
+
+  @Event({
     eventName: 'vff:change',
     bubbles: true,
     cancelable: true,
@@ -35,7 +43,7 @@ export class RadioButton {
       this.radioButtonStateChange.emit({
         origin: this.radioButton,
         name: (this.name || this.el.getAttribute('name')), // When changed from DOM "name" prop will be null.
-        checked: this.checked
+        data: this.checked
       });
     }
   }
@@ -49,8 +57,23 @@ export class RadioButton {
     }
   }
 
+  @Listen('vff:update', {target: 'document'})
+  handleVffUpdate(newValue: CustomEvent) {
+    const {dataAttrName, dataAttrValue, value} = newValue.detail;
+    if (isValidAttribute(dataAttrName, dataAttrValue, this.el)) {
+      this.value = value;
+    }
+  }
+
   constructor() {
     this.handleClick = this.handleClick.bind(this);
+  }
+
+  connectedCallback() {
+    this.componentInit.emit({
+      data: this.value,
+      el: this.el
+    });
   }
 
   componentDidLoad() {
@@ -58,11 +81,16 @@ export class RadioButton {
     this.radioButton.checked = this.checked; // In case attribute was set in HTML on initial render.
   }
 
-  handleClick() {
+  disconnectedCallback() {
+    triggerRemoveEvent(this.el);
+  }
+
+  private handleClick() {
     if (!this.checked) {// Radio button can't disable itself.
       this.checked = true;
       this.changeChecked.emit({
-        data: this.checked
+        data: this.checked,
+        el: this.el
       })
     }
   }

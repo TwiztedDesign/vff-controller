@@ -1,5 +1,6 @@
-import {Component, Host, h, Element, Event, EventEmitter, Prop, Watch} from '@stencil/core';
+import {Component, Host, h, Element, Event, EventEmitter, Prop, Watch, Listen} from '@stencil/core';
 import Pickr from '@simonwep/pickr';
+import {isValidAttribute, triggerRemoveEvent} from "../../utils/template.utils";
 
 @Component({
   tag: 'vff-color-picker',
@@ -9,6 +10,13 @@ import Pickr from '@simonwep/pickr';
 })
 export class ColorPicker {
   private colorPicker: Pickr;
+
+  @Event({
+    eventName: 'vff:init',
+    bubbles: true,
+    cancelable: true,
+    composed: true
+  }) componentInit: EventEmitter;
 
   @Event({
     eventName: 'vff:change',
@@ -24,6 +32,21 @@ export class ColorPicker {
   @Watch('value')
   handleValuePropChange(newValue) {
     this.colorPicker.setColor(newValue);
+  }
+
+  @Listen('vff:update', {target: 'document'})
+  handleVffUpdate(newValue: CustomEvent) {
+    const {dataAttrName, dataAttrValue, value} = newValue.detail;
+    if (isValidAttribute(dataAttrName, dataAttrValue, this.el)) {
+      this.value = value;
+    }
+  }
+
+  connectedCallback() {
+    this.componentInit.emit({
+      data: this.value,
+      el: this.el
+    });
   }
 
   componentDidLoad() {
@@ -51,11 +74,16 @@ export class ColorPicker {
         const clrStr = color.toHEXA().toString();
         if (this.value !== clrStr) { // this prevents event firing when setColor function is triggered
           this.changeColorProperty.emit({
-            data: clrStr
+            data: clrStr,
+            el: this.el
           });
           this.value = clrStr;
         }
       });
+  }
+
+  disconnectedCallback() {
+    triggerRemoveEvent(this.el);
   }
 
   render() {

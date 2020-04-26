@@ -40,7 +40,10 @@ export class Text {
   }
 
   connectedCallback() {
-    this.componentInit.emit({data: this.value});
+    this.componentInit.emit({
+      data: this.value,
+      el: this.el
+    });
   }
 
   disconnectedCallback() {
