@@ -1,4 +1,4 @@
-import {Component, Host, h, Prop, Event, EventEmitter, Listen} from '@stencil/core';
+import {Component, Host, h, Prop, Event, EventEmitter, Listen, Element} from '@stencil/core';
 
 @Component({
   tag: 'vff-text',
@@ -9,7 +9,6 @@ export class Text {
   @Prop() placeholder: string = '';
   @Prop() value: string = '';
   @Prop() multiline: boolean = false;
-  @Prop() vffData = '';
 
   @Event({
     eventName: 'vff:init',
@@ -25,14 +24,18 @@ export class Text {
     composed: true
   }) changeValue: EventEmitter;
 
+  @Element() el: HTMLElement;
+
   constructor() {
     this.onValueChange = this.onValueChange.bind(this);
   }
 
   @Listen('vff:update', {target: 'document'})
   handleVffUpdate(newValue: CustomEvent) {
-    const {vffData, value} = newValue.detail;
-    if (vffData !== this.vffData) return;
+    const {dataAttrName, dataAttrValue, value} = newValue.detail;
+    const currentAttrValue = this.el.getAttribute(dataAttrName);
+    if (!currentAttrValue || currentAttrValue !== dataAttrValue) return;
+    // else
     this.value = value;
   }
 
