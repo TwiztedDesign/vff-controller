@@ -3,8 +3,8 @@ export function isValidAttribute(attrName: string, attrValue: string, el: HTMLEl
   return currentAttrValue && currentAttrValue == attrValue;
 }
 
-export function triggerRemoveEvent(data: any) {
+export function triggerRemoveEvent(el: HTMLElement) {
   window.dispatchEvent(new CustomEvent("vff:remove", {
-    detail: {data}
+    detail: {el}
   }));
 }
