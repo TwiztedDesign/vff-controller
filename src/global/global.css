@@ -260,6 +260,10 @@ table td > vff-radio-button {
   margin: 0 5px;
 }
 
+vff-text {
+  width: 100%;
+}
+
 table .element-image .ctrl-container-row {
   display: none;
 }
