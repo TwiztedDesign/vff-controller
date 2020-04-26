@@ -12,11 +12,11 @@ export class Text {
   @Prop() vffData = '';
 
   @Event({
-    eventName: 'vff:rendered',
+    eventName: 'vff:init',
     bubbles: true,
     cancelable: true,
     composed: true
-  }) componentRendered: EventEmitter;
+  }) componentInit: EventEmitter;
 
   @Event({
     eventName: 'vff:change',
@@ -55,7 +55,7 @@ export class Text {
   }
 
   componentDidRender() {
-    this.componentRendered.emit({data: this.value});
+    this.componentInit.emit({data: this.value});
   }
 
   render() {
