@@ -1,5 +1,5 @@
 import {Component, Host, h, Prop, Event, EventEmitter, Element, Listen, Watch} from '@stencil/core';
-import {isValidAttribute} from '../../utils/template.utils';
+import {isValidAttribute, triggerRemoveEvent} from '../../utils/template.utils';
 
 @Component({
   tag: 'vff-range',
@@ -24,13 +24,6 @@ export class Range {
     cancelable: true,
     composed: true
   }) changeValue: EventEmitter;
-
-  @Event({
-    eventName: 'vff:remove',
-    bubbles: true,
-    cancelable: true,
-    composed: true,
-  }) componentRemoved: EventEmitter;
 
   @Element() el: HTMLElement;
 
@@ -63,7 +56,7 @@ export class Range {
   }
 
   disconnectedCallback() {
-    this.componentRemoved.emit({data: this.el});
+    triggerRemoveEvent(this.el);
   }
 
   private onValueInput(e) {

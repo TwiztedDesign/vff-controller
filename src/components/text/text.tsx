@@ -1,5 +1,5 @@
 import {Component, Host, h, Prop, Event, EventEmitter, Listen, Element} from '@stencil/core';
-import {isValidAttribute} from "../../utils/template.utils";
+import {isValidAttribute, triggerRemoveEvent} from "../../utils/template.utils";
 
 @Component({
   tag: 'vff-text',
@@ -25,13 +25,6 @@ export class Text {
     composed: true
   }) changeValue: EventEmitter;
 
-  @Event({
-    eventName: 'vff:remove',
-    bubbles: true,
-    cancelable: true,
-    composed: true,
-  }) componentRemoved: EventEmitter;
-
   @Element() el: HTMLElement;
 
   constructor() {
@@ -51,7 +44,7 @@ export class Text {
   }
 
   disconnectedCallback() {
-    this.componentRemoved.emit({data: this.el});
+    triggerRemoveEvent(this.el);
   }
 
   private onValueChange(e) {
