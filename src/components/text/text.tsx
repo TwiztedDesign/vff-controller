@@ -39,6 +39,10 @@ export class Text {
     this.value = value;
   }
 
+  connectedCallback() {
+    this.componentInit.emit({data: this.value});
+  }
+
   private onValueChange(e) {
     this.value = e.target.value;
     this.changeValue.emit({data: this.value});
@@ -55,10 +59,6 @@ export class Text {
     return <textarea placeholder={this.placeholder}
                      onInput={this.onValueChange}
                      value={this.value}/>;
-  }
-
-  componentDidRender() {
-    this.componentInit.emit({data: this.value});
   }
 
   render() {
