@@ -30,7 +30,7 @@
   justify-content: center;
   align-items: center;
   width: 50px;
-  background-color: var(--select-color);
+  background-color: var(--input-bg-color);
 }
 
 #select__utils {
