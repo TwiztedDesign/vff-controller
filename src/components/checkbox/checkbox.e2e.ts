@@ -25,7 +25,7 @@ describe('vff-checkbox', () => {
     const vffChange = await page.spyOnEvent('vff:change');
     await component.click();
     await page.waitForChanges();
-    expect(vffChange).toHaveReceivedEventDetail({data: true});
+    expect(vffChange).toHaveReceivedEventDetail({data: true, el: {"s-p": []}});
   });
 
   it('should not fire vff:change event when user injects status with value property', async () => {

@@ -20,6 +20,7 @@
 | ------------------------ | ----------- | ------------------ |
 | `radioButtonStateChange` |             | `CustomEvent<any>` |
 | `vff:change`             |             | `CustomEvent<any>` |
+| `vff:init`               |             | `CustomEvent<any>` |
 
 
 ----------------------------------------------

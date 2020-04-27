@@ -1,4 +1,4 @@
-# vff-color-picker
+# vff-video-time
 
 
 
@@ -7,9 +7,9 @@
 
 ## Properties
 
-| Property | Attribute | Description | Type     | Default     |
-| -------- | --------- | ----------- | -------- | ----------- |
-| `value`  | `value`   |             | `string` | `'#FFFFFF'` |
+| Property | Attribute | Description | Type     | Default |
+| -------- | --------- | ----------- | -------- | ------- |
+| `value`  | `value`   |             | `number` | `0`     |
 
 
 ## Events

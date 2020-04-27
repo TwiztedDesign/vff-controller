@@ -63,3 +63,9 @@ export function readFileAsync(file): Promise<string | ArrayBuffer> {
     reader.readAsDataURL(file);
   })
 }
+
+export function secToTimeString(timeInSeconds) {
+  const date = new Date(0);
+  date.setSeconds(timeInSeconds); // specify value for SECONDS here
+  return date.toISOString().substr(11, 8);
+}

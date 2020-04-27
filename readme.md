@@ -1,15 +1,21 @@
+<style>th, td{text-align: left}</style>
+
 ## Table of contents
 * [Videoflow Controllers Library](#Videoflow_Controllers_Library)
 * [Videoflow Controllers](#Videoflow_Controllers)
 * [Loading dependencies](#Loading_dependencies)
 * [Starter Template](#Starter_Template)
 * [How to use this library](#How_to_use_this_library)
+* [Using Controllers](#Using_Controllers)
 * [Available Controllers](#Available_Controllers)
   - [vff-checkbox](#vff-checkbox)
   - [vff-radio-button](#vff-radio-button)
   - [vff-image-browser](#vff-image-browser)
   - [vff-color-picker](#vff-color-picker)
   - [vff-select](#vff-select)
+  - [vff-text](#vff-text)
+  - [vff-range](#vff-range)
+  - [vff-video-time](#vff-video-time)
 
 ## <a name="Videoflow_Controllers_Library"></a> Videoflow Controllers Library
 
@@ -105,15 +111,47 @@ In order to allow a section to be bound to a tab it must have the same ```id=sec
 ###### .ctrl-container-row
 ###### .ctrl-container-block
 
+## <a name="Using_Controllers"></a> Using Controllers
+Common events that each component fires in different stages of it's life cycle:<br/>
+<table>
+  <thead>
+    <tr>
+      <th>Event</th>
+      <th>Payload</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>vff:init</td><td>{data, target: HTMLElement}</td><td>Right after a controller has been attached to DOM.</td></tr>
+    <tr><td>vff:change</td><td>{data, target: HTMLElement}</td><td>Each time when a change from user interface of a controller is received.</td></tr>
+    <tr><td>vff:remove</td><td>{data, target: HTMLElement}</td><td>Each time a controller has been detached from DOM</td></tr>
+  </tbody> 
+</table>
+
+Common events that each component listens to:<br/>
+<table>
+  <thead>
+    <tr>
+      <th>Event</th>
+      <th>Payload</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>vff:update</td><td>{dataAttrName: string, dataAttrValue: string, value}</td><td>Each component can be updated with new data.</td></tr>
+  </tbody>
+</table>
+
 ## <a name="Available_Controllers"></a> Available Controllers
+After setting up the basic layout, you can start declaring which controllers your layout will include. <br/>
  
-###### <a name="vff-checkbox"></a> vff-checkbox:
+##### <a name="vff-checkbox"></a> vff-checkbox:
 
 ```html 
     <vff-checkbox>You can have you're text here!</vff-checkbox>
 ```
 
-Checkbox properties<br/>
+Properties<br/>
 <table>
   <thead>
     <tr>
@@ -128,22 +166,7 @@ Checkbox properties<br/>
 </table>
 <br/>
 
-Checkbox events<br/>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>     
-      <th>Data</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>vff:change</td><td>boolean</td><td>Event data represents checkbox checked state</td></tr>   
-  </tbody>
-</table>
-<br/>
-
-###### <a name="vff-radio-button"></a> vff-radio-button:
+##### <a name="vff-radio-button"></a> vff-radio-button:
 
 ```html 
     <vff-radio-button name="radio-group">Radio1</vff-radio-button>
@@ -151,7 +174,7 @@ Checkbox events<br/>
     <vff-radio-button name="radio-group">Radio3</vff-radio-button>
 ```
 
-Radio button properties<br/>
+Properties<br/>
 <table>
   <thead>
     <tr>
@@ -168,22 +191,7 @@ Radio button properties<br/>
 </table>
 <br/>
 
-Radio button events<br/>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>     
-      <th>Data</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>vff:change</td><td>boolean</td><td>Event data represents radio button checked state</td></tr>   
-  </tbody>
-</table>
-<br/>
-
-###### <a name="vff-image-browser"></a> vff-image-browser:
+##### <a name="vff-image-browser"></a> vff-image-browser:
 
 <p>Image Browser provides drag’n’drop and upload button file uploads with image previews.</p>
 
@@ -191,7 +199,7 @@ Radio button events<br/>
     <vff-image-browser></vff-image-browser>
 ```
 
-Image Browser properties<br/>
+Properties<br/>
 <table>
   <thead>
     <tr>
@@ -210,7 +218,7 @@ Image Browser properties<br/>
 </table>
 <br/>
 
-Image Browser methods<br/>
+Methods<br/>
 <table>
   <thead>
     <tr>
@@ -226,22 +234,7 @@ Image Browser methods<br/>
 </table>
 <br/>
 
-Image Browser events<br/>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>     
-      <th>Data</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>vff:change</td><td>array of files</td><td>Each change to files in the image browser will result in change event</td></tr>   
-  </tbody>
-</table>
-<br/>
-
-###### <a name="vff-color-picker"></a> vff-color-picker:
+##### <a name="vff-color-picker"></a> vff-color-picker:
 
 <p>This component is a wrapper of color <a href="https://github.com/Simonwep/pickr">pickr</a> by Simonwep</p>
 
@@ -249,7 +242,7 @@ Image Browser events<br/>
     <vff-color-picker></vff-color-picker>
 ```
 
-Color picker properties<br/>
+Properties<br/>
 <table>
   <thead>
     <tr>
@@ -259,33 +252,18 @@ Color picker properties<br/>
     </tr>
   </thead>
   <tbody>
-    <tr><td>value</td><td>string</td><td>Sets or gets color representation in HEX(A)</td></tr>
+    <tr><td>value</td><td>string</td><td>Sets or returns color representation in HEX(A)</td></tr>
   </tbody>
 </table>
 <br/>
 
-Color picker events<br/>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>     
-      <th>Data</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>vff:change</td><td>string</td><td>Each color related change will trigger this event with HEX(A) value.</td></tr>   
-  </tbody>
-</table>
-<br/>
-
-###### <a name="vff-select"></a> vff-select:
+##### <a name="vff-select"></a> vff-select:
 
 ```html
     <vff-select></vff-select>
 ```
 
-Select interfaces<br/>
+Interfaces<br/>
 <table>
   <thead>
     <tr>
@@ -299,7 +277,7 @@ Select interfaces<br/>
 </table>
 <br/>
 
-Select properties<br/>
+Properties<br/>
 <table>
   <thead>
     <tr>
@@ -309,26 +287,62 @@ Select properties<br/>
     </tr>
   </thead>
   <tbody>
-    <tr><td>value</td><td>SelectItem[]</td><td>Sets or gets selected options.</td></tr>
+    <tr><td>value</td><td>SelectItem[]</td><td>Sets or returns selected options.</td></tr>
     <tr><td>multiple</td><td>boolean</td><td>Enables multiple selection.</td></tr>
     <tr><td>options</td><td>SelectItem | SelectItem[]</td>
-    <td>Sets or Gets all available options.<br/> 
+    <td>Sets or returns all available options.<br/> 
     <strong>Important: </strong>When setting the options, the <strong>key</strong> must be a unique value to avoid unexpected behaviour.</td></tr>
   </tbody>
 </table>
 <br/>
 
-Select Events<br/>
+##### <a name="vff-text"></a> vff-text:
+
+```html
+    <vff-text></vff-text>
+```
+
+Properties<br/>
 <table>
   <thead>
     <tr>
-      <th>Name</th>     
-      <th>Data</th>
+      <th>Property</th>
+      <th>Value</th>
       <th>Description</th>
     </tr>
   </thead>
   <tbody>
-    <tr><td>vff:change</td><td>string</td><td>Each option toggle will trigger this event with updated selected options.</td></tr>   
+  <tr><td>multiline</td><td>boolean</td><td>Defines a multi-line text input control.</td></tr>
+  <tr><td>placeholder</td><td>string</td><td>Specifies a short hint that describes the expected value of a text area.</td></tr>
+  <tr><td>value</td><td>string</td><td>Sets or returns the contents of a text area.</td></tr>
   </tbody>
 </table>
+<br/>
+
+##### <a name="vff-range"></a> vff-range:
+
+```html
+    <vff-range></vff-range>
+```
+
+Properties:<br/>
+
+| Property | Type   | Description                                                          |
+|:---------|:-------|:---------------------------------------------------------------------|
+| max      | number | Sets or returns the value of the max attribute of the slider control |
+| min      | number | Sets or returns the value of the min attribute of the slider control |
+| value    | number | Sets or returns the value of the value attribute of a slider control |
+<br/>
+
+##### <a name="vff-video-time"></a> vff-video-time:
+
+```html
+    <vff-video-time></vff-video-time>
+```
+
+Properties:<br/>
+
+| Property | Type   | Description                                                          |
+|:---------|:-------|:---------------------------------------------------------------------|
+| value    | number | Sets or returns the value in seconds.                                |
 <br/>

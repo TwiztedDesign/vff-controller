@@ -20,6 +20,7 @@
 | Event        | Description | Type               |
 | ------------ | ----------- | ------------------ |
 | `vff:change` |             | `CustomEvent<any>` |
+| `vff:init`   |             | `CustomEvent<any>` |
 
 
 ----------------------------------------------

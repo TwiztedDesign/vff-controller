@@ -51,13 +51,48 @@ export class Select {
     }
   }
 
+  @Watch('value')
+  validateValue(newValue) {
+    /**
+     * Since value can be set from out side the component to be undefined,
+     * we'd like to reset it to array to make sure the code doesn't break
+     * in places when operations on value are operations on array.
+     */
+    if (!Array.isArray(newValue)) this.value = [];
+  }
+
   @Watch('options')
   handleOptionsChange(options: SelectItem | SelectItem[]) {
+    let newOptions;
     if (Array.isArray(options)) {
-      this._options = [...options];
+      newOptions = [...options];
     } else if (typeof options === 'object') {
-      this._options = [options];
+      newOptions = [options];
     }
+    /**
+     * When new options are received we're making sure that already
+     * selected values are still available in the new options.
+     */
+    if (newOptions.length === this._options.length) {
+      // Cross reference values with new options by index.
+      this.value = this.value.map(selected => {
+        const indexInOldOptions = this._options.findIndex(_option => {
+          return _option.key == selected.key;
+        });
+        return newOptions[indexInOldOptions];
+      });
+    } else {
+      /**
+       * Cross reference values with new options by keys.
+       * Values that are not found in the new options are removed.
+       */
+      this.value = this.value.filter(selected => {
+        return newOptions.find(_option => {
+          return selected.key == _option.key;
+        });
+      });
+    }
+    this._options = newOptions;
   }
 
   connectedCallback() {

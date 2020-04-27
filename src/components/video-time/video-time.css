@@ -1,0 +1,45 @@
+:host {
+  display: block;
+}
+
+.timepicker{
+  display: flex;
+  border: 0.5px solid rgba(255,255,255,0.25); /*--input-border-color*/
+  background-color: rgba(0,0,0,0.4); /*--input-bg-color*/
+  min-height: 25px; /*--elememt-min-height*/
+  border-radius: 5px;
+  overflow: hidden;
+}
+.timepicker:hover .timepicker-time-display{
+  display: none;
+}
+.timepicker:hover .timepicker-button{
+  display: flex;
+}
+.timepicker .timepicker-time-value{
+  display: none;
+}
+.timepicker .timepicker-time-display{
+  display: flex;
+  font-size: 12px; /*--element-font-size*/
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.timepicker .timepicker-button{
+  display: none;
+  flex: 1 1 50%;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.75em;
+  cursor: pointer;
+  text-decoration: none;
+  outline: none;
+}
+.timepicker .timepicker-button:not(:last-child){
+  border-right: 1px solid rgba(255,255,255,.05);
+  background-color: rgba(255,255,255,.05);
+}
+.timepicker .timepicker-button:hover{
+  background-color: #0095ff;
+}
