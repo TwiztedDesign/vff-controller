@@ -86,7 +86,7 @@
 /**********************/
 
 body {
-  background-color: black;
+  background-color: #1A1F26;
   color: #fff;
   font-family: var(--element-font-family);
   display: flex;
