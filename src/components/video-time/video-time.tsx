@@ -37,7 +37,7 @@ export class VideoTime {
 
   @Watch('value')
   validateValue(newValue) {
-    if (!Number.isInteger(newValue)) {
+    if (!parseFloat(newValue)) {
       this.value = 0;
       console.error('vff-video-time value must be an integer');
     }
