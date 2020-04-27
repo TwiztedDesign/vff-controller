@@ -43,6 +43,11 @@ export class VideoTime {
     }
   }
 
+  constructor() {
+    this.getTime = this.getTime.bind(this);
+    this.goToTime = this.goToTime.bind(this);
+  }
+
   connectedCallback() {
     this.componentInit.emit({
       data: this.value,
@@ -56,7 +61,7 @@ export class VideoTime {
 
   private getTime() {
     vff.controller.currentTime().then(time => {
-      if (time !== this.value) {
+      if (time !== undefined && time !== this.value) {
         this.value = time;
         this.changeValue.emit({
           data: this.value,
