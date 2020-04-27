@@ -58,7 +58,7 @@ export class Select {
      * we'd like to reset it to array to make sure the code doesn't break
      * in places when operations on value are operations on array.
      */
-    if (!newValue) this.value = [];
+    if (!Array.isArray(newValue)) this.value = [];
   }
 
   @Watch('options')
