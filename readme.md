@@ -324,19 +324,11 @@ Properties<br/>
     <vff-range></vff-range>
 ```
 
-Properties<br/>
-<table>
-  <thead>
-    <tr>
-      <th>Property</th>
-      <th>Value</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-  <tr><td>max</td><td>number</td><td>Sets or returns the value of the max attribute of the slider control.</td></tr>
-  <tr><td>min</td><td>number</td><td>Sets or returns the value of the min attribute of the slider control.</td></tr>
-  <tr><td>value</td><td>number</td><td>Sets or returns the value of the value attribute of a slider control.</td></tr>
-  </tbody>
-</table>
-<br/>
+Properties:<br/>
+
+| Property | Type   | Description                                                          |
+|:---------|:-------|:---------------------------------------------------------------------|
+| max      | number | Sets or returns the value of the max attribute of the slider control |
+| min      | number | Sets or returns the value of the min attribute of the slider control |
+| value    | number | Sets or returns the value of the value attribute of a slider control |
+
