@@ -15,6 +15,7 @@
   - [vff-select](#vff-select)
   - [vff-text](#vff-text)
   - [vff-range](#vff-range)
+  - [vff-video-time](#vff-video-time)
 
 ## <a name="Videoflow_Controllers_Library"></a> Videoflow Controllers Library
 
@@ -331,4 +332,17 @@ Properties:<br/>
 | max      | number | Sets or returns the value of the max attribute of the slider control |
 | min      | number | Sets or returns the value of the min attribute of the slider control |
 | value    | number | Sets or returns the value of the value attribute of a slider control |
+<br/>
 
+##### <a name="vff-video-time"></a> vff-video-time:
+
+```html
+    <vff-video-time></vff-video-time>
+```
+
+Properties:<br/>
+
+| Property | Type   | Description                                                          |
+|:---------|:-------|:---------------------------------------------------------------------|
+| value    | number | Sets or returns the value in seconds.                                |
+<br/>
