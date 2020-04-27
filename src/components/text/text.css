@@ -25,3 +25,36 @@ textarea {
   flex: 0 0 auto;
   font-family: inherit;
 }
+
+
+textarea::-webkit-scrollbar-button {
+  display: none;
+  height: 13px;
+  border-radius: 0;
+  background-color: #AAA;
+}
+
+textarea::-webkit-scrollbar-button:hover {
+  background-color: #AAA;
+}
+
+textarea::-webkit-scrollbar-thumb {
+  background-color: #666;
+}
+
+textarea::-webkit-scrollbar-thumb:hover {
+  background-color: #aaa;
+}
+
+textarea::-webkit-scrollbar-track {
+
+}
+
+*::-webkit-scrollbar-track:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  cursor: pointer;
+}
