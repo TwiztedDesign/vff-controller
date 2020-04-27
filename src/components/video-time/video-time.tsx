@@ -40,6 +40,8 @@ export class VideoTime {
     if (!parseFloat(newValue)) {
       this.value = 0;
       console.error('vff-video-time value must be an integer');
+    } else {
+      this.value = parseFloat(newValue);
     }
   }
 
