@@ -51,6 +51,16 @@ export class Select {
     }
   }
 
+  @Watch('value')
+  validateValue(newValue) {
+    /**
+     * Since value can be set from out side the component to be undefined,
+     * we'd like to reset it to array to make sure the code doesn't break
+     * in places when operations on value are operations on array.
+     */
+    if (!newValue) this.value = [];
+  }
+
   @Watch('options')
   handleOptionsChange(options: SelectItem | SelectItem[]) {
     let newOptions;

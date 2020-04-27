@@ -110,7 +110,7 @@ describe('vff-select', () => {
     await option.click();
     await page.waitForChanges();
     // do the test
-    expect(vffChange).toHaveReceivedEventDetail({"data": [{"key": "key1", "value": "value1"}]});
+    expect(vffChange).toHaveReceivedEventDetail({"data": [{"key": "key1", "value": "value1"}], el: {"s-p": []}});
   });
 
   it('should present all chosen keys in select__result', async () => {
