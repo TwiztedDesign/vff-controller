@@ -1,4 +1,4 @@
-import {Component, Host, h, Prop, Element, Event, EventEmitter, Listen, Watch} from '@stencil/core';
+import {Component, Host, h, Prop, Element, Event, EventEmitter, Listen} from '@stencil/core';
 import {isValidAttribute, triggerRemoveEvent} from "../../utils/template.utils";
 
 @Component({
@@ -31,11 +31,6 @@ export class Checkbox {
     if (isValidAttribute(dataAttrName, dataAttrValue, this.el)) {
       this.value = value;
     }
-  }
-
-  @Watch('value')
-  validateCheckedPropChange(newValue: boolean) {
-    this.value = !!newValue;
   }
 
   constructor() {
