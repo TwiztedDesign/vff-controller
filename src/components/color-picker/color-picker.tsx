@@ -9,7 +9,8 @@ import {isValidAttribute, triggerRemoveEvent} from "../../utils/template.utils";
   shadow: true
 })
 export class ColorPicker {
-  private colorPicker: Pickr;
+  private pickerPromise;
+  private pickerResolve;
 
   @Event({
     eventName: 'vff:init',
@@ -31,7 +32,9 @@ export class ColorPicker {
 
   @Watch('value')
   handleValuePropChange(newValue) {
-    this.colorPicker && this.colorPicker.setColor(newValue);
+    this.pickerPromise.then((instance) => {
+      instance.setColor(newValue);
+    })
   }
 
   @Listen('vff:update', {target: 'document'})
@@ -40,6 +43,12 @@ export class ColorPicker {
     if (isValidAttribute(dataAttrName, dataAttrValue, this.el)) {
       this.value = value;
     }
+  }
+
+  constructor() {
+    this.pickerPromise = new Promise(resolve => {
+      this.pickerResolve = resolve;
+    })
   }
 
   connectedCallback() {
@@ -51,7 +60,7 @@ export class ColorPicker {
 
   componentDidLoad() {
     // initialize 3d party color picker component
-    this.colorPicker = Pickr.create({
+    Pickr.create({
       el: this.el.shadowRoot.querySelector('#color-picker__btn') as HTMLElement,
       theme: 'nano', // or 'monolith', or 'nano'
       container: this.el.shadowRoot.querySelector('#color-picker__app-container') as HTMLElement,
@@ -66,20 +75,18 @@ export class ColorPicker {
           input: true
         }
       }
+    }).on('init', instance => {
+      this.pickerResolve(instance);
+    }).on('change', (color) => {
+      const clrStr = color.toHEXA().toString();
+      if (this.value !== clrStr) { // this prevents event firing when setColor function is triggered
+        this.changeColorProperty.emit({
+          data: clrStr,
+          el: this.el
+        });
+        this.value = clrStr;
+      }
     });
-
-    // attach events
-    this.colorPicker
-      .on('change', (color) => {
-        const clrStr = color.toHEXA().toString();
-        if (this.value !== clrStr) { // this prevents event firing when setColor function is triggered
-          this.changeColorProperty.emit({
-            data: clrStr,
-            el: this.el
-          });
-          this.value = clrStr;
-        }
-      });
   }
 
   disconnectedCallback() {
