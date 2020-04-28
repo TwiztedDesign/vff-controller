@@ -31,7 +31,7 @@ export class ColorPicker {
 
   @Watch('value')
   handleValuePropChange(newValue) {
-    this.colorPicker.setColor(newValue);
+    this.colorPicker && this.colorPicker.setColor(newValue);
   }
 
   @Listen('vff:update', {target: 'document'})

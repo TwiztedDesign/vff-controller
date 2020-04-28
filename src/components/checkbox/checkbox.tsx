@@ -29,7 +29,7 @@ export class Checkbox {
 
   @Watch('value')
   validateCheckedPropChange(newValue: boolean) {
-    this.checkBoxInput.checked = newValue;
+    this.checkBoxInput && (this.checkBoxInput.checked = newValue);
   }
 
   @Listen('vff:update', {target: 'document'})
