@@ -25,7 +25,12 @@ Videoflow controllers out of the box.
 ## <a name="Videoflow_Controllers"></a> Videoflow Controllers
 
 Videflow controllers allow you to manage your visual engagement data in most intuitive way.<br/>
-Controllers are HTML elements and can be simply used inside you're HTML.  
+Controllers are HTML elements and can be simply used inside you're HTML. <br/>
+Please note, VFF controllers are Custom Elements and can not be self closing tags.
+The proper way of using a component is by always writing the opening and the closing tag:
+```html
+    <vff-custom-component></vff-custom-component>
+```
 
 ## <a name="Loading_dependencies"></a> Loading dependencies
 
@@ -277,24 +282,16 @@ Interfaces<br/>
 </table>
 <br/>
 
-Properties<br/>
-<table>
-  <thead>
-    <tr>
-      <th>Property</th>
-      <th>Value</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>value</td><td>SelectItem[]</td><td>Sets or returns selected options.</td></tr>
-    <tr><td>multiple</td><td>boolean</td><td>Enables multiple selection.</td></tr>
-    <tr><td>options</td><td>SelectItem | SelectItem[]</td>
-    <td>Sets or returns all available options.<br/> 
-    <strong>Important: </strong>When setting the options, the <strong>key</strong> must be a unique value to avoid unexpected behaviour.</td></tr>
-  </tbody>
-</table>
-<br/>
+Properties:<br/>
+
+| Property | Type                      | Description                           |
+|----------|---------------------------|---------------------------------------|
+| options  | SelectItem | SelectItem[] | Sets or returns all available options |
+| multiple | boolean                   | Enables multiple selection            |
+| value    | SelectItem[]              | Sets or returns selected options      |
+
+<strong>Important: </strong>When setting the options, the <strong>key</strong> must be a unique value to avoid unexpected behaviour.</td></tr>
+<br/><br/>
 
 ##### <a name="vff-text"></a> vff-text:
 
@@ -302,21 +299,13 @@ Properties<br/>
     <vff-text></vff-text>
 ```
 
-Properties<br/>
-<table>
-  <thead>
-    <tr>
-      <th>Property</th>
-      <th>Value</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-  <tr><td>multiline</td><td>boolean</td><td>Defines a multi-line text input control.</td></tr>
-  <tr><td>placeholder</td><td>string</td><td>Specifies a short hint that describes the expected value of a text area.</td></tr>
-  <tr><td>value</td><td>string</td><td>Sets or returns the contents of a text area.</td></tr>
-  </tbody>
-</table>
+Properties:<br/>
+
+| Property    | Type    | Description                                                             |
+|-------------|---------|-------------------------------------------------------------------------|
+| multiline   | boolean | Defines a multi-line text input control                                 |
+| placeholder | string  | Specifies a short hint that describes the expected value of a text area |
+| value       | string  | Sets or returns the contents of a text area                             |
 <br/>
 
 ##### <a name="vff-range"></a> vff-range:
