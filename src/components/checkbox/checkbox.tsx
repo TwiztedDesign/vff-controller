@@ -1,4 +1,4 @@
-import {Component, Host, h, Prop, Watch, Element, Event, EventEmitter, Listen} from '@stencil/core';
+import {Component, Host, h, Prop, Element, Event, EventEmitter, Listen, Watch} from '@stencil/core';
 import {isValidAttribute, triggerRemoveEvent} from "../../utils/template.utils";
 
 @Component({
@@ -7,8 +7,6 @@ import {isValidAttribute, triggerRemoveEvent} from "../../utils/template.utils";
   shadow: true
 })
 export class Checkbox {
-  private checkBoxInput: HTMLInputElement;
-
   @Prop({attribute: 'checked', reflect: true, mutable: true}) value: boolean = false;
 
   @Element() el: HTMLElement;
@@ -27,17 +25,17 @@ export class Checkbox {
     composed: true
   }) changeValue: EventEmitter;
 
-  @Watch('value')
-  validateCheckedPropChange(newValue: boolean) {
-    this.checkBoxInput && (this.checkBoxInput.checked = newValue);
-  }
-
   @Listen('vff:update', {target: 'document'})
   handleVffUpdate(newValue: CustomEvent) {
     const {dataAttrName, dataAttrValue, value} = newValue.detail;
     if (isValidAttribute(dataAttrName, dataAttrValue, this.el)) {
       this.value = value;
     }
+  }
+
+  @Watch('value')
+  validateCheckedPropChange(newValue: boolean) {
+    this.value = !!newValue;
   }
 
   constructor() {
@@ -49,11 +47,6 @@ export class Checkbox {
       data: this.value,
       el: this.el
     });
-  }
-
-  componentDidLoad() {
-    this.checkBoxInput = this.el.shadowRoot.querySelector('input');
-    this.checkBoxInput.checked = this.value;
   }
 
   disconnectedCallback() {
@@ -72,7 +65,7 @@ export class Checkbox {
     return (
       <Host onClick={this.handleClick}>
         <label class="element-checkbox">
-          <input disabled type="checkbox"/>
+          <input checked={this.value} disabled type="checkbox"/>
           <div class="element-checkbox-indicator"/>
           <div class="element-checkbox-text">
             <slot/>
