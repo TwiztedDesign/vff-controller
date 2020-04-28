@@ -38,7 +38,7 @@ export class Select {
 
   @Listen('click', {target: "document"})
   toggleOptionsPanel(e) {
-    if (e.target !== this.el) {
+    if (e.target !== this.el) { // click outside of options should close the options
       this.isOptionsVisible && (this.isOptionsVisible = false);
     }
   }
@@ -133,6 +133,26 @@ export class Select {
     this.isOptionsVisible = !this.isOptionsVisible;
   }
 
+  private renderOptionsPanel() {
+    return (
+      <div class={"select__options"}>
+        {this._options.map((option) => {
+          const isSelected = !!this.value.find((val) => {
+            return val.key == option.key;
+          });
+          return (
+            <div class={"select__option" + (isSelected ? ' selected' : '')}
+                 onClick={() => {
+                   this.onOptionClick(option)
+                 }}>
+              {option.key}
+            </div>
+          );
+        })}
+      </div>
+    )
+  }
+
   render() {
     let selectText: string = this.selectText;
     let selectedItems: HTMLElement[] = [];
@@ -154,21 +174,7 @@ export class Select {
           </div>
           <div class={"select__arrow" + (this.isOptionsVisible ? ' open' : '')}/>
         </div>
-        {this.isOptionsVisible && (<div class={"select__options"}>
-          {this._options.map((option) => {
-            const isSelected = !!this.value.find((val) => {
-              return val.key == option.key;
-            });
-            return (
-              <div class={"select__option" + (isSelected ? ' selected' : '')}
-                   onClick={() => {
-                     this.onOptionClick(option)
-                   }}>
-                {option.key}
-              </div>
-            );
-          })}
-        </div>)}
+        {this.isOptionsVisible && this.renderOptionsPanel()}
       </Host>
     );
   }
