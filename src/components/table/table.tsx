@@ -2,6 +2,12 @@ import {Component, Host, h, State, Element, Prop, Method, Event, EventEmitter} f
 import {makeSortable, SORT_EVENTS} from '../../utils/sortable.utils';
 import {TableRow} from "../../interface/interface";
 
+enum TABLE_UPDATE_EVENT {
+  add_row,
+  remove_row,
+  reorder_rows
+}
+
 @Component({
   tag: 'vff-table',
   styleUrl: 'table.css',
@@ -11,6 +17,7 @@ export class Table {
   private _rowId: number = 0; // will be added to every row for virtual DOM handling / key attribute
   private _headTitles; // table titles, comma delimited
   private _sortable;
+  private tableUpdatesQueue = []; // to use on componentDidUpdate
 
   @State() tableData = [];
   @State() template: Node[] = []; // will be defined in slot
@@ -29,7 +36,7 @@ export class Table {
     this.handleAddRowClick = this.handleAddRowClick.bind(this);
     this.createRow = this.createRow.bind(this);
     this.removeRow = this.removeRow.bind(this);
-    this.onTableUpdate = this.onTableUpdate.bind(this);
+    this.onTableSort = this.onTableSort.bind(this);
     this._headTitles = this.headTitles.split(',');
   }
 
@@ -58,7 +65,7 @@ export class Table {
   }
 
   componentWillRender() {
-    this._sortable && this._sortable.off(SORT_EVENTS.sortUpdate, this.onTableUpdate);
+    this._sortable && this._sortable.off(SORT_EVENTS.sortUpdate, this.onTableSort);
   }
 
   componentDidRender() {
@@ -67,20 +74,37 @@ export class Table {
       hoverClass: 'is-hovered',
       forcePlaceholderSize: true
     });
-    this._sortable.on(SORT_EVENTS.sortUpdate, this.onTableUpdate);
+    this._sortable.on(SORT_EVENTS.sortUpdate, this.onTableSort);
   }
 
   componentDidUnload() {
-    this._sortable && this._sortable.off(SORT_EVENTS.sortUpdate, this.onTableUpdate);
+    this._sortable && this._sortable.off(SORT_EVENTS.sortUpdate, this.onTableSort);
   }
 
-  private onTableUpdate() {
-    this.changeTable.emit();
+  componentDidUpdate() {
+    const triggerEvent = () => {
+      if (this.tableUpdatesQueue.length === 0) {
+        return;
+      } else {
+        this.changeTable.emit({data: this.tableUpdatesQueue.shift()});
+        triggerEvent();
+      }
+    };
+    triggerEvent();
+  }
+
+  private onTableSort(event) {
+    const from = event.detail.origin.index;
+    const to = event.detail.destination.index;
+    const clone = [...this.tableData];
+    clone.splice(to, 0, clone.splice(from, 1)[0]);
+    this.tableData = clone;
+    this.tableUpdatesQueue.push(TABLE_UPDATE_EVENT.reorder_rows);
   }
 
   private handleAddRowClick() {
     this.tableData = [...this.tableData, {_rowId: this._rowId++}];
-    this.onTableUpdate();
+    this.tableUpdatesQueue.push(TABLE_UPDATE_EVENT.add_row);
   }
 
   private removeRow(id: number) {
@@ -90,7 +114,7 @@ export class Table {
     });
     newArr.splice(index, 1);
     this.tableData = [...newArr];
-    this.onTableUpdate();
+    this.tableUpdatesQueue.push(TABLE_UPDATE_EVENT.remove_row);
   }
 
   private createRow(data: TableRow, index: number) {
