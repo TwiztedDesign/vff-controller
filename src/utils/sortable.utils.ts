@@ -1,4 +1,4 @@
-import sortable from 'html5sortable/dist/html5sortable.es'
+import sortable from 'html5sortable/dist/html5sortable.cjs'
 
 export const SORT_EVENTS = {
   sortStart: 'sortstart', // This event is triggered when the user starts sorting and the DOM position has not yet changed.

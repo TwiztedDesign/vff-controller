@@ -7,6 +7,11 @@
   <link rel="stylesheet" href="/build/vff-controller.css">
   <script type="module" src="/build/vff-controller.esm.js"></script>
   <script nomodule src="/build/vff-controller.js"></script>
+  <style>
+    body {
+      background-color: black;
+    }
+  </style>
 </head>
 <body>
 <vff-tabs default="section1">
@@ -18,6 +23,10 @@
 <section id="section1" class="section ctrl-container">
   <div class="ctrl-container-row">
     <h1>Main Title</h1>
+  </div>
+
+  <div class="ctrl-container-row">
+    <vff-select multiple></vff-select>
   </div>
 
   <div class="ctrl-container-row"><label>Main Header</label> <input type="text" placeholder="test"></div>
@@ -142,6 +151,10 @@
   </div>
 
   <div class="ctrl-container-row">
+    <vff-select multiple></vff-select>
+  </div>
+
+  <div class="ctrl-container-row">
     <h3>Table</h3>
   </div>
   <div class="ctrl-container-row">
@@ -223,18 +236,19 @@
     <vff-image-browser/>
   </div>
 
+  <div class="ctrl-container-row">
+    <vff-select multiple></vff-select>
+  </div>
+
 </section>
 <section id="section2" class="section ctrl-container">
   <vff-select multiple></vff-select>
+  <vff-video-time></vff-video-time>
 </section>
 <section id="section3" class="section ctrl-container">
-  <vff-table src="baseItems" head-titles="Image, Title, Sub Title, Description, Action, Link">
-    <vff-image-browser vff-data="img"></vff-image-browser>
+  <vff-table head-titles="Image, Title, Sub Title, Description, Action, Link">
+    <vff-image-browser vff-data="baseItems.{index}.img"></vff-image-browser>
     <vff-text vff-data="baseItems.{index}.title" type="text"></vff-text>
-    <input vff-data="subTitle" type="text"/>
-    <textarea vff-data="desc"></textarea>
-    <input vff-data="action" type="text"/>
-    <input vff-data="actionLink" type="text"/>
   </vff-table>
 </section>
 </body>

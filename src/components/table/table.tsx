@@ -16,7 +16,6 @@ export class Table {
   @State() template: Node[] = []; // will be defined in slot
 
   @Prop() headTitles: string = '';
-  @Prop() src = '';
   @Element() el: HTMLElement;
 
   @Event({
@@ -98,15 +97,13 @@ export class Table {
           if (el.attributes.length > 0) {
             Array.prototype.slice.call(el.attributes)
               .forEach(_attr => {
-                attr[_attr.name] = _attr.value;
+                attr[_attr.name] = _attr.value.replace('{index}', (index + ''));
               })
           }
-          // todo: this should go out of the component
-          let value = data.rowData && data.rowData[el.attributes.getNamedItem('vff-data').value] || null;
-          attr["vff-data"] = `${this.src}.${index}.${el.attributes.getNamedItem('vff-data').value}`;
-          //
           return (<td>
-            <el.nodeName {...attr} value={value}>{el.innerText}</el.nodeName>
+            {/*
+            // @ts-ignore*/}
+            <el.nodeName {...attr} value={el.value}>{el.innerText}</el.nodeName>
           </td>)
         })
       }
@@ -132,7 +129,7 @@ export class Table {
             this.tableData.map((row, i) => this.createRow(row, i))
           }</tbody>
         </table>
-        <button onClick={this.handleAddRowClick}>Add Row</button>
+        <button id="table__add-row-btn" onClick={this.handleAddRowClick}>Add Row</button>
       </Host>
     );
   }

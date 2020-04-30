@@ -10,7 +10,6 @@
 | Property     | Attribute     | Description | Type     | Default |
 | ------------ | ------------- | ----------- | -------- | ------- |
 | `headTitles` | `head-titles` |             | `string` | `''`    |
-| `src`        | `src`         |             | `string` | `''`    |
 
 
 ## Events
