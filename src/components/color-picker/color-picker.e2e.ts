@@ -1,11 +1,15 @@
-import { newE2EPage } from '@stencil/core/testing';
+import {newE2EPage} from '@stencil/core/testing';
 
 describe('vff-color-picker', () => {
-  it('renders', async () => {
-    const page = await newE2EPage();
-    await page.setContent('<vff-color-picker></vff-color-picker>');
+  let page, component;
 
-    const element = await page.find('vff-color-picker');
-    expect(element).toHaveClass('hydrated');
+  beforeEach(async () => {
+    page = await newE2EPage();
+    await page.setContent('<vff-color-picker></vff-color-picker>');
+    component = await page.find('vff-color-picker');
+  });
+
+  it('renders', async () => {
+    expect(component).toHaveClass('hydrated');
   });
 });

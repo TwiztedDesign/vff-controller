@@ -9,8 +9,8 @@ import {isValidAttribute, triggerRemoveEvent} from "../../utils/template.utils";
   shadow: true
 })
 export class ColorPicker {
-  private pickerPromise;
-  private pickerResolve;
+  private _pickerPromise;
+  private _pickerResolve;
 
   @Event({
     eventName: 'vff:init',
@@ -32,7 +32,7 @@ export class ColorPicker {
 
   @Watch('value')
   handleValuePropChange(newValue) {
-    this.pickerPromise.then((instance) => {
+    this._pickerPromise.then((instance) => {
       instance.setColor(newValue);
     })
   }
@@ -46,8 +46,8 @@ export class ColorPicker {
   }
 
   constructor() {
-    this.pickerPromise = new Promise(resolve => {
-      this.pickerResolve = resolve;
+    this._pickerPromise = new Promise(resolve => {
+      this._pickerResolve = resolve;
     })
   }
 
@@ -76,15 +76,15 @@ export class ColorPicker {
         }
       }
     }).on('init', instance => {
-      this.pickerResolve(instance);
+      this._pickerResolve(instance);
     }).on('change', (color) => {
-      const clrStr = color.toHEXA().toString();
-      if (this.value !== clrStr) { // this prevents event firing when setColor function is triggered
+      const colorStr: string = color.toHEXA().toString();
+      if (this.value !== colorStr) { // this prevents event firing when setColor function is triggered
+        this.value = colorStr;
         this.changeColorProperty.emit({
-          data: clrStr,
+          data: colorStr,
           el: this.el
         });
-        this.value = clrStr;
       }
     });
   }
