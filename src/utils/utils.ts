@@ -64,8 +64,8 @@ export function readFileAsync(file): Promise<string | ArrayBuffer> {
   })
 }
 
-export function secToTimeString(timeInSeconds) {
+export function secToTimeString(timeInSeconds: number): string {
   const date = new Date(0);
-  date.setSeconds(timeInSeconds); // specify value for SECONDS here
-  return date.toISOString().substr(11, 8);
+  date.setMilliseconds(timeInSeconds * 1000);
+  return date.toISOString().substr(11, 12);
 }
