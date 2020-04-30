@@ -41,7 +41,11 @@ export class Table {
   }
 
   componentDidLoad() {
-    this.template = this.el.shadowRoot.querySelector('slot').assignedElements();
+    this.template = this.el.shadowRoot.querySelector('slot')
+      .assignedNodes()
+      .filter((node) => {
+        return node.nodeType == 1; // getting rid of all the text nodes
+      });
     this.template.forEach(node => {
       /**
        * Removing slotted elements from DOM to ensure vff controller doesn't see them
