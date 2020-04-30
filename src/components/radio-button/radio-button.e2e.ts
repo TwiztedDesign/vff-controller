@@ -26,7 +26,7 @@ describe('vff-radio-button', () => {
       expect(c).toEqual(true);
     });
 
-    it('single radio button should not be unclicked', async () => {
+    it('single radio button should not be un-clicked', async () => {
       const radioButton = await page.find('vff-radio-button');
       await radioButton.click();
       await page.waitForChanges();

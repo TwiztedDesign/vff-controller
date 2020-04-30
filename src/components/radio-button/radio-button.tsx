@@ -7,13 +7,11 @@ import {isValidAttribute, triggerRemoveEvent} from "../../utils/template.utils";
   shadow: true
 })
 export class RadioButton {
-  private radioButton: HTMLInputElement;
-
   @Element() el: HTMLElement;
 
   @Prop() name = 'radio';
   @Prop() value = 'on';
-  @Prop({reflect: true, mutable: true}) checked = false;
+  @Prop({reflect: true, mutable: true}) checked: boolean = false;
 
   @Event({
     eventName: 'radioButtonStateChange',
@@ -38,10 +36,10 @@ export class RadioButton {
 
   @Watch('checked')
   validateCheckedPropChange(newValue: boolean) {
-    this.radioButton.checked = newValue;
+    this.checked = newValue;
     if (newValue) { // If one button is enabled, others should disable themselves. Let's notify them.
       this.radioButtonStateChange.emit({
-        origin: this.radioButton,
+        origin: this.el,
         name: (this.name || this.el.getAttribute('name')), // When changed from DOM "name" prop will be null.
         data: this.checked
       });
@@ -51,7 +49,7 @@ export class RadioButton {
   @Listen('radioButtonStateChange', {target: 'document'})
   handleRadioButtonStateChange(event: CustomEvent) {
     const {origin, name} = event.detail;
-    if (origin === this.radioButton) return;
+    if (origin === this.el) return;
     if (name === this.name) {
       this.checked = false;
     }
@@ -76,11 +74,6 @@ export class RadioButton {
     });
   }
 
-  componentDidLoad() {
-    this.radioButton = this.el.shadowRoot.querySelector('input');
-    this.radioButton.checked = this.checked; // In case attribute was set in HTML on initial render.
-  }
-
   disconnectedCallback() {
     triggerRemoveEvent(this.el);
   }
@@ -99,7 +92,7 @@ export class RadioButton {
     return (
       <Host onClick={this.handleClick}>
         <label class="element-checkbox">
-          <input disabled type="radio"/>
+          <input checked={this.checked} disabled type="radio"/>
           <div class="element-checkbox-indicator"/>
           <div class="element-checkbox-text">
             <slot></slot>
