@@ -195,7 +195,7 @@ export class Select {
             {selectedItems.length > 0 && selectedItems[0] || selectText}
             {selectedItems.length > 1 && '...'}
             <div id="select__utils">
-              <div id="fade"/>
+              {selectedItems.length > 0 && <div id="fade"/>}
               {selectedItems.length > 1 && <div id="select__hidden">+{selectedItems.length - 1}</div>}
             </div>
           </div>
