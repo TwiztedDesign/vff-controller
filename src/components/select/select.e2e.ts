@@ -114,6 +114,29 @@ describe('vff-select', () => {
     expect(vffChange).toHaveReceivedEventDetail({"data": [{"key": "key1", "value": "value1"}], el: {"s-p": []}});
   });
 
+  it('should have same value sent with vff:change as the component\'s value Prop', async () => {
+    const vffChange = await page.spyOnEvent('vff:change');
+
+    // set options
+    await component.setProperty('options', multipleOptions);
+    await page.waitForChanges();
+
+    // open options panel
+    const selectBtn = await page.find('vff-select >>> #select');
+    await selectBtn.click();
+    await page.waitForChanges();
+
+    // choose first option
+    const option = await page.find('vff-select >>> .select__option');
+    await option.click();
+    await page.waitForChanges();
+
+    // do the test
+    const value = await component.getProperty('value');
+    expect(value).toEqual([{"key": "key1", "value": "value1"}]);
+    expect(vffChange).toHaveReceivedEventDetail({"data": [{"key": "key1", "value": "value1"}], el: {"s-p": []}});
+  });
+
   it('should present all chosen keys in select__result', async () => {
     component.setProperty('multiple', true);
     await page.waitForChanges();
@@ -219,4 +242,5 @@ describe('vff-select', () => {
     selectItems = await page.find('vff-select >>> #select__options');
     expect(selectItems).toBeNull();
   });
+
 });
