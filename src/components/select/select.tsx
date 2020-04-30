@@ -8,6 +8,8 @@ import {isValidAttribute, triggerRemoveEvent} from "../../utils/template.utils";
   shadow: true
 })
 export class Select {
+  private _panelAdjusted = false; // used to limit amount of times the options panel will be adjusted in viewport
+
   @Event({
     eventName: 'vff:init',
     bubbles: true,
@@ -49,6 +51,14 @@ export class Select {
     if (isValidAttribute(dataAttrName, dataAttrValue, this.el)) {
       this.value = value;
     }
+  }
+
+  @Watch('isOptionsVisible')
+  handleOptionsVisible() {
+    /**
+     * reset _panelAdjusted flag when options are closed
+     */
+    !this.isOptionsVisible && (this._panelAdjusted = false);
   }
 
   @Watch('value')
@@ -102,8 +112,25 @@ export class Select {
     });
   }
 
+  componentDidRender() {
+    this.isOptionsVisible && this.adjustOptionsPanelPosition();
+  }
+
   disconnectedCallback() {
     triggerRemoveEvent(this.el);
+  }
+
+  private adjustOptionsPanelPosition() {
+    if (this._panelAdjusted) return; // adjust panel only the first time it opens
+    const optionsPanel = this.el.shadowRoot.querySelector('#select__options') as HTMLElement;
+    const optionsRect = optionsPanel.getBoundingClientRect();
+    const windowHeight = document.documentElement.clientHeight;
+    if (optionsRect.bottom > windowHeight) {
+      optionsPanel.style.top = (-1 * optionsRect.height) + 'px';
+    } else {
+      optionsPanel.style.top = `100%`;
+    }
+    this._panelAdjusted = true;
   }
 
   private onOptionClick(option: SelectItem) {
@@ -135,7 +162,7 @@ export class Select {
 
   private renderOptionsPanel() {
     return (
-      <div class={"select__options"}>
+      <div id={"select__options"}>
         {this._options.map((option) => {
           const isSelected = !!this.value.find((val) => {
             return val.key == option.key;

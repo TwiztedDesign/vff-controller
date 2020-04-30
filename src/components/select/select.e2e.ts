@@ -24,7 +24,7 @@ describe('vff-select', () => {
     await selectBtn.click();
     await page.waitForChanges();
     // end: open options panel
-    const selectItems = await page.find('vff-select >>> .select__options');
+    const selectItems = await page.find('vff-select >>> #select__options');
     expect(selectItems.children.length).toEqual(0);
     await component.setProperty('options', singleOption);
     await page.waitForChanges();
@@ -32,13 +32,14 @@ describe('vff-select', () => {
   });
 
   it('should add multiple options to select options', async () => {
-    // start: open options panel
+    // open options panel
     const selectBtn = await page.find('vff-select >>> #select');
     await selectBtn.click();
     await page.waitForChanges();
-    // end: open options panel
-    const selectItems = await page.find('vff-select >>> .select__options');
+
+    const selectItems = await page.find('vff-select >>> #select__options');
     expect(selectItems.children.length).toEqual(0);
+
     await component.setProperty('options', multipleOptions);
     await page.waitForChanges();
     expect(selectItems.children.length).toEqual(3);
@@ -58,7 +59,7 @@ describe('vff-select', () => {
     await selectBtn.click();
     await page.waitForChanges();
 
-    const selectItems = await page.find('vff-select >>> .select__options');
+    const selectItems = await page.find('vff-select >>> #select__options');
     expect(selectItems.children.length).toEqual(3);
   });
 
@@ -207,7 +208,7 @@ describe('vff-select', () => {
     await page.waitForChanges();
 
     // make sure the panel is still open
-    let selectItems = await page.find('vff-select >>> .select__options');
+    let selectItems = await page.find('vff-select >>> #select__options');
     expect(selectItems.children.length).toEqual(1);
 
     // click somewhere outside of the vff-select component
@@ -215,7 +216,7 @@ describe('vff-select', () => {
     await page.waitForChanges();
 
     // expect options panel to be closed now
-    selectItems = await page.find('vff-select >>> .select__options');
+    selectItems = await page.find('vff-select >>> #select__options');
     expect(selectItems).toBeNull();
   });
 });
