@@ -7,6 +7,7 @@ import {isValidAttribute, triggerRemoveEvent} from '../../utils/template.utils';
   shadow: true
 })
 export class Range {
+  @Prop() step: number = 1;
   @Prop() min: number = 0;
   @Prop() max: number = 100;
   @Prop() value: number = this.max / 2;
@@ -74,6 +75,7 @@ export class Range {
     return (
       <Host>
         <input type="range"
+               step={this.step}
                min={this.min}
                max={this.max}
                value={this.value}
