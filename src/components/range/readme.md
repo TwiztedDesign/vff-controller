@@ -11,6 +11,7 @@
 | -------- | --------- | ----------- | -------- | -------------- |
 | `max`    | `max`     |             | `number` | `100`          |
 | `min`    | `min`     |             | `number` | `0`            |
+| `step`   | `step`    |             | `number` | `1`            |
 | `value`  | `value`   |             | `number` | `this.max / 2` |
 
 

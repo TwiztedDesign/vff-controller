@@ -316,11 +316,12 @@ Properties:<br/>
 
 Properties:<br/>
 
-| Property | Type   | Description                                                          |
-|:---------|:-------|:---------------------------------------------------------------------|
-| max      | number | Sets or returns the value of the max attribute of the slider control |
-| min      | number | Sets or returns the value of the min attribute of the slider control |
-| value    | number | Sets or returns the value of the value attribute of a slider control |
+| Property | Type   | Description                                                     |
+|:---------|:-------|:----------------------------------------------------------------|
+| max      | number | Sets or returns the maximum value allowed                       |
+| min      | number | Sets or returns the minimum value allowed                       |
+| step     | number | Sets or returns the number of intervals of a slider control     |
+| value    | number | Sets or returns the value of a slider control                   |
 <br/>
 
 ##### <a name="vff-video-time"></a> vff-video-time:
