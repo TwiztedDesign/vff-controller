@@ -48,23 +48,13 @@ export class Table {
   }
 
   componentDidLoad() {
-    this.template = this.el.shadowRoot.querySelector('slot')
-      .assignedNodes()
-      .filter((node) => {
-        return node.nodeType == 1; // getting rid of all the text nodes
-      });
-    this.template.forEach(node => {
-      /**
-       * Removing slotted elements from DOM to ensure vff controller doesn't see them
-       * since they might have vff-data attribute on them, it might produce unexpected
-       * behaviour.
-       */
-      const parent = node.parentElement;
-      parent.removeChild(node);
-    });
+    this.createTableTemplate();
   }
 
   componentWillRender() {
+    /**
+     * unwind events since they will be wired back in componentDidRender
+     */
     this._sortable && this._sortable.off(SORT_EVENTS.sortUpdate, this.onTableSort);
   }
 
@@ -91,6 +81,29 @@ export class Table {
       }
     };
     triggerEvent();
+  }
+
+  private createTableTemplate() {
+    // 1. look for thead
+    // 2. look for tbody
+    // 3. when there is no thead and tbody
+    debugger;
+    this.template = this.el.shadowRoot.querySelector('slot')
+      .assignedNodes()
+      .filter((node) => {
+        return node.nodeType == 1; // getting rid of all the text nodes
+      });
+    this.template.forEach(node => {
+      /**
+       * Removing slotted elements from DOM to ensure vff controller doesn't see them
+       * since they might have vff-data attribute on them, it might produce unexpected
+       * behaviour.
+       */
+      const parent = node.parentElement;
+      parent.removeChild(node);
+    });
+
+    console.log(this.template);
   }
 
   private onTableSort(event) {
