@@ -1,6 +1,6 @@
 import {Component, Host, h, State, Element, Prop, Method, Event, EventEmitter} from '@stencil/core';
 import {makeSortable, SORT_EVENTS} from '../../utils/sortable.utils';
-import {TableRow} from "../../interface/interface";
+import {TableRow, TableTemplate} from "../../interface/interface";
 
 enum TABLE_UPDATE_EVENT {
   add_row,
@@ -15,12 +15,14 @@ enum TABLE_UPDATE_EVENT {
 })
 export class Table {
   private _rowId: number = 0; // will be added to every row for virtual DOM handling / key attribute
-  private _headTitles; // table titles, comma delimited
   private _sortable;
   private tableUpdatesQueue = []; // to use on componentDidUpdate
 
   @State() tableData = [];
-  @State() template: Node[] = []; // will be defined in slot
+  @State() tableTemplate: TableTemplate = {
+    head: {rows: []},
+    body: {rows: []}
+  };
 
   @Prop() headTitles: string = '';
   @Element() el: HTMLElement;
@@ -37,7 +39,6 @@ export class Table {
     this.createRow = this.createRow.bind(this);
     this.removeRow = this.removeRow.bind(this);
     this.onTableSort = this.onTableSort.bind(this);
-    this._headTitles = this.headTitles.split(',');
   }
 
   @Method()
@@ -48,7 +49,8 @@ export class Table {
   }
 
   componentDidLoad() {
-    this.createTableTemplate();
+    this.defineTableTemplate();
+    this.removeSlottedContent();
   }
 
   componentWillRender() {
@@ -83,17 +85,54 @@ export class Table {
     triggerEvent();
   }
 
-  private createTableTemplate() {
-    // 1. look for thead
-    // 2. look for tbody
-    // 3. when there is no thead and tbody
-    debugger;
-    this.template = this.el.shadowRoot.querySelector('slot')
+  private defineTableTemplate() {
+    const table = this.el.shadowRoot.querySelector('slot')
       .assignedNodes()
       .filter((node) => {
         return node.nodeType == 1; // getting rid of all the text nodes
+      })[0] as HTMLElement;
+    /**
+     * Get table head rows and cols
+     */
+    const tHead = table.querySelector('thead') as HTMLElement;
+    if (tHead) {
+      const headRows = tHead.querySelectorAll('tr') || [];
+      headRows.forEach(row => {
+        const cols = Array.prototype.slice.call(row.children).map(col => col.innerText);
+        this.tableTemplate.head.rows.push(cols);
       });
-    this.template.forEach(node => {
+    }
+    /**
+     * Get table body rows and cols
+     */
+    const tBody = table.querySelector('tbody');
+    if (tBody) {
+      const bodyRows = tBody.querySelectorAll('tr') || [];
+      bodyRows.forEach(row => {
+        const cols = Array.prototype.slice.call(row.children).map(col => {
+          return Array.prototype.slice.call(col.children).map(child => {
+            return {
+              nodeName: child.nodeName,
+              attributes: Array.prototype.slice.call(child.attributes).reduce((result, attr) => {
+                result[attr.name] = attr.value;
+                return result;
+              }, {}),
+              value: child.value,
+              innerText: child.innerText
+            };
+          })
+        });
+        this.tableTemplate.body.rows.push(cols);
+      })
+    }
+  }
+
+  private removeSlottedContent() {
+    this.el.shadowRoot.querySelector('slot')
+      .assignedNodes()
+      .filter((node) => {
+        return node.nodeType == 1; // getting rid of all the text nodes
+      }).forEach(node => {
       /**
        * Removing slotted elements from DOM to ensure vff controller doesn't see them
        * since they might have vff-data attribute on them, it might produce unexpected
@@ -102,8 +141,6 @@ export class Table {
       const parent = node.parentElement;
       parent.removeChild(node);
     });
-
-    console.log(this.template);
   }
 
   private onTableSort(event) {
@@ -131,29 +168,28 @@ export class Table {
   }
 
   private createRow(data: TableRow, index: number) {
+    const td = (el) => {
+      const attributes = Object.keys(el.attributes).reduce((result, name) => {
+        result[name] = el.attributes[name].replace('{index}', (index + ''));
+        return result;
+      }, {});
+      return (
+        <el.nodeName {...attributes} value={el.value}>{el.innerText}</el.nodeName>
+      )
+    };
+
     return (
-      <tr key={data._rowId.toString()}>{
-        this.template.map((el: HTMLElement) => {
-          let attr = {};
-          if (el.attributes.length > 0) {
-            Array.prototype.slice.call(el.attributes)
-              .forEach(_attr => {
-                attr[_attr.name] = _attr.value.replace('{index}', (index + ''));
-              })
-          }
-          return (<td>
-            {/*
-            // @ts-ignore*/}
-            <el.nodeName {...attr} value={el.value}>{el.innerText}</el.nodeName>
-          </td>)
-        })
-      }
-        <td>
-          <button onClick={() => this.removeRow(data._rowId)}>X</button>
-          <span class="row__handle">M</span>
-        </td>
-      </tr>
-    )
+      this.tableTemplate.body.rows.map((row: any[]) => {
+        return (
+          <tr key={data._rowId.toString()}>
+            {row.map(col => (<td>{col.map(td)}</td>))}
+            <td>
+              <button onClick={() => this.removeRow(data._rowId)}>X</button>
+              <span class="row__handle">M</span>
+            </td>
+          </tr>
+        );
+      }));
   }
 
   render() {
@@ -162,8 +198,9 @@ export class Table {
         <slot></slot>
         <table id="table">
           <thead id="table__head">
-          <tr>{this._headTitles.map((title) => {
-            return (<th>{title}</th>);
+          <tr>{this.tableTemplate.head.rows.map((row) => {
+            // introducing support for multiple rows in tHead
+            return row.map(title => <th>{title}</th>)
           })}</tr>
           </thead>
           <tbody id="table__body">{
