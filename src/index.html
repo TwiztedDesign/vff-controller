@@ -14,7 +14,7 @@
   </style>
 </head>
 <body>
-<vff-tabs default="section1">
+<vff-tabs default="section2">
   <vff-tab for="section1">First</vff-tab>
   <vff-tab for="section2">Second</vff-tab>
 </vff-tabs>
@@ -59,8 +59,8 @@
 
       <thead>
       <tr>
-        <th>Image</th>
-        <th>Title & Range</th>
+        <th>Title</th>
+        <th>Range</th>
       </tr>
       </thead>
 
@@ -70,7 +70,7 @@
           <vff-text vff-data="baseItems.{index}.title" type="text"></vff-text>
         </td>
         <td>
-          <vff-range vff-data="baseItems.{index}.title" type="text"></vff-range>
+          <vff-range vff-data="baseItems.{index}.range" type="text"></vff-range>
         </td>
       </tr>
       </tbody>
@@ -108,6 +108,12 @@
 
   const text = document.querySelector('vff-text');
   text.value = 'TwizztedDesign';
+
+  const vffTable = document.querySelector('vff-table');
+  vffTable.value = [
+    {title: 'Hello', range: 20},
+    {title: 'TwizztedDesign', range: 80}
+  ];
 </script>
 </body>
 </html>

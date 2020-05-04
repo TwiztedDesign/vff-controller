@@ -1,4 +1,4 @@
-import {Component, Host, h, State, Element, Prop, Method, Event, EventEmitter, Listen} from '@stencil/core';
+import {Component, Host, h, State, Element, Prop, Method, Event, EventEmitter, Listen, Watch} from '@stencil/core';
 import {makeSortable, SORT_EVENTS} from '../../utils/sortable.utils';
 import {TableRow, TableTemplate} from "../../interface/interface";
 import {isValidAttribute, triggerRemoveEvent} from "../../utils/template.utils";
@@ -17,8 +17,9 @@ enum TABLE_UPDATE_EVENT {
 export class Table {
   private _rowId: number = 0; // will be added to every row for virtual DOM handling / key attribute
   private _sortable;
-  private tableUpdatesQueue = []; // to use on componentDidUpdate
+  private _tableUpdatesQueue = []; // to use on componentDidUpdate
 
+  @State() firstRender = true;
   @State() tableData = [];
   @State() tableTemplate: TableTemplate = {
     head: {rows: []},
@@ -26,6 +27,8 @@ export class Table {
   };
 
   @Prop() headTitles: string = '';
+  @Prop() value = [];
+
   @Element() el: HTMLElement;
 
   @Event({
@@ -55,6 +58,11 @@ export class Table {
     this.updateData(data);
   }
 
+  @Watch('value')
+  handleValuePropChange(newValue) {
+    this.updateData(newValue);
+  }
+
   @Listen('vff:update', {target: 'document'})
   handleVffUpdate(newValue: CustomEvent) {
     const {dataAttrName, dataAttrValue, value} = newValue.detail;
@@ -64,6 +72,7 @@ export class Table {
   }
 
   connectedCallback() {
+    this.updateData(this.value);
     this.componentInit.emit({
       data: this.tableData,
       el: this.el
@@ -93,6 +102,7 @@ export class Table {
       forcePlaceholderSize: true
     });
     this._sortable.on(SORT_EVENTS.sortUpdate, this.onTableSort);
+    this.firstRender = false;
   }
 
   componentDidUnload() {
@@ -101,10 +111,10 @@ export class Table {
 
   componentDidUpdate() {
     const triggerEvent = () => {
-      if (this.tableUpdatesQueue.length === 0) {
+      if (this._tableUpdatesQueue.length === 0) {
         return;
       } else {
-        this.changeTable.emit({data: this.tableUpdatesQueue.shift()});
+        this.changeTable.emit({data: this._tableUpdatesQueue.shift()});
         triggerEvent();
       }
     };
@@ -176,12 +186,12 @@ export class Table {
     const clone = [...this.tableData];
     clone.splice(to, 0, clone.splice(from, 1)[0]);
     this.tableData = clone;
-    this.tableUpdatesQueue.push(TABLE_UPDATE_EVENT.reorder_rows);
+    this._tableUpdatesQueue.push(TABLE_UPDATE_EVENT.reorder_rows);
   }
 
   private handleAddRowClick() {
-    this.tableData = [...this.tableData, {_rowId: this._rowId++}];
-    this.tableUpdatesQueue.push(TABLE_UPDATE_EVENT.add_row);
+    this.tableData = [...this.tableData, {rowData: {}, _rowId: this._rowId++}];
+    this._tableUpdatesQueue.push(TABLE_UPDATE_EVENT.add_row);
   }
 
   private removeRow(id: number) {
@@ -191,7 +201,7 @@ export class Table {
     });
     newArr.splice(index, 1);
     this.tableData = [...newArr];
-    this.tableUpdatesQueue.push(TABLE_UPDATE_EVENT.remove_row);
+    this._tableUpdatesQueue.push(TABLE_UPDATE_EVENT.remove_row);
   }
 
   private createRow(data: TableRow, index: number) {
@@ -200,8 +210,10 @@ export class Table {
         result[name] = el.attributes[name].replace('{index}', (index + ''));
         return result;
       }, {});
+      // todo: i don't want to know about vff-data
+      const value = data.rowData[attributes['vff-data'].split('.').pop()];
       return (
-        <el.nodeName {...attributes} value={el.value}>{el.innerText}</el.nodeName>
+        <el.nodeName {...attributes} value={value}>{el.innerText}</el.nodeName>
       )
     };
 
