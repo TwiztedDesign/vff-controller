@@ -29,15 +29,8 @@ export class Range {
   @Element() el: HTMLElement;
 
   @Watch('value')
-  validateValue(newValue) {
-    const errorText = 'Value is out of reach, check min and max settings';
-    if (newValue > this.max) {
-      console.error(errorText);
-      this.value = this.max;
-    } else if (newValue < this.min) {
-      console.error(errorText);
-      this.value = this.min;
-    }
+  handleValuePropChange(newValue) {
+    this.validateValue(newValue);
   }
 
   @Listen('vff:update', {target: 'document'})
@@ -49,10 +42,12 @@ export class Range {
   }
 
   constructor() {
+    this.validateValue = this.validateValue.bind(this);
     this.onValueInput = this.onValueInput.bind(this);
   }
 
   connectedCallback() {
+    this.validateValue(this.value);
     this.componentInit.emit({
       data: this.value,
       el: this.el
@@ -61,6 +56,21 @@ export class Range {
 
   disconnectedCallback() {
     triggerRemoveEvent(this.el);
+  }
+
+  private validateValue(newValue) {
+    const errorText = 'Value %d is out of reach, check min and max settings: ';
+    if (Number.isNaN(newValue)) {
+      this.value = this.max / 2;
+      console.error(`passed value is NaN setting to average: `, this.el);
+    }
+    if (newValue > this.max) {
+      console.error(errorText, this.value, this.el);
+      this.value = this.max;
+    } else if (newValue < this.min) {
+      console.error(errorText, this.value, this.el);
+      this.value = this.min;
+    }
   }
 
   private onValueInput(e) {

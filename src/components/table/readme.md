@@ -10,6 +10,7 @@
 | Property     | Attribute     | Description | Type     | Default |
 | ------------ | ------------- | ----------- | -------- | ------- |
 | `headTitles` | `head-titles` |             | `string` | `''`    |
+| `value`      | --            |             | `any[]`  | `[]`    |
 
 
 ## Events
