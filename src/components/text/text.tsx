@@ -52,7 +52,7 @@ export class Text {
 
   private onValueChange(e) {
     this.value = e.target.value;
-    this.changeValue.emit({data: this.value});
+    this.changeValue.emit({data: this.value, el: this.el});
   }
 
   private renderSingleLine() {
