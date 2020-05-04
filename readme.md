@@ -1,5 +1,3 @@
-<style>th, td{text-align: left}</style>
-
 ## Table of contents
 * [Videoflow Controllers Library](#Videoflow_Controllers_Library)
 * [Videoflow Controllers](#Videoflow_Controllers)
