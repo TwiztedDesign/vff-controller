@@ -72,9 +72,6 @@
         <td>
           <vff-range vff-data="baseItems.{index}.title" type="text"></vff-range>
         </td>
-        <td>
-          <vff-select vff-data="baseItems.{index}.title" type="text"></vff-select>
-        </td>
       </tr>
       </tbody>
 
@@ -93,6 +90,24 @@
     {key: 'key5', value: 'value5'},
     {key: 'key6', value: 'value6'}
   ];
+
+  const checkBox = document.querySelector('vff-checkbox');
+  checkBox.value = true;
+
+  const radioButton = document.querySelectorAll('vff-radio-button')[1];
+  radioButton.checked = true;
+
+  const imageBrowser = document.querySelector('vff-image-browser');
+  imageBrowser.value = 'https://images.pexels.com/photos/4048182/pexels-photo-4048182.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
+
+  const colorPicker = document.querySelector('vff-color-picker');
+  colorPicker.value = '#DDFFEE';
+
+  const range = document.querySelector('vff-range');
+  range.value = 20;
+
+  const text = document.querySelector('vff-text');
+  text.value = 'TwizztedDesign';
 </script>
 </body>
 </html>

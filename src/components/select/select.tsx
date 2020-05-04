@@ -36,6 +36,7 @@ export class Select {
 
   constructor() {
     this.onOptionClick = this.onOptionClick.bind(this);
+    this.validateOptions = this.validateOptions.bind(this);
   }
 
   @Listen('click', {target: "document"})
@@ -73,6 +74,29 @@ export class Select {
 
   @Watch('options')
   handleOptionsChange(options: SelectItem | SelectItem[]) {
+    this.validateOptions(options);
+  }
+
+  connectedCallback() {
+    /**
+     * when options are set before the component had it's listeners ready
+     */
+    this.validateOptions(this.options);
+    this.componentInit.emit({
+      data: this.value,
+      el: this.el
+    });
+  }
+
+  componentDidRender() {
+    this.isOptionsVisible && this.adjustOptionsPanelPosition();
+  }
+
+  disconnectedCallback() {
+    triggerRemoveEvent(this.el);
+  }
+
+  private validateOptions(options: SelectItem | SelectItem[]) {
     let newOptions;
     if (Array.isArray(options)) {
       newOptions = [...options];
@@ -103,21 +127,6 @@ export class Select {
       });
     }
     this._options = newOptions;
-  }
-
-  connectedCallback() {
-    this.componentInit.emit({
-      data: this.value,
-      el: this.el
-    });
-  }
-
-  componentDidRender() {
-    this.isOptionsVisible && this.adjustOptionsPanelPosition();
-  }
-
-  disconnectedCallback() {
-    triggerRemoveEvent(this.el);
   }
 
   private adjustOptionsPanelPosition() {
