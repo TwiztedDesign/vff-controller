@@ -17,7 +17,6 @@
 <vff-tabs default="section1">
   <vff-tab for="section1">First</vff-tab>
   <vff-tab for="section2">Second</vff-tab>
-  <vff-tab for="section3">Third</vff-tab>
 </vff-tabs>
 
 <section id="section1" class="section ctrl-container">
@@ -55,9 +54,6 @@
   </div>
 </section>
 <section id="section2" class="section ctrl-container">
-  <vff-video-time></vff-video-time>
-</section>
-<section id="section3" class="section ctrl-container">
   <vff-table>
     <table>
 
@@ -71,16 +67,20 @@
       <tbody>
       <tr>
         <td>
-          <vff-image-browser vff-data="baseItems.{index}.img"></vff-image-browser>
+          <vff-text vff-data="baseItems.{index}.title" type="text"></vff-text>
         </td>
         <td>
-          <vff-text vff-data="baseItems.{index}.title" type="text"></vff-text>
+          <vff-range vff-data="baseItems.{index}.title" type="text"></vff-range>
+        </td>
+        <td>
+          <vff-select vff-data="baseItems.{index}.title" type="text"></vff-select>
         </td>
       </tr>
       </tbody>
 
     </table>
   </vff-table>
+</section>
 </section>
 
 <script>

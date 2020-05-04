@@ -1,6 +1,7 @@
-import {Component, Host, h, State, Element, Prop, Method, Event, EventEmitter} from '@stencil/core';
+import {Component, Host, h, State, Element, Prop, Method, Event, EventEmitter, Listen} from '@stencil/core';
 import {makeSortable, SORT_EVENTS} from '../../utils/sortable.utils';
 import {TableRow, TableTemplate} from "../../interface/interface";
+import {isValidAttribute, triggerRemoveEvent} from "../../utils/template.utils";
 
 enum TABLE_UPDATE_EVENT {
   add_row,
@@ -11,7 +12,7 @@ enum TABLE_UPDATE_EVENT {
 @Component({
   tag: 'vff-table',
   styleUrl: 'table.css',
-  shadow: true
+  shadow: false
 })
 export class Table {
   private _rowId: number = 0; // will be added to every row for virtual DOM handling / key attribute
@@ -28,6 +29,13 @@ export class Table {
   @Element() el: HTMLElement;
 
   @Event({
+    eventName: 'vff:init',
+    bubbles: true,
+    cancelable: true,
+    composed: true
+  }) componentInit: EventEmitter;
+
+  @Event({
     eventName: 'vff:change',
     bubbles: true,
     cancelable: true,
@@ -39,12 +47,26 @@ export class Table {
     this.createRow = this.createRow.bind(this);
     this.removeRow = this.removeRow.bind(this);
     this.onTableSort = this.onTableSort.bind(this);
+    this.updateData = this.updateData.bind(this);
   }
 
   @Method()
   async dataEntryPoint(data) {
-    this.tableData = data.map((rowData: object): TableRow => {
-      return {rowData, _rowId: this._rowId++}
+    this.updateData(data);
+  }
+
+  @Listen('vff:update', {target: 'document'})
+  handleVffUpdate(newValue: CustomEvent) {
+    const {dataAttrName, dataAttrValue, value} = newValue.detail;
+    if (isValidAttribute(dataAttrName, dataAttrValue, this.el)) {
+      this.updateData(value);
+    }
+  }
+
+  connectedCallback() {
+    this.componentInit.emit({
+      data: this.tableData,
+      el: this.el
     });
   }
 
@@ -61,7 +83,11 @@ export class Table {
   }
 
   componentDidRender() {
-    this._sortable = makeSortable(this.el.shadowRoot.querySelector('#table__body'), {
+    const tbody = this.el.querySelector('tbody');
+    const colSpan = tbody.children[0].children.length;
+    this._sortable = makeSortable(tbody, {
+      placeholder: `<tr><td colspan=${colSpan}></td></tr>`,
+      items: 'tr',
       handle: '.row__handle',
       hoverClass: 'is-hovered',
       forcePlaceholderSize: true
@@ -85,12 +111,18 @@ export class Table {
     triggerEvent();
   }
 
+  disconnectedCallback() {
+    triggerRemoveEvent(this.el);
+  }
+
+  private updateData(data) {
+    this.tableData = data.map((rowData: object): TableRow => {
+      return {rowData, _rowId: this._rowId++}
+    });
+  }
+
   private defineTableTemplate() {
-    const table = this.el.shadowRoot.querySelector('slot')
-      .assignedNodes()
-      .filter((node) => {
-        return node.nodeType == 1; // getting rid of all the text nodes
-      })[0] as HTMLElement;
+    const table = this.el.querySelector('table');
     /**
      * Get table head rows and cols
      */
@@ -128,19 +160,14 @@ export class Table {
   }
 
   private removeSlottedContent() {
-    this.el.shadowRoot.querySelector('slot')
-      .assignedNodes()
-      .filter((node) => {
-        return node.nodeType == 1; // getting rid of all the text nodes
-      }).forEach(node => {
-      /**
-       * Removing slotted elements from DOM to ensure vff controller doesn't see them
-       * since they might have vff-data attribute on them, it might produce unexpected
-       * behaviour.
-       */
-      const parent = node.parentElement;
-      parent.removeChild(node);
-    });
+    /**
+     * Removing elements from DOM to ensure vff controller doesn't see them
+     * since they might have vff-data attribute on them, it might produce unexpected
+     * behaviour.
+     */
+    const table = this.el.querySelector('table');
+    const parent = table.parentElement;
+    parent.removeChild(table);
   }
 
   private onTableSort(event) {
@@ -182,10 +209,12 @@ export class Table {
       this.tableTemplate.body.rows.map((row: any[]) => {
         return (
           <tr key={data._rowId.toString()}>
-            {row.map(col => (<td>{col.map(td)}</td>))}
-            <td>
-              <button onClick={() => this.removeRow(data._rowId)}>X</button>
-              <span class="row__handle">M</span>
+            {row.map(col => (<td class="table__cell">{col.map(td)}</td>))}
+            <td class="table__row-controls">
+              <div class="row__controls-container">
+                <button class="row__remove" onClick={() => this.removeRow(data._rowId)}>✕</button>
+                <span class="row__handle">↕</span>
+              </div>
             </td>
           </tr>
         );
@@ -195,8 +224,7 @@ export class Table {
   render() {
     return (
       <Host>
-        <slot></slot>
-        <table id="table">
+        <table class="table__container">
           <thead id="table__head">
           <tr>{this.tableTemplate.head.rows.map((row) => {
             // introducing support for multiple rows in tHead
