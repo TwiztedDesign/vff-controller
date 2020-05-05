@@ -92,16 +92,18 @@ export class Table {
   }
 
   componentDidRender() {
-    const tbody = this.el.querySelector('tbody');
-    const colSpan = tbody.children[0].children.length;
-    this._sortable = makeSortable(tbody, {
-      placeholder: `<tr><td colspan=${colSpan}></td></tr>`,
-      items: 'tr',
-      handle: '.row__handle',
-      hoverClass: 'is-hovered',
-      forcePlaceholderSize: true
-    });
-    this._sortable.on(SORT_EVENTS.sortUpdate, this.onTableSort);
+    if (!this.firstRender) {
+      const tbody = this.el.querySelector('tbody');
+      const colSpan = tbody.children[0].children.length;
+      this._sortable = makeSortable(tbody, {
+        placeholder: `<tr><td colspan=${colSpan}></td></tr>`,
+        items: 'tr',
+        handle: '.row__handle',
+        hoverClass: 'is-hovered',
+        forcePlaceholderSize: true
+      });
+      this._sortable.on(SORT_EVENTS.sortUpdate, this.onTableSort);
+    }
     this.firstRender = false;
   }
 
