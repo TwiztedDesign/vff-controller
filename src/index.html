@@ -14,7 +14,7 @@
   </style>
 </head>
 <body>
-<vff-tabs default="section1">
+<vff-tabs default="section2">
   <vff-tab for="section1">First</vff-tab>
   <vff-tab for="section2">Second</vff-tab>
 </vff-tabs>
@@ -54,29 +54,36 @@
   </div>
 </section>
 <section id="section2" class="section ctrl-container">
-  <vff-table>
-    <table>
-
-      <thead>
-      <tr>
-        <th>Title</th>
-        <th>Range</th>
-      </tr>
-      </thead>
-
-      <tbody>
-      <tr>
-        <td>
-          <vff-text vff-data="baseItems.{index}.title" type="text"></vff-text>
-        </td>
-        <td>
-          <vff-range vff-data="baseItems.{index}.range" type="text"></vff-range>
-        </td>
-      </tr>
-      </tbody>
-
-    </table>
-  </vff-table>
+    <div class="ctrl-container-row">
+      <vff-table id="vff-table">
+        <table>
+          <thead>
+          <tr>
+            <!--<th style="width:25px;">ID</th>-->
+            <th style="width: 100px">Item</th>
+            <th style="width: 100px">Image</th>
+            <th>Data</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>
+              <vff-select multiple vff-data="timeline.{index}.baseItem" vff-select-from="baseItems.name,baseItems.id"></vff-select>
+            </td>
+            <td>
+              <vff-image-browser vff-data="timeline.{index}.img" ></vff-image-browser>
+            </td>
+            <td>
+              <vff-text vff-data="timeline.{index}.header"></vff-text>
+              <vff-text multiline rows="5" vff-data="timeline.{index}.text"></vff-text>
+              <vff-text vff-data="timeline.{index}.cta"></vff-text>
+              <vff-video-time vff-data="timeline.{index}.time"></vff-video-time>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </vff-table>
+    </div>
 </section>
 </section>
 
