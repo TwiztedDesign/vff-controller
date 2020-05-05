@@ -237,17 +237,17 @@ export class Table {
     return (
       <Host>
         <table class="table__container">
-          <thead id="table__head">
+          <thead class="table__head">
           <tr>{this.tableTemplate.head.rows.map((row) => {
             // introducing support for multiple rows in tHead
             return row.map(title => <th>{title}</th>)
           })}</tr>
           </thead>
-          <tbody id="table__body">{
+          <tbody class="table__body">{
             this.tableData.map((row, i) => this.createRow(row, i))
           }</tbody>
         </table>
-        <button id="table__add-row-btn" onClick={this.handleAddRowClick}>Add Row</button>
+        <button class="table__add-row-btn" onClick={this.handleAddRowClick}>Add Row</button>
       </Host>
     );
   }

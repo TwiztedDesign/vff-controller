@@ -43,7 +43,7 @@
   outline: 1px dashed var(--theme-color-1);
 }
 
-#table__add-row-btn {
+.table__add-row-btn {
   height: initial;
 }
 
