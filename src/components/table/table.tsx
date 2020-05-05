@@ -15,6 +15,7 @@ enum TABLE_UPDATE_EVENT {
   shadow: false
 })
 export class Table {
+  private _colSpan = 0;
   private _rowId: number = 0; // will be added to every row for virtual DOM handling / key attribute
   private _sortable;
   private _tableUpdatesQueue = []; // to use on componentDidUpdate
@@ -92,11 +93,19 @@ export class Table {
   }
 
   componentDidRender() {
-    if (!this.firstRender) {
+    if (this.firstRender) {
+      /**
+       * actions on the template
+       */
       const tbody = this.el.querySelector('tbody');
-      const colSpan = tbody.children[0].children.length;
+      this._colSpan = tbody.children[0].children.length;
+    } else {
+      /**
+       * actions on he visual table
+       */
+      const tbody = this.el.querySelector('tbody');
       this._sortable = makeSortable(tbody, {
-        placeholder: `<tr><td colspan=${colSpan}></td></tr>`,
+        placeholder: `<tr><td colspan=${this._colSpan}></td></tr>`,
         items: 'tr',
         handle: '.row__handle',
         hoverClass: 'is-hovered',
