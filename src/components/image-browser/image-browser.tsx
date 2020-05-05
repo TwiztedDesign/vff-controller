@@ -60,7 +60,13 @@ export class ImageBrowser {
 
   @Watch('value') // it is used when ever the image just need to be previewed and not to go to selectedFiles
   handleValueChangeProp(newValue) {
-    this.validateValue(newValue);
+    if (!newValue) {
+      this.selectedFiles = [];
+      return;
+    }
+    this.selectedFiles.length = 0; // don't want to trigger Watchers and events
+    this.previewList = [];
+    this.previewList = [{file: new File([], 'placeholder'), data: newValue}];
   }
 
   @Watch('error')
@@ -95,14 +101,15 @@ export class ImageBrowser {
   constructor() {
     this.addFiles = this.addFiles.bind(this);
     this.removeFile = this.removeFile.bind(this);
-    this.validateValue = this.validateValue.bind(this);
   }
 
   connectedCallback() {
     /**
      * when value is set before the component had it's listeners ready
      */
-    this.validateValue(this.value);
+    if (this.value) {
+      this.previewList = [{file: new File([], 'placeholder'), data: this.value}];
+    }
     this.componentInit.emit({
       data: this.value,
       el: this.el
@@ -163,16 +170,6 @@ export class ImageBrowser {
     if (!file) return;
     this.value = '';
     this.selectedFiles = this.selectedFiles.filter(lf => lf !== file);
-  }
-
-  private validateValue(newValue) {
-    if (!newValue) {
-      this.selectedFiles = [];
-      return;
-    }
-    this.selectedFiles.length = 0; // don't want to trigger Watchers and events
-    this.previewList = [];
-    this.previewList = [{file: new File([], 'placeholder'), data: newValue}];
   }
 
   render() {
