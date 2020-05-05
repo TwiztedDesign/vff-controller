@@ -236,7 +236,7 @@ export class Table {
   render() {
     return (
       <Host>
-        <table class="table__container">
+        {!this.firstRender && <table class="table__container">
           <thead class="table__head">
           <tr>{this.tableTemplate.head.rows.map((row) => {
             // introducing support for multiple rows in tHead
@@ -246,8 +246,9 @@ export class Table {
           <tbody class="table__body">{
             this.tableData.map((row, i) => this.createRow(row, i))
           }</tbody>
+          <button class="table__add-row-btn" onClick={this.handleAddRowClick}>Add Row</button>
         </table>
-        <button class="table__add-row-btn" onClick={this.handleAddRowClick}>Add Row</button>
+        }
       </Host>
     );
   }
