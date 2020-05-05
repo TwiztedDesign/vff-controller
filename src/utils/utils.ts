@@ -69,3 +69,11 @@ export function secToTimeString(timeInSeconds: number): string {
   date.setMilliseconds(timeInSeconds * 1000);
   return date.toISOString().substr(11, 12);
 }
+
+export function isColor(strColor) {
+  const s = new Option().style;
+  s.color = strColor;
+  const test1 = s.color == strColor;
+  const test2 = /(^#[0-9A-F]{8}$)|(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(strColor);
+  return (test1 == true || test2 == true);
+}

@@ -1,5 +1,6 @@
 import {Component, Host, h, Element, Event, EventEmitter, Prop, Watch, Listen} from '@stencil/core';
 import Pickr from '@simonwep/pickr';
+import {isColor} from "../../utils/utils";
 import {isValidAttribute, triggerRemoveEvent} from "../../utils/template.utils";
 
 @Component({
@@ -33,7 +34,9 @@ export class ColorPicker {
   @Watch('value')
   handleValuePropChange(newValue) {
     this._pickerPromise.then((instance) => {
-      instance.setColor(newValue);
+      if (this.isValueValidColor(newValue)) {
+        instance.setColor(newValue);
+      }
     })
   }
 
@@ -48,10 +51,12 @@ export class ColorPicker {
   constructor() {
     this._pickerPromise = new Promise(resolve => {
       this._pickerResolve = resolve;
-    })
+    });
+    this.isValueValidColor = this.isValueValidColor.bind(this);
   }
 
   connectedCallback() {
+    this.isValueValidColor(this.value);
     this.componentInit.emit({
       data: this.value,
       el: this.el
@@ -91,6 +96,15 @@ export class ColorPicker {
 
   disconnectedCallback() {
     triggerRemoveEvent(this.el);
+  }
+
+  private isValueValidColor(newValue) {
+    if (!isColor(newValue)) {
+      console.error('value %s is not a valid color', newValue, this.el);
+      return false;
+    } else {
+      return true;
+    }
   }
 
   render() {
