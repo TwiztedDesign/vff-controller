@@ -98,12 +98,13 @@ export class Table {
        * actions on the template
        */
       const tbody = this.el.querySelector('tbody');
-      this._colSpan = tbody.children[0].children.length;
+      this._colSpan = tbody.children[0].children.length + 1;
     } else {
       /**
        * actions on he visual table
        */
       const tbody = this.el.querySelector('tbody');
+      this._sortable = null;
       this._sortable = makeSortable(tbody, {
         placeholder: `<tr><td colspan=${this._colSpan}></td></tr>`,
         items: 'tr',
