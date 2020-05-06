@@ -126,7 +126,7 @@ export class Table {
       if (this._tableUpdatesQueue.length === 0) {
         return;
       } else {
-        this.changeTable.emit({data: this._tableUpdatesQueue.shift()});
+        this.changeTable.emit({data: this._tableUpdatesQueue.shift(), el: this.el});
         triggerEvent();
       }
     };
