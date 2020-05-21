@@ -1,6 +1,12 @@
 import {Component, Host, h, Prop, Element, Event, EventEmitter, Listen} from '@stencil/core';
 import {isValidAttribute, triggerRemoveEvent} from "../../utils/template.utils";
 
+/**
+ * @description
+ * Checkboxes are used to let a user select one or more options of a limited number of choices.
+ * @example
+ * <vff-checkbox>You can have you're text here!</vff-checkbox>
+ */
 @Component({
   tag: 'vff-checkbox',
   styleUrl: 'checkbox.css',
