@@ -175,6 +175,8 @@ After setting up the basic layout, you can start declaring which controllers you
 
 #### vff-checkbox
 
+<p>Lets the user select one or more options of a limited number of choices.</p>
+
 ```html 
 <vff-checkbox>You can have you're text here!</vff-checkbox>
 ```
@@ -182,7 +184,7 @@ After setting up the basic layout, you can start declaring which controllers you
 ###### Properties
 
 Name | Type | Default | Description
-:----------- | :----------- | :----------- | :-----------
+:--- | :--- | :--- | :---
 value | boolean | false | Sets or returns the value of the value attribute of a checkbox
 
 
@@ -201,7 +203,7 @@ value | boolean | false | Sets or returns the value of the value attribute of a 
 ###### Properties
 
 Name | Type | Default | Description
-:----------- | :----------- | :----------- | :-----------
+:--- | :--- | :--- | :---
 checked | boolean | false | Sets or returns the checked state of a radio button.
 name | string | 'radio' | Sets or returns the value of the name attribute of the radio button.
 value | string | 'on' | Sets or returns the value of the value attribute of the radio button.
@@ -220,10 +222,10 @@ value | string | 'on' | Sets or returns the value of the value attribute of the 
 ###### Properties
 
 Name | Type | Default | Description
-:----------- | :----------- | :----------- | :-----------
+:--- | :--- | :--- | :---
 error | string | '' | Sets related error messages. Error text is cleared after 10 secs or on click.
 progress | boolean | false | Set this property to enable progress bar UI.
-progressStatus | number | 0 | Set to control the progress bar value.
+progressStatus | number | 0 | Set to control the progress bar value, min = 0, max = 100.
 selectedFiles | File[] | [] | Returns array of File objects that represent selected file or files.
 value | string | '' | Sets and returns image url for preview only. Previewed image will not be registered in selectedFiles.
 
@@ -231,7 +233,7 @@ value | string | '' | Sets and returns image url for preview only. Previewed ima
 ###### Methods
 
 Name | Parameters | Returns | Description
-:----------- | :----------- | :----------- | :-----------
+:--- | :--- | :--- | :---
 addFiles | files : File[]  | Promise<void> | Sets File objects that represent selected file or files
 
 
@@ -248,7 +250,7 @@ addFiles | files : File[]  | Promise<void> | Sets File objects that represent se
 ###### Properties
 
 Name | Type | Default | Description
-:----------- | :----------- | :----------- | :-----------
+:--- | :--- | :--- | :---
 value | string | '#FFFFFF' | Sets or returns the current color of a color-picker
 
 
@@ -263,7 +265,7 @@ value | string | '#FFFFFF' | Sets or returns the current color of a color-picker
 ###### Properties
 
 Name | Type | Default | Description
-:----------- | :----------- | :----------- | :-----------
+:--- | :--- | :--- | :---
 multiple | boolean | false | Enables multiple selection
 options | SelectItem[] | [] | Sets or return all available options
 selectText | string | 'CHOOSE OPTION' | Sets text to show for a user
@@ -282,7 +284,7 @@ value | SelectItem[] | [] | Sets or returns selected options
 ###### Properties
 
 Name | Type | Default | Description
-:----------- | :----------- | :----------- | :-----------
+:--- | :--- | :--- | :---
 multiline | boolean | false | Defines a multi-line text input control
 placeholder | string | '' | Specifies a short hint that describes the expected value of a text area
 value | string | '' | Sets or returns the contents of a text area
@@ -299,7 +301,7 @@ value | string | '' | Sets or returns the contents of a text area
 ###### Properties
 
 Name | Type | Default | Description
-:----------- | :----------- | :----------- | :-----------
+:--- | :--- | :--- | :---
 max | number | 100 | Sets or returns the maximum value allowed.
 min | number | 0 | Sets or returns the minimum value allowed.
 step | number | 1 | Sets or returns the number of intervals of a slider control.
@@ -317,7 +319,7 @@ value | number | this.max / 2 | Sets or returns the value of a slider control.
 ###### Properties
 
 Name | Type | Default | Description
-:----------- | :----------- | :----------- | :-----------
+:--- | :--- | :--- | :---
 value | number | 0 | Sets or returns the value in seconds.
 
 

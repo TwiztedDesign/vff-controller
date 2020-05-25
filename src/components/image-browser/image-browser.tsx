@@ -40,7 +40,7 @@ export class ImageBrowser {
   @Prop({mutable: true}) selectedFiles: File[] = [];
   /** Set this property to enable progress bar UI. */
   @Prop() progress: boolean = false;
-  /** Set to control the progress bar value. */
+  /** Set to control the progress bar value, min = 0, max = 100. */
   @Prop() progressStatus: number = 0;
   /** Sets and returns image url for preview only. Previewed image will not be registered in selectedFiles. */
   @Prop({reflect: true, mutable: true}) value: string = '';

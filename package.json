@@ -14,11 +14,10 @@
     "dist/"
   ],
   "scripts": {
-    "build": "stencil build --docs",
+    "build": "stencil build --docs && npx @appnest/readme generate",
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll",
-    "readme": "npm run build && npx @appnest/readme generate",
     "generate": "stencil generate",
     "prepublishOnly": "npm run build"
   },
@@ -27,7 +26,6 @@
     "@stencil/core": "1.8.11",
     "@types/jest": "24.0.25",
     "@types/puppeteer": "1.20.4",
-    "array-to-table": "^1.0.1",
     "jest": "24.9.0",
     "jest-cli": "24.9.0",
     "puppeteer": "1.20.0"

@@ -2,6 +2,8 @@ import {Component, Host, h, Prop, Element, Event, EventEmitter, Listen} from '@s
 import {isValidAttribute, triggerRemoveEvent} from "../../utils/template.utils";
 
 /**
+ * @description
+ * Lets the user select one or more options of a limited number of choices.
  * @example
  * <vff-checkbox>You can have you're text here!</vff-checkbox>
  */
