@@ -3,6 +3,12 @@ import {readFileAsync} from "../../utils/utils";
 import {PreviewItem} from "../../interface/interface";
 import {isValidAttribute, triggerRemoveEvent} from "../../utils/template.utils";
 
+/**
+ * @description
+ * Image Browser provides drag’n’drop and upload button file uploads with image previews.
+ * @example
+ * <vff-image-browser></vff-image-browser>
+ */
 @Component({
   tag: 'vff-image-browser',
   styleUrl: 'image-browser.css',
@@ -28,10 +34,15 @@ export class ImageBrowser {
 
   @State() previewList: PreviewItem[] = [];
 
+  /** Sets related error messages. Error text is cleared after 10 secs or on click. */
   @Prop({mutable: true}) error: string = '';
+  /** Returns array of File objects that represent selected file or files. */
   @Prop({mutable: true}) selectedFiles: File[] = [];
+  /** Set this property to enable progress bar UI. */
   @Prop() progress: boolean = false;
+  /** Set to control the progress bar value. */
   @Prop() progressStatus: number = 0;
+  /** Sets and returns image url for preview only. Previewed image will not be registered in selectedFiles. */
   @Prop({reflect: true, mutable: true}) value: string = '';
 
   @Element() el: HTMLElement;
@@ -148,6 +159,10 @@ export class ImageBrowser {
     triggerRemoveEvent(this.el);
   }
 
+  /**
+   * Sets File objects that represent selected file or files
+   * @param files: File[]
+   * */
   @Method()
   async addFiles(files) {
     if (files.length === 0) return;

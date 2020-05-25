@@ -2,8 +2,6 @@ import {Component, Host, h, Prop, Element, Event, EventEmitter, Listen} from '@s
 import {isValidAttribute, triggerRemoveEvent} from "../../utils/template.utils";
 
 /**
- * @description
- * Checkboxes are used to let a user select one or more options of a limited number of choices.
  * @example
  * <vff-checkbox>You can have you're text here!</vff-checkbox>
  */
@@ -13,6 +11,7 @@ import {isValidAttribute, triggerRemoveEvent} from "../../utils/template.utils";
   shadow: true
 })
 export class Checkbox {
+  /** Sets or returns the value of the value attribute of a checkbox */
   @Prop({attribute: 'checked', reflect: true, mutable: true}) value: boolean = false;
 
   @Element() el: HTMLElement;

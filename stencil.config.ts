@@ -1,5 +1,5 @@
 import {Config} from '@stencil/core';
-import {generateComponentDocs} from './docs/generator';
+import {generateReadme} from './docs/docs-generator';
 
 export const config: Config = {
   namespace: 'vff-controller',
@@ -10,7 +10,7 @@ export const config: Config = {
     },
     {
       type: 'docs-custom',
-      generator: generateComponentDocs
+      generator: generateReadme
     },
     {
       type: 'www',

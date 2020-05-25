@@ -1,15 +1,23 @@
 import {Component, Host, h, Prop, Event, EventEmitter, Element, Listen, Watch} from '@stencil/core';
 import {isValidAttribute, triggerRemoveEvent} from '../../utils/template.utils';
 
+/**
+ * @example
+ * <vff-range></vff-range>
+ */
 @Component({
   tag: 'vff-range',
   styleUrl: 'range.css',
   shadow: true
 })
 export class Range {
+  /** Sets or returns the number of intervals of a slider control. */
   @Prop() step: number = 1;
+  /** Sets or returns the minimum value allowed. */
   @Prop() min: number = 0;
+  /** Sets or returns the maximum value allowed. */
   @Prop() max: number = 100;
+  /** Sets or returns the value of a slider control. */
   @Prop() value: number = this.max / 2;
 
   @Event({

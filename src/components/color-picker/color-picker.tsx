@@ -3,6 +3,12 @@ import Pickr from '@simonwep/pickr';
 import {isColor} from "../../utils/utils";
 import {isValidAttribute, triggerRemoveEvent} from "../../utils/template.utils";
 
+/**
+ * @description
+ * This component is a wrapper of color <a href="https://github.com/Simonwep/pickr">pickr</a> by Simonwep
+ * @example
+ * <vff-color-picker></vff-color-picker>
+ */
 @Component({
   tag: 'vff-color-picker',
   styleUrl: 'color-picker.css',
@@ -27,6 +33,7 @@ export class ColorPicker {
     composed: true
   }) changeColorProperty: EventEmitter;
 
+  /** Sets or returns the current color of a color-picker */
   @Prop({mutable: true}) value: string = '#FFFFFF';
 
   @Element() el: HTMLElement;

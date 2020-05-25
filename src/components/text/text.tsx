@@ -1,14 +1,21 @@
 import {Component, Host, h, Prop, Event, EventEmitter, Listen, Element} from '@stencil/core';
 import {isValidAttribute, triggerRemoveEvent} from "../../utils/template.utils";
 
+/**
+ * @example
+ * <vff-text></vff-text>
+ */
 @Component({
   tag: 'vff-text',
   styleUrl: 'text.css',
   shadow: true
 })
 export class Text {
+  /** Specifies a short hint that describes the expected value of a text area */
   @Prop() placeholder: string = '';
+  /** Sets or returns the contents of a text area */
   @Prop() value: string = '';
+  /** Defines a multi-line text input control */
   @Prop() multiline: boolean = false;
 
   @Event({

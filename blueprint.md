@@ -146,191 +146,22 @@ Common events that each component listens to:<br/>
 </table>
 
 ## <a name="Available_Controllers"></a> Available Controllers
-After setting up the basic layout, you can start declaring which controllers your layout will include. <br/>
- 
-##### <a name="vff-checkbox"></a> vff-checkbox:
-
-```html 
-    <vff-checkbox>You can have you're text here!</vff-checkbox>
-```
-
-Properties<br/>
-<table>
-  <thead>
-    <tr>
-      <th>Property</th>
-      <th>Value</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>value</td><td>boolean</td><td>Sets or returns the checked state of a checkbox</td></tr>
-  </tbody>
-</table>
+After setting up the basic layout, you can start declaring which controllers your layout will include. 
 <br/>
-
-##### <a name="vff-radio-button"></a> vff-radio-button:
-
-```html 
-    <vff-radio-button name="radio-group">Radio1</vff-radio-button>
-    <vff-radio-button name="radio-group">Radio2</vff-radio-button>
-    <vff-radio-button name="radio-group">Radio3</vff-radio-button>
-```
-
-Properties<br/>
-<table>
-  <thead>
-    <tr>
-      <th>Property</th>
-      <th>Value</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>name</td><td>string</td><td>Sets or returns the value of the name attribute of the radio button</td></tr>
-    <tr><td>value</td><td>string</td><td>Sets or returns the value of the value attribute of the radio button</td></tr>
-    <tr><td>checked</td><td>boolean</td><td>Sets or returns the checked state of a radio button</td></tr>
-  </tbody>
-</table>
+{{ load:src/components/checkbox/readme2.md }}
 <br/>
-
-##### <a name="vff-image-browser"></a> vff-image-browser:
-
-<p>Image Browser provides drag’n’drop and upload button file uploads with image previews.</p>
-
-```html
-    <vff-image-browser></vff-image-browser>
-```
-
-Properties<br/>
-<table>
-  <thead>
-    <tr>
-      <th>Property</th>
-      <th>Value</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>value</td><td>string</td><td>Sets and returns image url for preview only. Previed image will not be registered in selectedFiles.</td></tr>
-    <tr><td>selectedFiles</td><td>[File]</td><td>Returns array of File objects that represent selected file or files.</td></tr>
-    <tr><td>error</td><td>string</td><td>Set related error messages. Error text is cleared after 10 secs or on click.</td></tr>
-    <tr><td>progress</td><td>boolean</td><td>Set this property to enable progress bar UI.</td></tr>
-    <tr><td>progress-status</td><td>int [0-100]</td><td>Set to control the progress bar value.</td></tr>
-  </tbody>
-</table>
+{{ load:src/components/radio-button/readme2.md }}
 <br/>
-
-Methods<br/>
-<table>
-  <thead>
-    <tr>
-      <th>Method</th>
-      <th>Arguments</th>
-      <th>Returns</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>addFiles</td><td>[File]</td><td>n/a</td><td>Sets File objects that represent selected file or files</td></tr>   
-  </tbody>
-</table>
+{{ load:src/components/image-browser/readme2.md }}
 <br/>
-
-##### <a name="vff-color-picker"></a> vff-color-picker:
-
-<p>This component is a wrapper of color <a href="https://github.com/Simonwep/pickr">pickr</a> by Simonwep</p>
-
-```html
-    <vff-color-picker></vff-color-picker>
-```
-
-Properties<br/>
-<table>
-  <thead>
-    <tr>
-      <th>Property</th>
-      <th>Value</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>value</td><td>string</td><td>Sets or returns color representation in HEX(A)</td></tr>
-  </tbody>
-</table>
+{{ load:src/components/color-picker/readme2.md }}
 <br/>
-
-##### <a name="vff-select"></a> vff-select:
-
-```html
-    <vff-select></vff-select>
-```
-
-Interfaces<br/>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>    
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>SelectItem</td><td>{ key: 'string', value: 'string' }.</td></tr>
-  </tbody>
-</table>
-<br/>
-
-Properties:<br/>
-
-| Property | Type                      | Description                           |
-|----------|---------------------------|---------------------------------------|
-| options  | SelectItem | SelectItem[] | Sets or returns all available options |
-| multiple | boolean                   | Enables multiple selection            |
-| value    | SelectItem[]              | Sets or returns selected options      |
-
+{{ load:src/components/select/readme2.md }}
 <strong>Important: </strong>When setting the options, the <strong>key</strong> must be a unique value to avoid unexpected behaviour.</td></tr>
-<br/><br/>
-
-##### <a name="vff-text"></a> vff-text:
-
-```html
-    <vff-text></vff-text>
-```
-
-Properties:<br/>
-
-| Property    | Type    | Description                                                             |
-|-------------|---------|-------------------------------------------------------------------------|
-| multiline   | boolean | Defines a multi-line text input control                                 |
-| placeholder | string  | Specifies a short hint that describes the expected value of a text area |
-| value       | string  | Sets or returns the contents of a text area                             |
 <br/>
-
-##### <a name="vff-range"></a> vff-range:
-
-```html
-    <vff-range></vff-range>
-```
-
-Properties:<br/>
-
-| Property | Type   | Description                                                     |
-|:---------|:-------|:----------------------------------------------------------------|
-| max      | number | Sets or returns the maximum value allowed                       |
-| min      | number | Sets or returns the minimum value allowed                       |
-| step     | number | Sets or returns the number of intervals of a slider control     |
-| value    | number | Sets or returns the value of a slider control                   |
+{{ load:src/components/text/readme2.md }}
 <br/>
-
-##### <a name="vff-video-time"></a> vff-video-time:
-
-```html
-    <vff-video-time></vff-video-time>
-```
-
-Properties:<br/>
-
-| Property | Type   | Description                                                          |
-|:---------|:-------|:---------------------------------------------------------------------|
-| value    | number | Sets or returns the value in seconds.                                |
+{{ load:src/components/range/readme2.md }}
+<br/>
+{{ load:src/components/video-time/readme2.md }}
 <br/>

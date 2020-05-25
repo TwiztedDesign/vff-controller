@@ -3,12 +3,17 @@ import {isValidAttribute, triggerRemoveEvent} from "../../utils/template.utils";
 import {secToTimeString} from '../../utils/utils';
 import {vff} from '../../utils/vff.utils';
 
+/**
+ * @example
+ * <vff-video-time></vff-video-time>
+ */
 @Component({
   tag: 'vff-video-time',
   styleUrl: 'video-time.css',
   shadow: true
 })
 export class VideoTime {
+  /** Sets or returns the value in seconds. */
   @Prop() value: number = 0;
 
   @Event({

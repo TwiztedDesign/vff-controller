@@ -2,6 +2,10 @@ import {Component, Host, h, Prop, Event, EventEmitter, State, Listen, Element, W
 import {SelectItem} from "../../interface/interface";
 import {isValidAttribute, triggerRemoveEvent} from "../../utils/template.utils";
 
+/**
+ * @example
+ * <vff-select></vff-select>
+ */
 @Component({
   tag: 'vff-select',
   styleUrl: 'select.css',
@@ -27,9 +31,13 @@ export class Select {
   @State() isOptionsVisible: boolean = false;
   @State() _options: SelectItem[] = [];
 
+  /** Sets or return all available options */
   @Prop() options: SelectItem[] = [];
+  /** Enables multiple selection */
   @Prop() multiple: boolean = false;
+  /** Sets text to show for a user */
   @Prop() selectText: string = 'CHOOSE OPTION';
+  /** Sets or returns selected options */
   @Prop({mutable: true}) value: SelectItem[] = []; // chosen option
 
   @Element() el: HTMLElement;

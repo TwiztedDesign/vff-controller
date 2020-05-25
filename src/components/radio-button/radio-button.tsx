@@ -1,6 +1,14 @@
 import {Component, Host, h, Prop, Element, Event, EventEmitter, Listen, Watch} from '@stencil/core';
 import {isValidAttribute, triggerRemoveEvent} from "../../utils/template.utils";
 
+/**
+ * @description
+ * Radio buttons let a user select only one of a limited number of choices.
+ * @example
+ * <vff-radio-button name="radio-group">Radio1</vff-radio-button>
+ * <vff-radio-button name="radio-group">Radio2</vff-radio-button>
+ * <vff-radio-button name="radio-group">Radio3</vff-radio-button>
+ */
 @Component({
   tag: 'vff-radio-button',
   styleUrl: 'radio-button.css',
@@ -9,8 +17,11 @@ import {isValidAttribute, triggerRemoveEvent} from "../../utils/template.utils";
 export class RadioButton {
   @Element() el: HTMLElement;
 
+  /** Sets or returns the value of the name attribute of the radio button. */
   @Prop() name = 'radio';
+  /** Sets or returns the value of the value attribute of the radio button. */
   @Prop() value = 'on';
+  /** Sets or returns the checked state of a radio button. */
   @Prop({reflect: true, mutable: true}) checked: boolean = false;
 
   @Event({
